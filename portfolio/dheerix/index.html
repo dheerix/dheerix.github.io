@@ -37,6 +37,33 @@
 				},
 			};
 		</script>
+		<style>
+			.brand-logo {
+				display: inline-flex;
+				align-items: center;
+				gap: 0.75rem;
+				font-family: "Space Grotesk", "Inter", "Segoe UI", Arial, sans-serif;
+				font-weight: 700;
+				text-transform: uppercase;
+			}
+
+			.brand-logo__mark {
+				display: grid;
+				width: 2.375rem;
+				height: 2.375rem;
+				place-items: center;
+				border: 1px solid rgba(255, 255, 255, 0.16);
+				background: linear-gradient(135deg, #0b1730, #1f5fad);
+				color: #fff;
+				font-size: 0.92rem;
+				letter-spacing: 0.08em;
+			}
+
+			.brand-logo__text {
+				font-size: 0.82rem;
+				letter-spacing: 0.08em;
+			}
+		</style>
 	</head>
 	<body
 		class="bg-paper text-ink antialiased dark:bg-slate-950 dark:text-slate-100"
@@ -50,12 +77,10 @@
 			>
 				<a
 					href="#introduction"
-					class="flex items-center gap-3"
+					class="brand-logo"
 					aria-label="Dheerix — introduction"
-					><span
-						class="grid h-10 w-10 place-items-center border border-white/15 bg-gradient-to-br from-[#10213a] to-[#2f7de0] font-editorial text-base font-black tracking-[.08em] text-white shadow-[inset_0_0_0_1px_rgba(255,255,255,0.08)]"
-						>DX</span
-					><span class="font-editorial text-lg font-bold uppercase tracking-[.14em]">Dheerix</span></a
+					><span class="brand-logo__mark">DX</span
+					><span class="brand-logo__text">Dheerix</span></a
 				>
 				<div
 					class="hidden gap-5 text-xs font-semibold uppercase tracking-wider text-slate-600 md:flex dark:text-slate-300"
