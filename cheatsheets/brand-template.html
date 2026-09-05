@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=1080, initial-scale=1" />
+		<title>Dheerix Engineering Map</title>
+		<style>
+			* { box-sizing: border-box; }
+			html, body {
+				width: 1080px;
+				height: 1350px;
+				margin: 0;
+				overflow: hidden;
+				background: #ffffff;
+			}
+			body {
+				display: grid;
+				grid-template-rows: 1300px 50px;
+				font-family: Inter, "Segoe UI", Arial, sans-serif;
+			}
+			.poster {
+				display: grid;
+				place-items: center;
+				background: #ffffff;
+			}
+			.poster img {
+				display: block;
+				width: 1040px;
+				height: 1300px;
+			}
+			.brand-footer {
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				padding: 0 20px;
+				border-top: 1px solid #d7e0ea;
+				background: #f8fafc;
+				color: #0b1730;
+			}
+			.brand {
+				display: inline-flex;
+				align-items: center;
+				gap: 10px;
+				font-family: "Space Grotesk", Inter, "Segoe UI", Arial, sans-serif;
+				font-weight: 700;
+				letter-spacing: 0.08em;
+				text-transform: uppercase;
+			}
+			.brand-mark {
+				display: grid;
+				width: 34px;
+				height: 34px;
+				place-items: center;
+				background: linear-gradient(135deg, #0b1730, #1f5fad);
+				color: #ffffff;
+				font-size: 13px;
+			}
+			.brand-name { font-size: 14px; }
+			.linkedin {
+				color: #42566f;
+				font-size: 13px;
+				font-weight: 600;
+				letter-spacing: 0.01em;
+			}
+		</style>
+	</head>
+	<body>
+		<main class="poster">
+			<img id="poster" alt="Engineering map" />
+		</main>
+		<footer class="brand-footer">
+			<div class="brand" aria-label="Dheerix">
+				<span class="brand-mark">DX</span>
+				<span class="brand-name">Dheerix</span>
+			</div>
+			<div class="linkedin">linkedin.com/in/dheerajbharatsethi</div>
+		</footer>
+		<script>
+			const params = new URLSearchParams(window.location.search);
+			document.getElementById("poster").src =
+				params.get("src") || "./generated/001-big-o-and-complexity.png";
+		</script>
+	</body>
+</html>
