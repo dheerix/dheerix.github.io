@@ -1,2 +1,0 @@
-# Commerce/Search Resume
-
