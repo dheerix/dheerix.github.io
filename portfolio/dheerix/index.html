@@ -1,1248 +1,203 @@
 <!doctype html>
 <html lang="en" class="scroll-smooth">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<meta
-			name="description"
-			content="Dheeraj Bharat Sethi — Software Engineer working across systems, AI, and products."
-		/>
-		<meta name="color-scheme" content="light dark" />
-		<title>
-			Dheeraj Bharat Sethi — Software Engineer | Systems, AI &amp; Products
-		</title>
-		<link rel="preconnect" href="https://fonts.googleapis.com" />
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-		<link
-			rel="stylesheet"
-			href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap"
-		/>
-		<script src="https://cdn.tailwindcss.com"></script>
-		<script>
-			tailwind.config = {
-				darkMode: 'class',
-				theme: {
-					extend: {
-						colors: {
-							paper: '#f8f6f1',
-							ink: '#17212b',
-							moss: '#245d52',
-							rust: '#b94726',
-						},
-						fontFamily: {
-							sans: ['Inter', 'Segoe UI', 'Arial', 'sans-serif'],
-							editorial: ['Space Grotesk', 'Inter', 'Segoe UI', 'Arial', 'sans-serif'],
-						},
-					},
-				},
-			};
-		</script>
-		<style>
-			.brand-logo {
-				display: inline-flex;
-				align-items: center;
-				gap: 0.75rem;
-				font-family: "Space Grotesk", "Inter", "Segoe UI", Arial, sans-serif;
-				font-weight: 700;
-				text-transform: uppercase;
-			}
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Dheeraj Bharat Sethi — Software Engineer with 14+ years of experience across production AI, distributed systems, modernization, and technical leadership." />
+  <meta name="color-scheme" content="light dark" />
+  <title>Dheeraj Bharat Sethi — Software Engineer | Systems, AI &amp; Products</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: { extend: {
+        colors: { paper: '#f8f6f1', ink: '#17212b', moss: '#245d52', rust: '#b94726', 'rust-light': '#f29a7d' },
+        fontFamily: {
+          sans: ['Inter', 'Segoe UI', 'Arial', 'sans-serif'],
+          editorial: ['Space Grotesk', 'Inter', 'Segoe UI', 'Arial', 'sans-serif'],
+        },
+      } },
+    };
+  </script>
+  <style>
+    .brand-logo { display: inline-flex; align-items: center; gap: .75rem; font-family: "Space Grotesk", "Inter", "Segoe UI", Arial, sans-serif; font-weight: 700; text-transform: uppercase; }
+    .brand-logo__mark { display: grid; width: 2.375rem; height: 2.375rem; place-items: center; border: 1px solid rgba(255,255,255,.16); background: linear-gradient(135deg, #0b1730, #1f5fad); color: #fff; font-size: .92rem; letter-spacing: .08em; }
+    .brand-logo__text { font-size: .82rem; letter-spacing: .08em; }
+    .dark .text-rust { color: #f29a7d; }
+    a, button, summary { outline-offset: 4px; }
+    a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px solid #b94726; outline-offset: 4px; }
+    section[id], footer[id] { scroll-margin-top: 5rem; }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto !important; }
+      *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
+    }
+  </style>
+</head>
+<body class="bg-paper text-ink antialiased dark:bg-slate-950 dark:text-slate-100">
+  <a href="#main-content" class="fixed left-4 top-3 z-[60] -translate-y-20 bg-ink px-4 py-2 text-sm font-bold text-paper focus:translate-y-0 dark:bg-paper dark:text-ink">Skip to content</a>
+  <header class="sticky top-0 z-50 border-b border-ink/10 bg-paper/95 backdrop-blur dark:border-white/10 dark:bg-slate-950/95">
+    <nav class="mx-auto flex max-w-7xl items-center justify-between gap-4 px-5 py-3 lg:px-8" aria-label="Portfolio navigation">
+      <a href="#introduction" class="brand-logo" aria-label="Dheerix — introduction"><span class="brand-logo__mark">DX</span><span class="brand-logo__text">Dheerix</span></a>
+      <div class="hidden items-center gap-5 text-xs font-semibold uppercase tracking-wider text-slate-600 md:flex dark:text-slate-300">
+        <a class="hover:text-rust dark:hover:text-rust-light" href="#work">Work</a><a class="hover:text-rust dark:hover:text-rust-light" href="#expertise">Expertise</a><a class="hover:text-rust dark:hover:text-rust-light" href="#journey">Journey</a><a class="hover:text-rust dark:hover:text-rust-light" href="#recommendations">Recommendations</a><a class="hover:text-rust dark:hover:text-rust-light" href="#contact">Contact</a>
+      </div>
+      <div class="flex items-center gap-3">
+        <a class="hidden text-xs font-semibold text-moss hover:text-rust sm:inline dark:text-teal-300 dark:hover:text-rust-light" href="./learn/">Knowledge ↗</a>
+        <button id="theme-toggle" type="button" class="inline-flex h-9 w-9 items-center justify-center rounded-full border border-ink/15 hover:border-rust hover:text-rust dark:border-white/20 dark:hover:border-rust-light dark:hover:text-rust-light" aria-label="Switch to dark theme" aria-pressed="false"><i data-lucide="sun" class="h-4 w-4 dark:hidden" aria-hidden="true"></i><i data-lucide="moon" class="hidden h-4 w-4 dark:block" aria-hidden="true"></i></button>
+      </div>
+    </nav>
+    <details id="mobile-menu" class="border-t border-ink/10 px-5 py-2 md:hidden dark:border-white/10">
+      <summary class="cursor-pointer text-xs font-bold uppercase tracking-wider">Sections</summary>
+      <div class="grid grid-cols-2 gap-4 py-4 text-sm"><a href="#work">Work</a><a href="#expertise">Expertise</a><a href="#journey">Journey</a><a href="#recommendations">Recommendations</a><a href="#contact">Contact</a><a href="./learn/">Knowledge ↗</a></div>
+    </details>
+  </header>
 
-			.brand-logo__mark {
-				display: grid;
-				width: 2.375rem;
-				height: 2.375rem;
-				place-items: center;
-				border: 1px solid rgba(255, 255, 255, 0.16);
-				background: linear-gradient(135deg, #0b1730, #1f5fad);
-				color: #fff;
-				font-size: 0.92rem;
-				letter-spacing: 0.08em;
-			}
+  <main id="main-content">
+    <section id="introduction" class="mx-auto max-w-7xl px-5 pb-14 pt-12 sm:pt-16 lg:px-8 lg:pb-20">
+      <div class="grid gap-10 lg:grid-cols-[1.45fr_.55fr] lg:items-center">
+        <div>
+          <p class="text-xs font-bold uppercase tracking-[.2em] text-moss dark:text-teal-300">Software Engineer · 14+ years</p>
+          <h1 class="mt-4 text-3xl font-bold tracking-tight text-ink sm:text-4xl dark:text-white">Dheeraj Bharat Sethi</h1>
+          <p class="mt-5 max-w-5xl font-editorial text-4xl font-semibold leading-[1.02] tracking-[-.04em] sm:text-5xl lg:text-6xl">I follow problems<br />across the system.</p>
+          <p class="mt-5 font-editorial text-xl font-semibold leading-7 text-rust sm:text-2xl dark:text-rust-light">Technologies changed. Engineering principles didn&apos;t.</p>
+          <p class="mt-8 max-w-2xl border-t border-ink/15 pt-6 text-base leading-7 text-slate-700 dark:border-white/15 dark:text-slate-300">For 14+ years, I&apos;ve connected product intent, architecture, implementation, cloud delivery, and production operations. Today that means building AI-enabled and distributed systems that teams can deploy, observe, and evolve with confidence.</p>
+          <div class="mt-7 flex flex-wrap gap-x-6 gap-y-3 text-sm font-semibold"><a class="border-b-2 border-rust pb-1" href="#work">Read selected work →</a><a class="border-b-2 border-ink/20 pb-1 dark:border-white/30" href="#contact">Start a conversation →</a></div>
+        </div>
+        <div class="space-y-5">
+          <figure class="relative overflow-hidden border border-ink/15 bg-ink/5 shadow-xl dark:border-white/15"><img src="./dheeraj-sethi-profile.png" alt="Portrait of Dheeraj Bharat Sethi" class="aspect-square h-full w-full object-cover" width="1254" height="1254" fetchpriority="high" /><figcaption class="absolute bottom-0 left-0 bg-ink px-3 py-2 text-xs font-semibold uppercase tracking-wider text-paper">Toronto, Canada</figcaption></figure>
+          <aside class="border-l-2 border-rust pl-5 text-sm leading-6 text-slate-600 dark:text-slate-300"><strong class="text-ink dark:text-white">The thread through my work</strong><p class="mt-2">Own the system, not only the assigned code. The handoffs between product, services, models, infrastructure, and operations are where delivery risk accumulates.</p></aside>
+        </div>
+      </div>
+    </section>
 
-			.brand-logo__text {
-				font-size: 0.82rem;
-				letter-spacing: 0.08em;
-			}
-		</style>
-	</head>
-	<body
-		class="bg-paper text-ink antialiased dark:bg-slate-950 dark:text-slate-100"
-	>
-		<header
-			class="sticky top-0 z-50 border-b border-ink/10 bg-paper/95 backdrop-blur dark:border-white/10 dark:bg-slate-950/95"
-		>
-			<nav
-				class="mx-auto flex max-w-7xl items-center justify-between px-5 py-3 lg:px-8"
-				aria-label="Portfolio navigation"
-			>
-				<a
-					href="#introduction"
-					class="brand-logo"
-					aria-label="Dheerix — introduction"
-					><span class="brand-logo__mark">DX</span
-					><span class="brand-logo__text">Dheerix</span></a
-				>
-				<div
-					class="hidden gap-5 text-xs font-semibold uppercase tracking-wider text-slate-600 md:flex dark:text-slate-300"
-				>
-					<a href="#introduction">Introduction</a><a href="./learn/">Knowledge</a><a href="#journey">Journey</a
-					><a href="#systems">Systems</a><a href="#projects">Projects</a
-					><a href="#principles">Principles</a><a href="#stack">Stack</a
-					><a href="#testimonials">Testimonials</a><a href="#contact">Contact</a>
-				</div>
-				<button
-					id="theme-toggle"
-					type="button"
-					class="inline-flex h-9 w-9 items-center justify-center rounded-full border border-ink/15 focus:ring-2 focus:ring-rust dark:border-white/20"
-					aria-label="Toggle theme"
-				>
-					<i data-lucide="sun" class="h-4 w-4 dark:hidden"></i
-					><i data-lucide="moon" class="hidden h-4 w-4 dark:block"></i>
-				</button>
-			</nav>
-			<details
-				class="border-t border-ink/10 px-5 py-2 md:hidden dark:border-white/10"
-			>
-				<summary
-					class="cursor-pointer text-xs font-bold uppercase tracking-wider"
-				>
-					Sections
-				</summary>
-				<div class="grid grid-cols-2 gap-3 py-4 text-sm">
-					<a href="./learn/">Knowledge</a><a href="#journey">Journey</a><a href="#systems">Systems</a
-					><a href="#projects">Projects</a><a href="#principles">Principles</a
-					><a href="#stack">Stack</a><a href="#testimonials">Testimonials</a
-					><a href="#contact">Contact</a>
-				</div>
-			</details>
-		</header>
-		<main>
-			<section
-				id="introduction"
-				class="mx-auto max-w-7xl px-5 pb-14 pt-12 sm:pt-16 lg:px-8 lg:pb-20"
-			>
-				<div class="grid gap-10 lg:grid-cols-[1.45fr_.55fr] lg:items-center">
-					<div>
-						<p
-							class="text-xs font-bold uppercase tracking-[.2em] text-moss dark:text-teal-300"
-						>
-							Senior Software Development Engineer II · 14+ years
-						</p>
-						<h1
-							class="mt-4 text-3xl font-bold tracking-tight text-ink sm:text-4xl dark:text-white"
-						>
-							Dheeraj Bharat Sethi
-						</h1>
-						<p
-							class="mt-5 max-w-5xl font-editorial text-4xl font-semibold leading-[1.02] tracking-[-.04em] sm:text-5xl lg:text-6xl"
-						>
-							I follow problems<br />across the system.
-						</p>
-						<p
-							class="mt-5 font-editorial text-xl font-semibold leading-7 text-rust sm:text-2xl"
-						>
-							Technologies changed. Engineering principles didn&apos;t.
-						</p>
-						<p
-							class="mt-8 max-w-2xl border-t border-ink/15 pt-6 text-base leading-7 text-slate-700 dark:border-white/15 dark:text-slate-300"
-						>
-							For 14+ years, I&apos;ve followed problems from idea to production—across
-							Android, PHP, .NET, Java, Flutter, Python, React, cloud platforms,
-							AI, and production systems. The common thread has never been the
-							language; it has been the engineering.
-						</p>
-						<div class="mt-7 flex gap-6 text-sm font-semibold">
-							<a class="border-b-2 border-rust pb-1" href="#projects"
-								>Read selected work →</a
-							><a
-								class="border-b-2 border-ink/20 pb-1 dark:border-white/30"
-								href="#contact"
-								>Resume &amp; contact →</a
-							>
-						</div>
-					</div>
-					<div class="space-y-5">
-						<figure class="relative overflow-hidden border border-ink/15 bg-ink/5 shadow-xl dark:border-white/15">
-							<img
-								src="./dheeraj-sethi-profile.png"
-								alt="Dheeraj Bharat Sethi"
-								class="aspect-square h-full w-full object-cover"
-								width="1254"
-								height="1254"
-								fetchpriority="high"
-							/>
-							<figcaption class="absolute bottom-0 left-0 bg-ink px-3 py-2 text-xs font-semibold uppercase tracking-wider text-paper">
-								Toronto, Canada
-							</figcaption>
-						</figure>
-						<aside class="border-l-2 border-rust pl-5 text-sm leading-6 text-slate-600 dark:text-slate-300">
-							<strong class="text-ink dark:text-white">The thread through my work</strong>
-							<p class="mt-2">
-								I connect product intent, architecture, implementation, cloud
-								delivery, and production operations—choosing the right boundary
-								and technology for the system.
-							</p>
-						</aside>
-					</div>
-				</div>
-			</section>
-			<section
-				aria-labelledby="thesis-title"
-				class="border-y border-ink/10 bg-ink py-14 text-paper dark:border-white/10 dark:bg-slate-900"
-			>
-				<div
-					class="mx-auto grid max-w-7xl gap-8 px-5 lg:grid-cols-[.65fr_1.35fr] lg:px-8"
-				>
-					<div>
-						<p
-							class="text-xs font-bold uppercase tracking-[.2em] text-teal-300"
-						>
-							Engineering thesis
-						</p>
-						<h2
-							id="thesis-title"
-							class="mt-4 font-editorial text-4xl leading-tight"
-						>
-							I work across the whole system because the handoffs are where risk
-							accumulates.
-						</h2>
-					</div>
-					<div class="self-end">
-						<p class="text-sm font-bold">
-							Product intent <span class="text-rust">→</span> Architecture
-							<span class="text-rust">→</span> Implementation
-							<span class="text-rust">→</span> Deployment
-							<span class="text-rust">→</span> Production
-							<span class="text-rust">→</span> Iteration
-						</p>
-						<p class="mt-6 leading-7 text-slate-300">
-							I connect user needs with service boundaries, interfaces, delivery
-							practices, operational signals, and the conversations that make a
-							change safe in the real world.
-						</p>
-					</div>
-				</div>
-			</section>
-			<section
-				id="journey"
-				class="mx-auto max-w-7xl px-5 py-20 lg:px-8"
-				aria-labelledby="journey-title"
-			>
-				<div class="grid gap-10 lg:grid-cols-[.45fr_1.55fr]">
-					<div>
-						<p
-							class="text-xs font-bold uppercase tracking-[.2em] text-moss dark:text-teal-300"
-						>
-							Career journey
-						</p>
-						<h2
-							id="journey-title"
-							class="mt-4 font-editorial text-4xl leading-tight"
-						>
-							The scope grew; the habit of learning systems stayed.
-						</h2>
-						<p
-							class="mt-5 text-sm leading-6 text-slate-600 dark:text-slate-300"
-						>
-							A progression of the problems I have taken on, not a disconnected
-							list of titles.
-						</p>
-					</div>
-					<ol class="border-l border-ink/20 dark:border-white/20">
-						<li class="relative grid gap-3 pb-9 pl-8 sm:grid-cols-[10rem_1fr]">
-							<span
-								class="absolute -left-1.5 top-1.5 h-3 w-3 rounded-full bg-rust"
-							></span>
-							<p
-								class="text-xs font-bold uppercase tracking-wider text-slate-500"
-							>
-								Foundation
-							</p>
-							<div>
-								<h3 class="font-bold">Application development</h3>
-								<p
-									class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-300"
-								>
-									Java, C#, .NET, Android, PHP, and SQL across desktop, mobile,
-									web, and enterprise applications. Breadth taught me which
-									concepts survive framework changes.
-								</p>
-							</div>
-						</li>
-						<li class="relative grid gap-3 pb-9 pl-8 sm:grid-cols-[10rem_1fr]">
-							<span
-								class="absolute -left-1.5 top-1.5 h-3 w-3 rounded-full bg-rust"
-							></span>
-							<p
-								class="text-xs font-bold uppercase tracking-wider text-slate-500"
-							>
-								Commerce
-							</p>
-							<div>
-								<h3 class="font-bold">
-									Search, discovery, and product systems
-								</h3>
-								<p
-									class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-300"
-								>
-									At Holland &amp; Barrett: OneSearch, Elasticsearch, promotion
-									rules, APIs, React features, and production
-									investigation—moving from features to systems supporting
-									customer journeys.
-								</p>
-							</div>
-						</li>
-						<li class="relative grid gap-3 pb-9 pl-8 sm:grid-cols-[10rem_1fr]">
-							<span
-								class="absolute -left-1.5 top-1.5 h-3 w-3 rounded-full bg-rust"
-							></span>
-							<p
-								class="text-xs font-bold uppercase tracking-wider text-slate-500"
-							>
-								Healthcare
-							</p>
-							<div>
-								<h3 class="font-bold">Reliable workflow-oriented software</h3>
-								<p
-									class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-300"
-								>
-									Healthcare product work deepened my respect for correctness,
-									privacy-aware thinking, usability, and maintainability in
-									regulated contexts.
-								</p>
-							</div>
-						</li>
-						<li class="relative grid gap-3 pb-9 pl-8 sm:grid-cols-[10rem_1fr]">
-							<span
-								class="absolute -left-1.5 top-1.5 h-3 w-3 rounded-full bg-rust"
-							></span>
-							<p
-								class="text-xs font-bold uppercase tracking-wider text-slate-500"
-							>
-								Openlane
-							</p>
-							<div>
-								<h3 class="font-bold">
-									Modernization and distributed platform work
-								</h3>
-								<p
-									class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-300"
-								>
-									Legacy Oracle and Java systems, cloud-native services, event
-									paths, BFFs, modern frontend patterns, and production
-									continuity had to coexist.
-								</p>
-							</div>
-						</li>
-						<li class="relative grid gap-3 pl-8 sm:grid-cols-[10rem_1fr]">
-							<span
-								class="absolute -left-1.5 top-1.5 h-3 w-3 rounded-full bg-moss dark:bg-teal-300"
-							></span>
-							<p
-								class="text-xs font-bold uppercase tracking-wider text-slate-500"
-							>
-								Today
-							</p>
-							<div>
-								<h3 class="font-bold">
-									Resilient, AI-enabled production systems
-								</h3>
-								<p
-									class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-300"
-								>
-									My current SDE2 scope is turning cross-stack ambiguity into a
-									delivery path: architecture, AI workflows, observability,
-									production readiness, and stakeholder alignment.
-								</p>
-							</div>
-						</li>
-					</ol>
-				</div>
-			</section>
-			<section
-				id="systems"
-				class="border-y border-ink/10 bg-white py-20 dark:border-white/10 dark:bg-slate-900/40"
-				aria-labelledby="systems-title"
-			>
-				<div class="mx-auto max-w-7xl px-5 lg:px-8">
-					<p
-						class="text-xs font-bold uppercase tracking-[.2em] text-moss dark:text-teal-300"
-					>
-						Engineering practice
-					</p>
-					<div class="mt-4 grid gap-6 lg:grid-cols-[.7fr_1.3fr]">
-						<h2
-							id="systems-title"
-							class="font-editorial text-4xl leading-tight"
-						>
-							How I engineer across a system—not just within one layer.
-						</h2>
-						<p class="self-end leading-7 text-slate-600 dark:text-slate-300">
-							The work becomes more durable when every capability has a point of
-							view: a principle that guides the choices, evidence that grounds
-							it, and technology in service of the result.
-						</p>
-					</div>
-					<div class="mt-12 grid gap-12">
-						<section class="border-t-2 border-ink pt-6 dark:border-white">
-							<p
-								class="text-xs font-bold uppercase tracking-[.2em] text-ink dark:text-white"
-							>
-								Systems
-							</p>
-							<div class="mt-4 grid gap-x-8 md:grid-cols-2">
-								<article
-									class="border-t border-ink/15 py-7 dark:border-white/15"
-								>
-									<p class="text-xs font-bold text-rust">01 / AI Systems</p>
-									<h3 class="mt-3 text-lg font-bold">
-										I treat AI as a production system, not a model.
-									</h3>
-									<p
-										class="mt-3 text-sm leading-6 text-slate-600 dark:text-slate-300"
-									>
-										My work spans data, evaluation, deployment, governance,
-										observability, and fallback paths because a model is only one
-										component of a reliable product.
-									</p>
-									<p
-										class="mt-5 text-xs font-bold uppercase tracking-wider text-moss dark:text-teal-300"
-									>
-										Evidence
-									</p>
-									<p class="mt-1 text-sm font-semibold">
-										Guardlane · AI Upload
-									</p>
-									<p class="mt-3 text-xs font-semibold text-slate-500">
-										Dataset engineering · evaluation · SageMaker ·
-										human-in-the-loop · LLM fallback
-									</p>
-								</article>
-								<article
-									class="border-t border-ink/15 py-7 dark:border-white/15"
-								>
-									<p class="text-xs font-bold text-rust">
-										02 / Distributed Systems
-									</p>
-									<h3 class="mt-3 text-lg font-bold">
-										I design boundaries that can evolve.
-									</h3>
-									<p
-										class="mt-3 text-sm leading-6 text-slate-600 dark:text-slate-300"
-									>
-										I use APIs, messaging, and backend boundaries to make change
-										easier—so new capabilities can coexist with existing production
-										systems.
-									</p>
-									<p
-										class="mt-5 text-xs font-bold uppercase tracking-wider text-moss dark:text-teal-300"
-									>
-										Evidence
-									</p>
-									<p class="mt-1 text-sm font-semibold">
-										Marketplace modernization
-									</p>
-									<p class="mt-3 text-xs font-semibold text-slate-500">
-										.NET · Java · Node.js · REST · event-driven messaging
-									</p>
-								</article>
-								<article
-									class="border-t border-ink/15 py-7 dark:border-white/15"
-								>
-									<p class="text-xs font-bold text-rust">03 / Modernization</p>
-									<h3 class="mt-3 text-lg font-bold">
-										Modernize without stopping the business.
-									</h3>
-									<p
-										class="mt-3 text-sm leading-6 text-slate-600 dark:text-slate-300"
-									>
-										Large systems evolve through incremental migration,
-										compatibility layers, and carefully designed interfaces—not
-										through one risky rewrite.
-									</p>
-									<p
-										class="mt-5 text-xs font-bold uppercase tracking-wider text-moss dark:text-teal-300"
-									>
-										Evidence
-									</p>
-									<p class="mt-1 text-sm font-semibold">
-										Legacy-to-cloud marketplace initiatives
-									</p>
-									<p class="mt-3 text-xs font-semibold text-slate-500">
-										Incremental delivery · BFFs · integration layers
-									</p>
-								</article>
-							</div>
-						</section>
-						<section class="border-t-2 border-ink pt-6 dark:border-white">
-							<p
-								class="text-xs font-bold uppercase tracking-[.2em] text-ink dark:text-white"
-							>
-								Delivery
-							</p>
-							<div class="mt-4 grid gap-x-8 md:grid-cols-2">
-								<article
-									class="border-t border-ink/15 py-7 dark:border-white/15"
-								>
-									<p class="text-xs font-bold text-rust">
-										04 / Product Experience
-									</p>
-									<h3 class="mt-3 text-lg font-bold">
-										Hide complexity behind simple experiences.
-									</h3>
-									<p
-										class="mt-3 text-sm leading-6 text-slate-600 dark:text-slate-300"
-									>
-										The best interfaces expose product value, not implementation
-										details. Frontend architecture should absorb backend
-										complexity rather than leak it to users.
-									</p>
-									<p
-										class="mt-5 text-xs font-bold uppercase tracking-wider text-moss dark:text-teal-300"
-									>
-										Evidence
-									</p>
-									<p class="mt-1 text-sm font-semibold">
-										Marketplace UI · commerce · micro frontends
-									</p>
-									<p class="mt-3 text-xs font-semibold text-slate-500">
-										React · Svelte · Stencil · Flutter
-									</p>
-								</article>
-								<article
-									class="border-t border-ink/15 py-7 dark:border-white/15"
-								>
-									<p class="text-xs font-bold text-rust">05 / Cloud Delivery</p>
-									<h3 class="mt-3 text-lg font-bold">
-										Deployment is part of the architecture.
-									</h3>
-									<p
-										class="mt-3 text-sm leading-6 text-slate-600 dark:text-slate-300"
-									>
-										A feature is not complete until it can be deployed,
-										observed, rolled back, and operated with confidence.
-									</p>
-									<p
-										class="mt-5 text-xs font-bold uppercase tracking-wider text-moss dark:text-teal-300"
-									>
-										Evidence
-									</p>
-									<p class="mt-1 text-sm font-semibold">Marketplace platform</p>
-									<p class="mt-3 text-xs font-semibold text-slate-500">
-										AWS · Lambda · Kubernetes · ArgoCD
-									</p>
-								</article>
-								<article
-									class="border-t border-ink/15 py-7 dark:border-white/15"
-								>
-									<p class="text-xs font-bold text-rust">
-										06 / Production Engineering
-									</p>
-									<h3 class="mt-3 text-lg font-bold">
-										Production is where software becomes real.
-									</h3>
-									<p
-										class="mt-3 text-sm leading-6 text-slate-600 dark:text-slate-300"
-									>
-										Incidents, telemetry, tracing, and operational feedback are
-										part of the engineering loop—not work that begins after
-										release.
-									</p>
-									<p
-										class="mt-5 text-xs font-bold uppercase tracking-wider text-moss dark:text-teal-300"
-									>
-										Evidence
-									</p>
-									<p class="mt-1 text-sm font-semibold">
-										Incident investigation · production support
-									</p>
-									<p class="mt-3 text-xs font-semibold text-slate-500">
-										Honeycomb · OpenTelemetry · distributed tracing
-									</p>
-								</article>
-							</div>
-						</section>
-						<section class="border-t-2 border-ink pt-6 dark:border-white">
-							<p
-								class="text-xs font-bold uppercase tracking-[.2em] text-ink dark:text-white"
-							>
-								Leadership
-							</p>
-							<div class="mt-4 grid gap-x-8 md:grid-cols-2">
-								<article
-									class="border-t border-ink/15 py-7 dark:border-white/15"
-								>
-									<p class="text-xs font-bold text-rust">07 / Search & Data</p>
-									<h3 class="mt-3 text-lg font-bold">
-										Good products depend on discoverability.
-									</h3>
-									<p
-										class="mt-3 text-sm leading-6 text-slate-600 dark:text-slate-300"
-									>
-										Search is an engineering capability, not a feature. Data
-										models, indexing, relevance, and business rules determine
-										whether users can find the right information at the right
-										time.
-									</p>
-									<p
-										class="mt-5 text-xs font-bold uppercase tracking-wider text-moss dark:text-teal-300"
-									>
-										Evidence
-									</p>
-									<p class="mt-1 text-sm font-semibold">
-										Enterprise Search · Promotion Engine
-									</p>
-									<p class="mt-3 text-xs font-semibold text-slate-500">
-										Elasticsearch · Oracle · SQL · DynamoDB
-									</p>
-								</article>
-								<article
-									class="border-t border-ink/15 py-7 dark:border-white/15"
-								>
-									<p class="text-xs font-bold text-rust">
-										08 / Technical Leadership
-									</p>
-									<h3 class="mt-3 text-lg font-bold">
-										Create clarity before writing code.
-									</h3>
-									<p
-										class="mt-3 text-sm leading-6 text-slate-600 dark:text-slate-300"
-									>
-										The highest leverage often comes from defining the problem,
-										aligning stakeholders, sequencing delivery, and enabling
-										other engineers to succeed.
-									</p>
-									<p
-										class="mt-5 text-xs font-bold uppercase tracking-wider text-moss dark:text-teal-300"
-									>
-										Evidence
-									</p>
-									<p class="mt-1 text-sm font-semibold">
-										Cross-team initiatives · onboarding · technical planning
-									</p>
-									<p class="mt-3 text-xs font-semibold text-slate-500">
-										Architecture discussions · mentoring · production ownership
-									</p>
-								</article>
-							</div>
-						</section>
-					</div>
-				</div>
-			</section>
-			<section
-				id="projects"
-				class="mx-auto max-w-7xl px-5 py-20 lg:px-8"
-				aria-labelledby="projects-title"
-			>
-				<p
-					class="text-xs font-bold uppercase tracking-[.2em] text-moss dark:text-teal-300"
-				>
-					Selected technical evidence
-				</p>
-				<div class="mt-4 grid gap-6 lg:grid-cols-[.7fr_1.3fr]">
-					<h2 id="projects-title" class="font-editorial text-4xl leading-tight">
-						Four projects that show how I work when the system has consequences.
-					</h2>
-					<p class="self-end leading-7 text-slate-600 dark:text-slate-300">
-						Not abstract success stories: source-backed examples of decisions,
-						tensions, and production concerns that shaped my judgment.
-					</p>
-				</div>
-				<div
-					class="mt-12 divide-y divide-ink/15 border-y border-ink/15 dark:divide-white/15 dark:border-white/15"
-				>
-					<article class="grid gap-7 py-10 lg:grid-cols-[.45fr_.55fr]">
-						<header>
-							<p class="text-xs font-bold uppercase tracking-wider text-rust">
-								01 / Openlane
-							</p>
-							<h3 class="mt-3 font-editorial text-3xl">
-								Marketplace modernization
-							</h3>
-							<p
-								class="mt-4 text-sm leading-6 text-slate-600 dark:text-slate-300"
-							>
-								An automotive marketplace moving from legacy foundations toward
-								cloud-native services and modern product surfaces—while
-								production stayed live.
-							</p>
-						</header>
-						<div class="grid gap-x-6 gap-y-5 text-sm leading-6 sm:grid-cols-2">
-							<div>
-								<h4 class="font-bold text-moss dark:text-teal-300">
-									Situation &amp; obstacle
-								</h4>
-								<p class="mt-1 text-slate-600 dark:text-slate-300">
-									Oracle- and Java-based systems were deeply connected to
-									vehicle, bidding, sales, user, and dealer workflows. A
-									one-time replacement was not viable.
-								</p>
-							</div>
-							<div>
-								<h4 class="font-bold text-moss dark:text-teal-300">
-									My ownership
-								</h4>
-								<p class="mt-1 text-slate-600 dark:text-slate-300">
-									Backend, frontend, platform, and integration work: BFFs,
-									customer experiences, shared patterns, production operations,
-									and delivery coordination.
-								</p>
-							</div>
-							<div>
-								<h4 class="font-bold text-moss dark:text-teal-300">
-									Architecture &amp; decision
-								</h4>
-								<p class="mt-1 text-slate-600 dark:text-slate-300">
-									Integration layers and event-driven services became
-									evolutionary bridges that allowed platform generations to
-									coexist.
-								</p>
-							</div>
-							<div>
-								<h4 class="font-bold text-rust">Result &amp; lesson</h4>
-								<p class="mt-1 text-slate-600 dark:text-slate-300">
-									The platform could move toward cloud-native services while
-									preserving continuity. Modernization is sustained engineering,
-									not a cutover.
-								</p>
-							</div>
-						</div>
-					</article>
-					<article class="grid gap-7 py-10 lg:grid-cols-[.45fr_.55fr]">
-						<header>
-							<p class="text-xs font-bold uppercase tracking-wider text-rust">
-								02 / Openlane
-							</p>
-							<h3 class="mt-3 font-editorial text-3xl">Guardlane</h3>
-							<p
-								class="mt-4 text-sm leading-6 text-slate-600 dark:text-slate-300"
-							>
-								A production-oriented AI moderation capability for safer and
-								more reliable marketplace content processing.
-							</p>
-						</header>
-						<div class="grid gap-x-6 gap-y-5 text-sm leading-6 sm:grid-cols-2">
-							<div>
-								<h4 class="font-bold text-moss dark:text-teal-300">
-									Situation &amp; obstacle
-								</h4>
-								<p class="mt-1 text-slate-600 dark:text-slate-300">
-									A working AI flow needed to become a capability that could be
-									operated and trusted through ambiguity, model failure, and
-									downstream failure.
-								</p>
-							</div>
-							<div>
-								<h4 class="font-bold text-moss dark:text-teal-300">
-									My ownership
-								</h4>
-								<p class="mt-1 text-slate-600 dark:text-slate-300">
-									I owned the production-readiness path: workflow shape,
-									stakeholder alignment, AI/backend/MLOps/DevOps concerns,
-									planning, and communication.
-								</p>
-							</div>
-							<div>
-								<h4 class="font-bold text-moss dark:text-teal-300">
-									Architecture &amp; trade-off
-								</h4>
-								<p class="mt-1 text-slate-600 dark:text-slate-300">
-									Marketplace input flows through evaluation and policy
-									decisions to fallback or human review, outcomes, and
-									monitoring. The trade-off is automation against safe,
-									observable handling of uncertainty.
-								</p>
-							</div>
-							<div>
-								<h4 class="font-bold text-rust">Result &amp; lesson</h4>
-								<p class="mt-1 text-slate-600 dark:text-slate-300">
-									A production-readiness plan around reliability, governance,
-									observability, and controlled rollout. A model response is not
-									a production AI system.
-								</p>
-							</div>
-						</div>
-					</article>
-					<article class="grid gap-7 py-10 lg:grid-cols-[.45fr_.55fr]">
-						<header>
-							<p class="text-xs font-bold uppercase tracking-wider text-rust">
-								03 / Openlane
-							</p>
-							<h3 class="mt-3 font-editorial text-3xl">AI Upload</h3>
-							<p
-								class="mt-4 text-sm leading-6 text-slate-600 dark:text-slate-300"
-							>
-								An LLM-assisted workflow for dealer-provided content, treated as
-								a product and platform workflow rather than a model demo.
-							</p>
-						</header>
-						<div class="grid gap-x-6 gap-y-5 text-sm leading-6 sm:grid-cols-2">
-							<div>
-								<h4 class="font-bold text-moss dark:text-teal-300">
-									Situation &amp; obstacle
-								</h4>
-								<p class="mt-1 text-slate-600 dark:text-slate-300">
-									Dealer content work is repetitive and time-sensitive. AI
-									assistance had to fit operations, provide review paths, and
-									earn production trust.
-								</p>
-							</div>
-							<div>
-								<h4 class="font-bold text-moss dark:text-teal-300">
-									My ownership
-								</h4>
-								<p class="mt-1 text-slate-600 dark:text-slate-300">
-									I helped shape delivery across AI, platform integration,
-									backend and frontend concerns, production thinking, and
-									cross-functional communication.
-								</p>
-							</div>
-							<div>
-								<h4 class="font-bold text-moss dark:text-teal-300">
-									Architecture &amp; trade-off
-								</h4>
-								<p class="mt-1 text-slate-600 dark:text-slate-300">
-									Dealer content enters an AI-assisted flow with operational
-									validation before marketplace-ready output. The choice is
-									assistance with human judgment—not false end-to-end
-									automation.
-								</p>
-							</div>
-							<div>
-								<h4 class="font-bold text-rust">Result &amp; lesson</h4>
-								<p class="mt-1 text-slate-600 dark:text-slate-300">
-									AI capability connected to a real operating workflow. Adoption
-									depends on validation, observability, and shared workflow
-									assumptions.
-								</p>
-							</div>
-						</div>
-					</article>
-					<article class="grid gap-7 py-10 lg:grid-cols-[.45fr_.55fr]">
-						<header>
-							<p class="text-xs font-bold uppercase tracking-wider text-rust">
-								04 / Holland &amp; Barrett
-							</p>
-							<h3 class="mt-3 font-editorial text-3xl">
-								Enterprise search &amp; product discovery
-							</h3>
-							<p
-								class="mt-4 text-sm leading-6 text-slate-600 dark:text-slate-300"
-							>
-								Commerce search, browsing, and promotions where relevance,
-								business rules, product data, and runtime behavior meet.
-							</p>
-						</header>
-						<div class="grid gap-x-6 gap-y-5 text-sm leading-6 sm:grid-cols-2">
-							<div>
-								<h4 class="font-bold text-moss dark:text-teal-300">
-									Situation &amp; obstacle
-								</h4>
-								<p class="mt-1 text-slate-600 dark:text-slate-300">
-									Customers needed to discover products through a changing
-									catalog while supporting navigation, promotions, and
-									production reliability.
-								</p>
-							</div>
-							<div>
-								<h4 class="font-bold text-moss dark:text-teal-300">
-									My ownership
-								</h4>
-								<p class="mt-1 text-slate-600 dark:text-slate-300">
-									OneSearch, Elasticsearch, search APIs, promotion engine, ANTLR
-									grammar enhancements, React features, backend APIs, and
-									production investigation.
-								</p>
-							</div>
-							<div>
-								<h4 class="font-bold text-moss dark:text-teal-300">
-									Architecture &amp; decision
-								</h4>
-								<p class="mt-1 text-slate-600 dark:text-slate-300">
-									A React storefront was composed across search and browse
-									paths, Elasticsearch, and commerce services for catalog,
-									pricing, inventory, and promotions.
-								</p>
-							</div>
-							<div>
-								<h4 class="font-bold text-rust">Result &amp; lesson</h4>
-								<p class="mt-1 text-slate-600 dark:text-slate-300">
-									Search is information retrieval and product discovery—not a
-									database query. Business rules and relevance are architecture
-									concerns.
-								</p>
-							</div>
-						</div>
-					</article>
-				</div>
-			</section>
-			<section
-				id="principles"
-				class="border-y border-ink/10 bg-moss py-20 text-paper dark:border-white/10 dark:bg-teal-950"
-				aria-labelledby="principles-title"
-			>
-				<div
-					class="mx-auto grid max-w-7xl gap-10 px-5 lg:grid-cols-[.65fr_1.35fr] lg:px-8"
-				>
-					<div>
-						<p
-							class="text-xs font-bold uppercase tracking-[.2em] text-teal-200"
-						>
-							Engineering principles
-						</p>
-						<h2
-							id="principles-title"
-							class="mt-4 font-editorial text-4xl leading-tight"
-						>
-							The principles I return to when a system becomes complicated.
-						</h2>
-					</div>
-					<ol class="divide-y divide-white/20 border-t border-white/20">
-						<li class="py-4">
-							<strong>01 · Evidence before optimization.</strong> Observe the
-							request path, dependencies, and user impact before treating a
-							symptom as a root cause.
-						</li>
-						<li class="py-4">
-							<strong>02 · Reliability before cleverness.</strong> A simple
-							design with known failure behavior is more valuable than an
-							elegant flow that cannot be operated.
-						</li>
-						<li class="py-4">
-							<strong>03 · Incremental modernization over rewrites.</strong> Let
-							legacy and modern systems coexist through deliberate seams.
-						</li>
-						<li class="py-4">
-							<strong>04 · Production readiness over demo readiness.</strong>
-							Monitoring, fallback, deployment, and ownership are part of the
-							feature.
-						</li>
-						<li class="py-4">
-							<strong>05 · Own the system, not only the assigned code.</strong>
-							The work continues through QA, rollout, incidents, feedback, and
-							the next decision.
-						</li>
-						<li class="py-4">
-							<strong>06 · Clear communication reduces delivery risk.</strong>
-							Shared understanding of trade-offs and ownership keeps systems
-							moving.
-						</li>
-					</ol>
-				</div>
-			</section>
-			<section
-				id="stack"
-				class="mx-auto max-w-7xl px-5 py-20 lg:px-8"
-				aria-labelledby="stack-title"
-			>
-				<p
-					class="text-xs font-bold uppercase tracking-[.2em] text-moss dark:text-teal-300"
-				>
-					Polyglot systems
-				</p>
-				<h2
-					id="stack-title"
-					class="mt-4 max-w-3xl font-editorial text-4xl leading-tight"
-				>
-					Technologies matter most in the layer and relationship where I use
-					them.
-				</h2>
-				<dl
-					class="mt-12 divide-y divide-ink/15 border-t border-ink/15 dark:divide-white/15 dark:border-white/15"
-				>
-					<div class="grid gap-3 py-6 md:grid-cols-[13rem_1fr_1.2fr]">
-						<dt class="font-bold">Experience layer</dt>
-						<dd class="text-sm text-slate-600 dark:text-slate-300">
-							React · Svelte · Stencil · TypeScript · JavaScript · Flutter
-						</dd>
-						<dd class="text-sm leading-6 text-slate-600 dark:text-slate-300">
-							Customer and dealer-facing experiences, micro frontends, and
-							BFF-composed interfaces.
-						</dd>
-					</div>
-					<div class="grid gap-3 py-6 md:grid-cols-[13rem_1fr_1.2fr]">
-						<dt class="font-bold">Service layer</dt>
-						<dd class="text-sm text-slate-600 dark:text-slate-300">
-							.NET · Java · Spring Boot · Node.js · Python · REST · GraphQL
-						</dd>
-						<dd class="text-sm leading-6 text-slate-600 dark:text-slate-300">
-							Domain services, API contracts, and maintainable integration
-							paths.
-						</dd>
-					</div>
-					<div class="grid gap-3 py-6 md:grid-cols-[13rem_1fr_1.2fr]">
-						<dt class="font-bold">Integration &amp; messaging</dt>
-						<dd class="text-sm text-slate-600 dark:text-slate-300">
-							Kinesis · Kafka · Pulsar · RabbitMQ · SNS · SQS
-						</dd>
-						<dd class="text-sm leading-6 text-slate-600 dark:text-slate-300">
-							Event-driven transitions between legacy platforms, cloud services,
-							and independently evolving capabilities.
-						</dd>
-					</div>
-					<div class="grid gap-3 py-6 md:grid-cols-[13rem_1fr_1.2fr]">
-						<dt class="font-bold">Data &amp; discovery</dt>
-						<dd class="text-sm text-slate-600 dark:text-slate-300">
-							Oracle · PostgreSQL · MySQL · MongoDB · DynamoDB · Elasticsearch
-						</dd>
-						<dd class="text-sm leading-6 text-slate-600 dark:text-slate-300">
-							Transactional data, durable state, search relevance, and product
-							discovery.
-						</dd>
-					</div>
-					<div class="grid gap-3 py-6 md:grid-cols-[13rem_1fr_1.2fr]">
-						<dt class="font-bold">Cloud &amp; runtime</dt>
-						<dd class="text-sm text-slate-600 dark:text-slate-300">
-							AWS · Lambda · ECS · Docker · Kubernetes · ArgoCD · CDK
-						</dd>
-						<dd class="text-sm leading-6 text-slate-600 dark:text-slate-300">
-							Deployment and runtime platforms that make a service repeatable,
-							observable, and safer to change.
-						</dd>
-					</div>
-					<div class="grid gap-3 py-6 md:grid-cols-[13rem_1fr_1.2fr]">
-						<dt class="font-bold">AI &amp; observability</dt>
-						<dd class="text-sm text-slate-600 dark:text-slate-300">
-							DistilBERT · model training · SageMaker · MLOps · LLM fallback ·
-							Honeycomb · OpenTelemetry
-						</dd>
-						<dd class="text-sm leading-6 text-slate-600 dark:text-slate-300">
-							ML and production AI lifecycle: dataset engineering, supervised
-							training, versioned deployment, evaluation, monitoring, fallback,
-							human review, and operational feedback.
-						</dd>
-					</div>
-				</dl>
-			</section>
-			<section
-				class="border-y border-ink/10 bg-white py-16 dark:border-white/10 dark:bg-slate-900/40"
-				aria-labelledby="learning-title"
-			>
-				<div
-					class="mx-auto grid max-w-7xl gap-10 px-5 lg:grid-cols-[.55fr_1.45fr] lg:px-8"
-				>
-					<div>
-						<p
-							class="text-xs font-bold uppercase tracking-[.2em] text-moss dark:text-teal-300"
-						>
-							Continuous practice
-						</p>
-						<h2
-							id="learning-title"
-							class="mt-4 font-editorial text-4xl leading-tight"
-						>
-							I learn by building things that make the next engineering decision better.
-						</h2>
-					</div>
-					<ul class="grid gap-x-8 gap-y-5 sm:grid-cols-2">
-						<li class="border-t border-ink/15 pt-4 dark:border-white/15">
-							<strong>Applied machine learning project</strong>
-							<p
-								class="mt-1 text-sm leading-6 text-slate-600 dark:text-slate-300"
-							>
-								University work on an image-caption generator using a neural network and LSTM, trained on the Flickr8k image dataset. It made the training data, model behavior, and evaluation loop tangible—not abstract.
-							</p>
-						</li>
-						<li class="border-t border-ink/15 pt-4 dark:border-white/15">
-							<strong>Delivery and project discipline</strong>
-							<p
-								class="mt-1 text-sm leading-6 text-slate-600 dark:text-slate-300"
-							>
-								PMP study strengthened how I think about scope, risk, sequencing, stakeholder alignment, and the work required to turn a technical plan into dependable delivery.
-							</p>
-						</li>
-						<li class="border-t border-ink/15 pt-4 dark:border-white/15">
-							<strong>Targeted technical study</strong>
-							<p
-								class="mt-1 text-sm leading-6 text-slate-600 dark:text-slate-300"
-							>
-								I use selected Udemy and YouTube courses to deepen specific gaps as the work demands them—then apply the learning through implementation, reviews, and production problem-solving.
-							</p>
-						</li>
-						<li class="border-t border-ink/15 pt-4 dark:border-white/15">
-							<strong>Engineering reflection</strong>
-							<p
-								class="mt-1 text-sm leading-6 text-slate-600 dark:text-slate-300"
-							>
-								I document production AI lessons, architecture decisions, and modernization trade-offs so technical experience becomes reusable judgment for the next system.
-							</p>
-						</li>
-					</ul>
-				</div>
-			</section>
-			<section
-				class="mx-auto max-w-7xl px-5 py-20 lg:px-8"
-				aria-labelledby="leadership-title"
-			>
-				<div class="grid gap-10 lg:grid-cols-[.55fr_1.45fr]">
-					<div>
-						<p
-							class="text-xs font-bold uppercase tracking-[.2em] text-moss dark:text-teal-300"
-						>
-							Leadership evidence
-						</p>
-						<h2
-							id="leadership-title"
-							class="mt-4 font-editorial text-4xl leading-tight"
-						>
-							Leadership is reducing uncertainty.
-						</h2>
-					</div>
-					<div class="max-w-3xl self-end space-y-4 text-lg leading-8 text-slate-700 dark:text-slate-300">
-						<p>Leadership isn&apos;t only making technical decisions. It&apos;s reducing uncertainty.</p>
-						<p>Sometimes that means architecture. Sometimes it means unblocking a release, aligning stakeholders, or asking the question everyone else missed.</p>
-						<p>During Guardlane work, I kept product and engineering discussions moving when the tech lead was unavailable. I treat that kind of clarity as part of responsible engineering—not separate from implementation.</p>
-					</div>
-				</div>
-			</section>
-			<section class="border-y border-ink/10 bg-ink py-16 text-paper dark:border-white/10 dark:bg-slate-900" aria-labelledby="notebook-title">
-				<div class="mx-auto grid max-w-7xl gap-8 px-5 lg:grid-cols-[.7fr_1.3fr] lg:px-8">
-					<div><p class="text-xs font-bold uppercase tracking-[.2em] text-teal-300">Engineering notebook</p><h2 id="notebook-title" class="mt-4 font-editorial text-4xl leading-tight">Read before merge.</h2></div>
-					<div class="self-end"><p class="max-w-2xl text-lg leading-8 text-slate-300">A working collection of notes that turns production experience into reusable judgment—before the next system, incident, or architecture decision arrives.</p><ul class="mt-6 flex flex-wrap gap-x-5 gap-y-2 text-sm font-semibold text-teal-200"><li>Production incidents</li><li>AI systems</li><li>Architecture decisions</li><li>Modernization</li><li>Technical communication</li></ul></div>
-				</div>
-			</section>
-			<section
-				id="testimonials"
-				class="border-t border-ink/10 bg-white py-20 dark:border-white/10 dark:bg-slate-900/40"
-				aria-labelledby="testimonials-title"
-			>
-				<div class="mx-auto max-w-7xl px-5 lg:px-8">
-					<p
-						class="text-xs font-bold uppercase tracking-[.2em] text-moss dark:text-teal-300"
-					>
-						Working relationships
-					</p>
-					<div class="mt-4 grid gap-6 lg:grid-cols-[.7fr_1.3fr]">
-						<h2
-							id="testimonials-title"
-							class="font-editorial text-4xl leading-tight"
-						>
-							The engineering matters most when it improves how a team works together.
-						</h2>
-						<p class="self-end leading-7 text-slate-600 dark:text-slate-300">
-							A few perspectives from product, engineering, and operations collaborators.
-						</p>
-					</div>
-					<div class="mt-12 flex items-center justify-between border-y border-ink/15 py-4 dark:border-white/15"><p class="text-xs font-bold uppercase tracking-[.16em] text-slate-500">11 recommendations · ordered by recommender designation</p><div class="flex items-center gap-2"><button id="testimonial-prev" type="button" class="grid h-9 w-9 place-items-center border border-ink/20 text-ink hover:border-rust hover:text-rust focus:outline-none focus:ring-2 focus:ring-rust dark:border-white/20 dark:text-white" aria-label="Previous testimonial"><i data-lucide="arrow-left" class="h-4 w-4" aria-hidden="true"></i></button><span id="testimonial-status" class="min-w-10 text-center text-xs font-bold tabular-nums" aria-live="polite">1 / 4</span><button id="testimonial-next" type="button" class="grid h-9 w-9 place-items-center border border-ink/20 text-ink hover:border-rust hover:text-rust focus:outline-none focus:ring-2 focus:ring-rust dark:border-white/20 dark:text-white" aria-label="Next testimonial"><i data-lucide="arrow-right" class="h-4 w-4" aria-hidden="true"></i></button></div></div>
-					<div id="testimonial-carousel" class="mt-6 overflow-hidden" role="region" aria-roledescription="carousel" aria-label="Professional recommendations" tabindex="0"><div id="testimonial-track" class="flex gap-px bg-ink/15 dark:bg-white/15"><figure class="order-5 w-full shrink-0 md:w-1/3 bg-paper p-7 dark:bg-slate-950"><blockquote class="font-editorial text-lg leading-8">“Dheeraj was reliable and routinely went above and beyond… with in-depth knowledge of our problems and solutions, commitment to getting things done, and customer empathy.”</blockquote><figcaption class="mt-7 border-t border-ink/15 pt-4 text-sm dark:border-white/15"><strong>Christian Ricci</strong><br /><span class="text-slate-600 dark:text-slate-300">CTO · former engineering leader, Holland &amp; Barrett</span></figcaption></figure>
-<figure class="order-6 w-full shrink-0 md:w-1/3 bg-paper p-7 dark:bg-slate-950"><blockquote class="font-editorial text-lg leading-8">“From day one, he was able to immerse himself into the team and roll up his sleeves to get to work. His work met or exceeded expectations.”</blockquote><figcaption class="mt-7 border-t border-ink/15 pt-4 text-sm dark:border-white/15"><strong>Jessica Regan</strong><br /><span class="text-slate-600 dark:text-slate-300">Co-Founder &amp; CEO · FoodMesh client</span></figcaption></figure>
-<figure class="order-7 w-full shrink-0 md:w-1/3 bg-paper p-7 dark:bg-slate-950"><blockquote class="font-editorial text-lg leading-8">“He managed development of a complex meal-plan product in a language foreign to his own, doing everything in his power to solve each challenge with efficiency and a strong attitude.”</blockquote><figcaption class="mt-7 border-t border-ink/15 pt-4 text-sm dark:border-white/15"><strong>Cristina Arvizu</strong><br /><span class="text-slate-600 dark:text-slate-300">Founder · Healthy Martina client</span></figcaption></figure>
-<figure class="order-3 w-full shrink-0 md:w-1/3 bg-paper p-7 dark:bg-slate-950"><blockquote class="font-editorial text-lg leading-8">“He understands the big picture as well as specific technical details and makes suggestions that implement complex features in the right way—well designed and easy to maintain.”</blockquote><figcaption class="mt-7 border-t border-ink/15 pt-4 text-sm dark:border-white/15"><strong>Christina Zhong</strong><br /><span class="text-slate-600 dark:text-slate-300">Director of Engineering</span></figcaption></figure>
-<figure class="order-4 w-full shrink-0 md:w-1/3 bg-paper p-7 dark:bg-slate-950"><blockquote class="font-editorial text-lg leading-8">“Dheeraj had a get-it-done attitude; no problem was too big. He addressed challenging issues, communicated clearly with the team and stakeholders, and was a joy to work with.”</blockquote><figcaption class="mt-7 border-t border-ink/15 pt-4 text-sm dark:border-white/15"><strong>Junaid Bakali</strong><br /><span class="text-slate-600 dark:text-slate-300">Head of Engineering &amp; Principal Architect · former manager</span></figcaption></figure>
-<figure class="order-8 w-full shrink-0 md:w-1/3 bg-paper p-7 dark:bg-slate-950"><blockquote class="font-editorial text-lg leading-8">“An exceptional full-stack developer: highly skilled, dedicated, detail-oriented, and committed to maintainable, scalable applications.”</blockquote><figcaption class="mt-7 border-t border-ink/15 pt-4 text-sm dark:border-white/15"><strong>Charanpreet Singh</strong><br /><span class="text-slate-600 dark:text-slate-300">Former direct manager · L&amp;G Consultancy</span></figcaption></figure>
-<figure class="order-1 w-full shrink-0 md:w-1/3 bg-paper p-7 dark:bg-slate-950"><blockquote class="font-editorial text-lg leading-8">“Skilled and dependable, able to interpret and implement brief stories with minimal guidance. He often makes suggestions that improve the final outcome.”</blockquote><figcaption class="mt-7 border-t border-ink/15 pt-4 text-sm dark:border-white/15"><strong>Ciaran O&apos;Broin</strong><br /><span class="text-slate-600 dark:text-slate-300">Product Manager · Holland &amp; Barrett</span></figcaption></figure>
-<figure class="order-2 w-full shrink-0 md:w-1/3 bg-paper p-7 dark:bg-slate-950"><blockquote class="font-editorial text-lg leading-8">“An excellent polyglot who willingly gets the work done and contributes to team goals; his quality and desire to learn have not gone unnoticed.”</blockquote><figcaption class="mt-7 border-t border-ink/15 pt-4 text-sm dark:border-white/15"><strong>Luis Bocaletti</strong><br /><span class="text-slate-600 dark:text-slate-300">Technology Professional · former manager</span></figcaption></figure>
-<figure class="order-9 w-full shrink-0 md:w-1/3 bg-paper p-7 dark:bg-slate-950"><blockquote class="font-editorial text-lg leading-8">“I have enjoyed working with Dheeraj because of his positivity and willingness to jump in and help on projects, and his initiative in finding creative solutions.”</blockquote><figcaption class="mt-7 border-t border-ink/15 pt-4 text-sm dark:border-white/15"><strong>Theodora Geach</strong><br /><span class="text-slate-600 dark:text-slate-300">System Operations Specialist · FoodMesh</span></figcaption></figure>
-<figure class="order-9 w-full shrink-0 md:w-1/3 bg-paper p-7 dark:bg-slate-950"><blockquote class="font-editorial text-lg leading-8">“Experienced and very knowledgeable. With minimal guidance he is able to understand our systems, fix bugs promptly, and implement new feature changes.”</blockquote><figcaption class="mt-7 border-t border-ink/15 pt-4 text-sm dark:border-white/15"><strong>Nikki Mertens</strong><br /><span class="text-slate-600 dark:text-slate-300">Operations Specialist · FoodMesh</span></figcaption></figure>
-<figure class="order-10 w-full shrink-0 md:w-1/3 bg-paper p-7 dark:bg-slate-950"><blockquote class="font-editorial text-lg leading-8">“Efficient and hard working, known for out-of-the-box thinking, strong database knowledge, problem solving, and adapting quickly to change.”</blockquote><figcaption class="mt-7 border-t border-ink/15 pt-4 text-sm dark:border-white/15"><strong>Harpreet Singh</strong><br /><span class="text-slate-600 dark:text-slate-300">Engineering peer</span></figcaption></figure></div></div></div></section></main><footer id="contact" class="bg-ink text-paper"><div class="mx-auto grid max-w-7xl gap-8 px-5 py-16 lg:grid-cols-[1fr_.7fr] lg:px-8"><div><p class="text-xs font-bold uppercase tracking-[.2em] text-teal-300">Contact</p>
-					<h2 class="mt-4 max-w-xl font-editorial text-4xl leading-tight">
-						I&apos;m interested in problems that require technical depth, patient modernization, and end-to-end ownership.
-					</h2>
-					<p class="mt-5 max-w-xl leading-7 text-slate-300">
-						If that sounds like your engineering culture, I&apos;d love to talk.
-					</p>
-				</div>
-				<div class="self-end">
-					<ul class="space-y-3 text-sm font-semibold">
-						<li>
-							<a class="flex items-center gap-3 hover:text-teal-300" href="mailto:dj.sethi09@gmail.com"
-								><i data-lucide="mail" class="h-4 w-4" aria-hidden="true"></i>Email
-								<span class="font-normal text-slate-400">dj.sethi09@gmail.com</span></a
-							>
-						</li>
-						<li>
-							<a
-								href="https://www.linkedin.com/in/dheerajbharatsethi/details/recommendations"
-								target="_blank"
-								rel="noopener noreferrer"
-								class="flex items-center gap-3 hover:text-teal-300"><i data-lucide="linkedin" class="h-4 w-4" aria-hidden="true"></i>LinkedIn
-								<span class="font-normal text-slate-400">dheerajbharatsethi</span></a
-							>
-						</li>
-						<li>
-							<a
-								href="https://github.com/dheerix/"
-								target="_blank"
-								rel="noopener noreferrer"
-								class="flex items-center gap-3 hover:text-teal-300"><i data-lucide="github" class="h-4 w-4" aria-hidden="true"></i>GitHub
-								<span class="font-normal text-slate-400">github.com/dheerix</span></a
-							>
-						</li>
-						<li>
-							<span class="flex items-center gap-3"><i data-lucide="file-text" class="h-4 w-4" aria-hidden="true"></i>Resume <span class="font-normal text-slate-400">Coming soon</span></span>
-						</li>
-					</ul>
-					<p class="mt-10 text-xs text-slate-500">
-						© <span id="year"></span> Dheeraj Bharat Sethi
-					</p>
-				</div>
-			</div>
-		</footer>
-		<script src="https://cdn.jsdelivr.net/npm/lucide@0.468.0/dist/umd/lucide.min.js"></script>
-		<script>
-			const root = document.documentElement,
-				savedTheme = localStorage.getItem('portfolio-theme');
-			if (
-				savedTheme === 'dark' ||
-				(!savedTheme && matchMedia('(prefers-color-scheme: dark)').matches)
-			)
-				root.classList.add('dark');
-			document.getElementById('theme-toggle').addEventListener('click', () => {
-				root.classList.toggle('dark');
-				localStorage.setItem(
-					'portfolio-theme',
-					root.classList.contains('dark') ? 'dark' : 'light',
-				);
-			});
-			document.getElementById('year').textContent = new Date().getFullYear();
-			const testimonialCarousel = document.getElementById('testimonial-carousel');
-			const testimonialTrack = document.getElementById('testimonial-track');
-			const testimonialSlides = testimonialTrack
-				? [...testimonialTrack.children]
-				: [];
-			const testimonialStatus = document.getElementById('testimonial-status');
-			let testimonialIndex = 0;
-			let testimonialTimer;
-			const testimonialsPerView = () =>
-				window.matchMedia('(min-width: 768px)').matches ? 3 : 1;
-			const showTestimonial = (nextIndex) => {
-				if (!testimonialSlides.length) return;
-				const perView = testimonialsPerView();
-				const pageCount = Math.ceil(testimonialSlides.length / perView);
-				testimonialIndex = (nextIndex + pageCount) % pageCount;
-				testimonialCarousel.scrollTo({
-					left: testimonialIndex * testimonialCarousel.clientWidth,
-					behavior: matchMedia('(prefers-reduced-motion: reduce)').matches
-						? 'auto'
-						: 'smooth',
-				});
-				testimonialStatus.textContent = `${testimonialIndex + 1} / ${pageCount}`;
-			};
-			const restartTestimonialTimer = () => {
-				clearInterval(testimonialTimer);
-				if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
-					testimonialTimer = setInterval(
-						() => showTestimonial(testimonialIndex + 1),
-						7000,
-					);
-				}
-			};
-			document.getElementById('testimonial-prev')?.addEventListener('click', () => {
-				showTestimonial(testimonialIndex - 1);
-				restartTestimonialTimer();
-			});
-			document.getElementById('testimonial-next')?.addEventListener('click', () => {
-				showTestimonial(testimonialIndex + 1);
-				restartTestimonialTimer();
-			});
-			testimonialCarousel?.addEventListener('mouseenter', () => clearInterval(testimonialTimer));
-			testimonialCarousel?.addEventListener('mouseleave', restartTestimonialTimer);
-			testimonialCarousel?.addEventListener('focusin', () => clearInterval(testimonialTimer));
-			testimonialCarousel?.addEventListener('focusout', restartTestimonialTimer);
-			window.addEventListener('resize', () => showTestimonial(testimonialIndex));
-			showTestimonial(0);
-			restartTestimonialTimer();
-			lucide.createIcons();
-		</script>
-	</body>
+    <section id="work" class="border-y border-ink/10 bg-ink py-16 text-paper dark:border-white/10 dark:bg-slate-900" aria-labelledby="guardlane-title">
+      <div class="mx-auto max-w-7xl px-5 lg:px-8">
+        <div class="grid gap-8 lg:grid-cols-[.58fr_1.42fr]">
+          <header><p class="text-xs font-bold uppercase tracking-[.2em] text-teal-300">Featured case study · Openlane</p><h2 id="guardlane-title" class="mt-4 font-editorial text-5xl leading-none sm:text-6xl">Guardlane</h2><p class="mt-5 text-lg leading-8 text-slate-300">A production moderation capability delivered across the application, machine-learning, infrastructure, UI, and operational layers.</p></header>
+          <div class="grid gap-px border border-white/15 bg-white/15 sm:grid-cols-2">
+            <article class="bg-ink p-6 dark:bg-slate-900 sm:col-span-2"><p class="text-xs font-bold uppercase tracking-[.18em] text-rust-light">Problem</p><p class="mt-3 leading-7 text-slate-300">Marketplace conversations could contain contact sharing, abusive content, or other policy violations. Manual and reactive moderation could not provide a scalable, consistent operating path.</p></article>
+            <article class="bg-ink p-6 dark:bg-slate-900"><p class="text-xs font-bold uppercase tracking-[.18em] text-teal-300">My ownership</p><p class="mt-3 text-sm leading-6 text-slate-300">Owned delivery across requirements, backend orchestration, dataset and model development, SageMaker deployment, dashboard integration, human-review tooling, production readiness, and stakeholder alignment.</p></article>
+            <article class="bg-ink p-6 dark:bg-slate-900"><p class="text-xs font-bold uppercase tracking-[.18em] text-teal-300">System design</p><p class="mt-3 text-sm leading-6 text-slate-300">Prepared and evaluated labeled data for a multi-label DistilBERT classifier. Guardlane combines deterministic regex detection, the English classifier on SageMaker, and an LLM fallback for non-English or unsupported input behind one moderation API.</p></article>
+            <article class="bg-ink p-6 dark:bg-slate-900"><p class="text-xs font-bold uppercase tracking-[.18em] text-teal-300">Production outcome</p><p class="mt-3 text-sm leading-6 text-slate-300">Deployed a traceable moderation capability with explicit failure handling, telemetry, asynchronously persisted outcomes, and rollback support. A dashboard enables human review and operational feedback; evaluation and reviewed outcomes guide threshold changes and future model refinement.</p></article>
+            <article class="bg-ink p-6 dark:bg-slate-900"><p class="text-xs font-bold uppercase tracking-[.18em] text-rust-light">Engineering lesson</p><p class="mt-3 text-sm leading-6 text-slate-300">A model endpoint is not a production AI system. Reliability comes from the surrounding contracts, routing, versioning, telemetry, review workflow, and clear ownership of business decisions.</p></article>
+          </div>
+        </div>
+        <div class="mt-10 border-t border-white/15 pt-6"><p class="text-xs font-bold uppercase tracking-[.18em] text-teal-300">Request path</p><p class="mt-3 font-editorial text-base font-semibold leading-8 text-slate-200 sm:text-lg">Marketplace input <span class="text-rust">→</span> language and pattern detection <span class="text-rust">→</span> DistilBERT or LLM route <span class="text-rust">→</span> normalized moderation evidence <span class="text-rust">→</span> product decision <span class="text-rust">→</span> review and feedback</p></div>
+      </div>
+    </section>
+
+    <section class="mx-auto max-w-7xl px-5 py-16 lg:px-8" aria-labelledby="other-work-title">
+      <p class="text-xs font-bold uppercase tracking-[.2em] text-moss dark:text-teal-300">Other selected work</p>
+      <div class="mt-4 grid gap-6 lg:grid-cols-[.7fr_1.3fr]"><h2 id="other-work-title" class="font-editorial text-4xl leading-tight">Three compact examples of judgment across products and platforms.</h2><p class="self-end leading-7 text-slate-600 dark:text-slate-300">Each project is reduced to the decision, ownership, outcome, and lesson that best show its technical scope.</p></div>
+      <div class="mt-10 divide-y divide-ink/15 border-y border-ink/15 dark:divide-white/15 dark:border-white/15">
+        <article class="grid gap-7 py-9 lg:grid-cols-[.38fr_.62fr]">
+          <header><p class="text-xs font-bold uppercase tracking-wider text-rust dark:text-rust-light">01 / Openlane</p><h3 class="mt-3 font-editorial text-3xl">Marketplace modernization</h3><p class="mt-3 text-sm leading-6 text-slate-600 dark:text-slate-300">Evolving a live automotive marketplace across legacy, serverless, and modern service generations.</p></header>
+          <dl class="grid gap-x-7 gap-y-5 text-sm leading-6 sm:grid-cols-2"><div><dt class="font-bold text-moss dark:text-teal-300">Problem</dt><dd class="mt-1 text-slate-600 dark:text-slate-300">Oracle and Java systems remained central to vehicle, bidding, sales, and dealer workflows; a one-time replacement was not viable.</dd></div><div><dt class="font-bold text-moss dark:text-teal-300">My ownership</dt><dd class="mt-1 text-slate-600 dark:text-slate-300">Implemented event routing, foundational cloud-service upgrades, BFF and frontend capabilities, and supported production delivery across multiple services.</dd></div><div><dt class="font-bold text-moss dark:text-teal-300">Technical decision</dt><dd class="mt-1 text-slate-600 dark:text-slate-300">Used integration layers, domain event routing, and BFF boundaries as evolutionary bridges between platform generations.</dd></div><div><dt class="font-bold text-rust">Outcome · lesson</dt><dd class="mt-1 text-slate-600 dark:text-slate-300">Enabled cloud-native services and modern experiences to coexist with the live platform. Incremental modernization preserves continuity while reducing future friction.</dd></div></dl>
+        </article>
+        <article class="grid gap-7 py-9 lg:grid-cols-[.38fr_.62fr]">
+          <header><p class="text-xs font-bold uppercase tracking-wider text-rust dark:text-rust-light">02 / Openlane</p><h3 class="mt-3 font-editorial text-3xl">AI Upload</h3><p class="mt-3 text-sm leading-6 text-slate-600 dark:text-slate-300">An LLM-assisted workflow for processing dealer-provided vehicle content.</p></header>
+          <dl class="grid gap-x-7 gap-y-5 text-sm leading-6 sm:grid-cols-2"><div><dt class="font-bold text-moss dark:text-teal-300">Problem</dt><dd class="mt-1 text-slate-600 dark:text-slate-300">Repetitive, time-sensitive content processing needed useful AI assistance without removing operational review and control.</dd></div><div><dt class="font-bold text-moss dark:text-teal-300">My ownership</dt><dd class="mt-1 text-slate-600 dark:text-slate-300">Led significant parts of delivery, including planning, backend and integration changes, frontend support, phased release, production investigation, and coordination with product and engineering.</dd></div><div><dt class="font-bold text-moss dark:text-teal-300">Technical decision</dt><dd class="mt-1 text-slate-600 dark:text-slate-300">Integrated AI as an assistive step with validation before marketplace-ready output, keeping judgment in the operating workflow.</dd></div><div><dt class="font-bold text-rust">Outcome · lesson</dt><dd class="mt-1 text-slate-600 dark:text-slate-300">Connected AI capability to real dealer operations. Adoption depends on review paths, observability, and shared workflow assumptions—not model novelty.</dd></div></dl>
+        </article>
+        <article class="grid gap-7 py-9 lg:grid-cols-[.38fr_.62fr]">
+          <header><p class="text-xs font-bold uppercase tracking-wider text-rust dark:text-rust-light">03 / Holland &amp; Barrett</p><h3 class="mt-3 font-editorial text-3xl">Enterprise search &amp; product discovery</h3><p class="mt-3 text-sm leading-6 text-slate-600 dark:text-slate-300">Commerce search where relevance, promotions, product data, and runtime behavior meet.</p></header>
+          <dl class="grid gap-x-7 gap-y-5 text-sm leading-6 sm:grid-cols-2"><div><dt class="font-bold text-moss dark:text-teal-300">Problem</dt><dd class="mt-1 text-slate-600 dark:text-slate-300">Customers needed reliable discovery across a changing catalog while the platform also supported navigation and complex promotion rules.</dd></div><div><dt class="font-bold text-moss dark:text-teal-300">My ownership</dt><dd class="mt-1 text-slate-600 dark:text-slate-300">Implemented OneSearch and Elasticsearch integrations, search APIs, promotion-engine and ANTLR grammar changes, React features, and production fixes.</dd></div><div><dt class="font-bold text-moss dark:text-teal-300">Technical decision</dt><dd class="mt-1 text-slate-600 dark:text-slate-300">Kept Elasticsearch query construction and commerce orchestration behind stable service APIs instead of exposing search infrastructure to clients.</dd></div><div><dt class="font-bold text-rust">Outcome · lesson</dt><dd class="mt-1 text-slate-600 dark:text-slate-300">Supported customer-facing search, browse, and promotions with maintainable boundaries. Relevance and business rules are architecture concerns, not database queries.</dd></div></dl>
+        </article>
+      </div>
+    </section>
+
+    <section id="expertise" class="border-y border-ink/10 bg-white py-16 dark:border-white/10 dark:bg-slate-900/40" aria-labelledby="expertise-title">
+      <div class="mx-auto max-w-7xl px-5 lg:px-8">
+        <p class="text-xs font-bold uppercase tracking-[.2em] text-moss dark:text-teal-300">Engineering capabilities</p>
+        <div class="mt-4 grid gap-6 lg:grid-cols-[.7fr_1.3fr]"><h2 id="expertise-title" class="font-editorial text-4xl leading-tight">Point of view, evidence, and tools—without the keyword wall.</h2><p class="self-end leading-7 text-slate-600 dark:text-slate-300">The principles show up in the work: evidence before optimization, reliability before cleverness, production readiness before demo readiness, and clear communication before risky handoffs.</p></div>
+        <div class="mt-10 grid gap-x-8 md:grid-cols-2">
+          <article class="border-t-2 border-ink py-6 dark:border-white"><p class="text-xs font-bold text-rust">01 / Production AI systems</p><h3 class="mt-3 text-lg font-bold">A model is one component of an operable product.</h3><p class="mt-3 text-sm leading-6 text-slate-600 dark:text-slate-300"><strong>Evidence:</strong> Guardlane dataset, evaluation, hybrid inference, SageMaker deployment, monitoring, and human review; AI Upload workflow integration.</p><p class="mt-3 text-xs font-semibold text-slate-600 dark:text-slate-400">Python · DistilBERT · SageMaker · LLMs · MLOps · Honeycomb</p></article>
+          <article class="border-t-2 border-ink py-6 dark:border-white"><p class="text-xs font-bold text-rust">02 / Distributed systems &amp; modernization</p><h3 class="mt-3 text-lg font-bold">Prefer deliberate seams to disruptive rewrites.</h3><p class="mt-3 text-sm leading-6 text-slate-600 dark:text-slate-300"><strong>Evidence:</strong> Routed Oracle-originated domain events into cloud services; evolved marketplace capabilities across legacy, serverless, and .NET platforms.</p><p class="mt-3 text-xs font-semibold text-slate-600 dark:text-slate-400">Java · .NET · Node.js · Kinesis · Pulsar · Lambda</p></article>
+          <article class="border-t border-ink/20 py-6 dark:border-white/20"><p class="text-xs font-bold text-rust">03 / Product &amp; service architecture</p><h3 class="mt-3 text-lg font-bold">Hide system complexity behind useful boundaries.</h3><p class="mt-3 text-sm leading-6 text-slate-600 dark:text-slate-300"><strong>Evidence:</strong> Vehicle Detail BFF aggregation, marketplace micro frontends, search APIs, and AI-assisted dealer workflows.</p><p class="mt-3 text-xs font-semibold text-slate-600 dark:text-slate-400">REST · GraphQL · React · Svelte · Stencil · TypeScript</p></article>
+          <article class="border-t border-ink/20 py-6 dark:border-white/20"><p class="text-xs font-bold text-rust">04 / Cloud delivery &amp; production engineering</p><h3 class="mt-3 text-lg font-bold">Deployment and operations are part of the design.</h3><p class="mt-3 text-sm leading-6 text-slate-600 dark:text-slate-300"><strong>Evidence:</strong> Versioned model deployment and rollback support, platform upgrades, production investigation, and distributed tracing.</p><p class="mt-3 text-xs font-semibold text-slate-600 dark:text-slate-400">AWS · Docker · Kubernetes · ArgoCD · CDK · OpenTelemetry</p></article>
+          <article class="border-t border-ink/20 py-6 dark:border-white/20"><p class="text-xs font-bold text-rust">05 / Search &amp; data systems</p><h3 class="mt-3 text-lg font-bold">Evidence precedes optimization.</h3><p class="mt-3 text-sm leading-6 text-slate-600 dark:text-slate-300"><strong>Evidence:</strong> Enterprise search APIs, query construction, promotion rules, production diagnosis, and transactional and event-driven data paths.</p><p class="mt-3 text-xs font-semibold text-slate-600 dark:text-slate-400">Elasticsearch · Oracle · PostgreSQL · DynamoDB · ANTLR4</p></article>
+          <article class="border-t border-ink/20 py-6 dark:border-white/20"><p class="text-xs font-bold text-rust">06 / Technical leadership</p><h3 class="mt-3 text-lg font-bold">Leadership is reducing uncertainty.</h3><p class="mt-3 text-sm leading-6 text-slate-600 dark:text-slate-300"><strong>Evidence:</strong> Turned ambiguity into delivery paths, aligned product and engineering, surfaced missed requirements and integration risks, kept decisions moving during limited leadership coverage, and supported engineers through planning, reviews, and investigations.</p><p class="mt-3 text-xs font-semibold text-slate-600 dark:text-slate-400">Architecture · planning · reviews · mentoring · incident support</p></article>
+        </div>
+        <aside class="mt-6 grid gap-6 border-l-2 border-rust pl-6 sm:grid-cols-[.7fr_1.3fr]"><h3 class="font-editorial text-2xl">Practice becomes leverage when it is reusable.</h3><div><p class="text-sm leading-6 text-slate-600 dark:text-slate-300">I convert production experience into architecture notes, AI-system evaluation guidance, modernization lessons, and clearer technical communication for the next decision.</p><a class="mt-3 inline-block border-b-2 border-rust pb-1 text-sm font-semibold" href="./learn/">Explore the knowledge library →</a></div></aside>
+      </div>
+    </section>
+
+    <section id="journey" class="mx-auto max-w-7xl px-5 py-16 lg:px-8" aria-labelledby="journey-title">
+      <div class="grid gap-10 lg:grid-cols-[.45fr_1.55fr]">
+        <div><p class="text-xs font-bold uppercase tracking-[.2em] text-moss dark:text-teal-300">Career journey</p><h2 id="journey-title" class="mt-4 font-editorial text-4xl leading-tight">The scope grew; the habit of learning systems stayed.</h2><p class="mt-5 text-sm leading-6 text-slate-600 dark:text-slate-300">A progression of responsibilities and problem spaces, not a disconnected list of titles.</p></div>
+        <ol class="border-l border-ink/20 dark:border-white/20">
+          <li class="relative grid gap-3 pb-8 pl-8 sm:grid-cols-[9rem_1fr]"><span class="absolute -left-1.5 top-1.5 h-3 w-3 rounded-full bg-rust"></span><p class="text-xs font-bold uppercase tracking-wider text-slate-600 dark:text-slate-400">Foundation</p><div><h3 class="font-bold">Application development</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-300">Built desktop, mobile, web, and enterprise applications with Java, C#, .NET, Android, PHP, and SQL—learning which engineering concepts survive framework changes.</p></div></li>
+          <li class="relative grid gap-3 pb-8 pl-8 sm:grid-cols-[9rem_1fr]"><span class="absolute -left-1.5 top-1.5 h-3 w-3 rounded-full bg-rust"></span><p class="text-xs font-bold uppercase tracking-wider text-slate-600 dark:text-slate-400">Commerce</p><div><h3 class="font-bold">Search, discovery, and product systems</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-300">Implemented enterprise search, promotion logic, APIs, React features, and production fixes at Holland &amp; Barrett.</p></div></li>
+          <li class="relative grid gap-3 pb-8 pl-8 sm:grid-cols-[9rem_1fr]"><span class="absolute -left-1.5 top-1.5 h-3 w-3 rounded-full bg-rust"></span><p class="text-xs font-bold uppercase tracking-wider text-slate-600 dark:text-slate-400">Products</p><div><h3 class="font-bold">Workflow-oriented software</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-300">Healthcare and FoodMesh product work deepened my focus on correctness, usability, maintainability, and customer operations.</p></div></li>
+          <li class="relative grid gap-3 pb-8 pl-8 sm:grid-cols-[9rem_1fr]"><span class="absolute -left-1.5 top-1.5 h-3 w-3 rounded-full bg-rust"></span><p class="text-xs font-bold uppercase tracking-wider text-slate-600 dark:text-slate-400">Platform</p><div><h3 class="font-bold">Modernization and distributed systems</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-300">Integrated legacy event paths with cloud-native services, built BFF and frontend capabilities, and maintained production continuity at Openlane.</p></div></li>
+          <li class="relative grid gap-3 pl-8 sm:grid-cols-[9rem_1fr]"><span class="absolute -left-1.5 top-1.5 h-3 w-3 rounded-full bg-moss dark:bg-teal-300"></span><p class="text-xs font-bold uppercase tracking-wider text-slate-600 dark:text-slate-400">Today</p><div><h3 class="font-bold">Production AI and broader technical ownership</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-300">Delivering AI-enabled capabilities across models, services, infrastructure, operations, architecture, and stakeholder alignment—with responsibility extending beyond implementation.</p></div></li>
+        </ol>
+      </div>
+    </section>
+
+    <section id="recommendations" class="border-t border-ink/10 bg-white py-16 dark:border-white/10 dark:bg-slate-900/40" aria-labelledby="recommendations-title">
+      <div class="mx-auto max-w-7xl px-5 lg:px-8">
+        <p class="text-xs font-bold uppercase tracking-[.2em] text-moss dark:text-teal-300">Recommendations</p>
+        <div class="mt-4 grid gap-6 lg:grid-cols-[.7fr_1.3fr]"><h2 id="recommendations-title" class="font-editorial text-4xl leading-tight">What collaborators notice when the work gets complicated.</h2><p class="self-end leading-7 text-slate-600 dark:text-slate-300">Perspectives from engineering, product, leadership, clients, and operations. The strongest evidence of system thinking and ownership appears first.</p></div>
+        <div class="mt-10 flex items-center justify-between border-y border-ink/15 py-4 dark:border-white/15"><p class="text-xs font-bold uppercase tracking-[.16em] text-slate-600 dark:text-slate-400">11 professional recommendations</p><div class="flex items-center gap-2"><button id="testimonial-prev" type="button" class="grid h-9 w-9 place-items-center border border-ink/20 text-ink hover:border-rust hover:text-rust dark:border-white/20 dark:text-white" aria-label="Previous recommendation"><i data-lucide="arrow-left" class="h-4 w-4" aria-hidden="true"></i></button><span id="testimonial-status" class="min-w-10 text-center text-xs font-bold tabular-nums" aria-live="polite">1 / 4</span><button id="testimonial-next" type="button" class="grid h-9 w-9 place-items-center border border-ink/20 text-ink hover:border-rust hover:text-rust dark:border-white/20 dark:text-white" aria-label="Next recommendation"><i data-lucide="arrow-right" class="h-4 w-4" aria-hidden="true"></i></button></div></div>
+        <div id="testimonial-carousel" class="mt-6 overflow-hidden" role="region" aria-roledescription="carousel" aria-label="Professional recommendations" tabindex="0"><div id="testimonial-track" class="flex gap-px bg-ink/15 dark:bg-white/15">
+          <figure class="w-full shrink-0 bg-paper p-7 md:w-1/3 dark:bg-slate-950"><blockquote class="font-editorial text-lg leading-8">“He understands the big picture as well as specific technical details and makes suggestions that implement complex features in the right way—well designed and easy to maintain.”</blockquote><figcaption class="mt-7 border-t border-ink/15 pt-4 text-sm dark:border-white/15"><strong>Christina Zhong</strong><br /><span class="text-slate-600 dark:text-slate-300">Director of Engineering</span></figcaption></figure>
+          <figure class="w-full shrink-0 bg-paper p-7 md:w-1/3 dark:bg-slate-950"><blockquote class="font-editorial text-lg leading-8">“Dheeraj had a get-it-done attitude; no problem was too big. He addressed challenging issues, communicated clearly with the team and stakeholders, and was a joy to work with.”</blockquote><figcaption class="mt-7 border-t border-ink/15 pt-4 text-sm dark:border-white/15"><strong>Junaid Bakali</strong><br /><span class="text-slate-600 dark:text-slate-300">Head of Engineering &amp; Principal Architect · former manager</span></figcaption></figure>
+          <figure class="w-full shrink-0 bg-paper p-7 md:w-1/3 dark:bg-slate-950"><blockquote class="font-editorial text-lg leading-8">“Dheeraj was reliable and routinely went above and beyond… with in-depth knowledge of our problems and solutions, commitment to getting things done, and customer empathy.”</blockquote><figcaption class="mt-7 border-t border-ink/15 pt-4 text-sm dark:border-white/15"><strong>Christian Ricci</strong><br /><span class="text-slate-600 dark:text-slate-300">CTO · former engineering leader, Holland &amp; Barrett</span></figcaption></figure>
+          <figure class="w-full shrink-0 bg-paper p-7 md:w-1/3 dark:bg-slate-950"><blockquote class="font-editorial text-lg leading-8">“An exceptional full-stack developer: highly skilled, dedicated, detail-oriented, and committed to maintainable, scalable applications.”</blockquote><figcaption class="mt-7 border-t border-ink/15 pt-4 text-sm dark:border-white/15"><strong>Charanpreet Singh</strong><br /><span class="text-slate-600 dark:text-slate-300">Former direct manager · L&amp;G Consultancy</span></figcaption></figure>
+          <figure class="w-full shrink-0 bg-paper p-7 md:w-1/3 dark:bg-slate-950"><blockquote class="font-editorial text-lg leading-8">“Skilled and dependable, able to interpret and implement brief stories with minimal guidance. He often makes suggestions that improve the final outcome.”</blockquote><figcaption class="mt-7 border-t border-ink/15 pt-4 text-sm dark:border-white/15"><strong>Ciaran O&apos;Broin</strong><br /><span class="text-slate-600 dark:text-slate-300">Product Manager · Holland &amp; Barrett</span></figcaption></figure>
+          <figure class="w-full shrink-0 bg-paper p-7 md:w-1/3 dark:bg-slate-950"><blockquote class="font-editorial text-lg leading-8">“An excellent polyglot who willingly gets the work done and contributes to team goals; his quality and desire to learn have not gone unnoticed.”</blockquote><figcaption class="mt-7 border-t border-ink/15 pt-4 text-sm dark:border-white/15"><strong>Luis Bocaletti</strong><br /><span class="text-slate-600 dark:text-slate-300">Technology Professional · former manager</span></figcaption></figure>
+          <figure class="w-full shrink-0 bg-paper p-7 md:w-1/3 dark:bg-slate-950"><blockquote class="font-editorial text-lg leading-8">“From day one, he was able to immerse himself into the team and roll up his sleeves to get to work. His work met or exceeded expectations.”</blockquote><figcaption class="mt-7 border-t border-ink/15 pt-4 text-sm dark:border-white/15"><strong>Jessica Regan</strong><br /><span class="text-slate-600 dark:text-slate-300">Co-Founder &amp; CEO · FoodMesh client</span></figcaption></figure>
+          <figure class="w-full shrink-0 bg-paper p-7 md:w-1/3 dark:bg-slate-950"><blockquote class="font-editorial text-lg leading-8">“He managed development of a complex meal-plan product in a language foreign to his own, doing everything in his power to solve each challenge with efficiency and a strong attitude.”</blockquote><figcaption class="mt-7 border-t border-ink/15 pt-4 text-sm dark:border-white/15"><strong>Cristina Arvizu</strong><br /><span class="text-slate-600 dark:text-slate-300">Founder · Healthy Martina client</span></figcaption></figure>
+          <figure class="w-full shrink-0 bg-paper p-7 md:w-1/3 dark:bg-slate-950"><blockquote class="font-editorial text-lg leading-8">“Experienced and very knowledgeable. With minimal guidance he is able to understand our systems, fix bugs promptly, and implement new feature changes.”</blockquote><figcaption class="mt-7 border-t border-ink/15 pt-4 text-sm dark:border-white/15"><strong>Nikki Mertens</strong><br /><span class="text-slate-600 dark:text-slate-300">Operations Specialist · FoodMesh</span></figcaption></figure>
+          <figure class="w-full shrink-0 bg-paper p-7 md:w-1/3 dark:bg-slate-950"><blockquote class="font-editorial text-lg leading-8">“I have enjoyed working with Dheeraj because of his positivity and willingness to jump in and help on projects, and his initiative in finding creative solutions.”</blockquote><figcaption class="mt-7 border-t border-ink/15 pt-4 text-sm dark:border-white/15"><strong>Theodora Geach</strong><br /><span class="text-slate-600 dark:text-slate-300">System Operations Specialist · FoodMesh</span></figcaption></figure>
+          <figure class="w-full shrink-0 bg-paper p-7 md:w-1/3 dark:bg-slate-950"><blockquote class="font-editorial text-lg leading-8">“Efficient and hard working, known for out-of-the-box thinking, strong database knowledge, problem solving, and adapting quickly to change.”</blockquote><figcaption class="mt-7 border-t border-ink/15 pt-4 text-sm dark:border-white/15"><strong>Harpreet Singh</strong><br /><span class="text-slate-600 dark:text-slate-300">Engineering peer</span></figcaption></figure>
+        </div></div>
+      </div>
+    </section>
+  </main>
+
+  <footer id="contact" class="bg-ink text-paper">
+    <div class="mx-auto grid max-w-7xl gap-8 px-5 py-16 lg:grid-cols-[1fr_.7fr] lg:px-8">
+      <div><p class="text-xs font-bold uppercase tracking-[.2em] text-teal-300">Contact</p><h2 class="mt-4 max-w-xl font-editorial text-4xl leading-tight">I&apos;m interested in problems that require technical depth, patient modernization, and end-to-end ownership.</h2><p class="mt-5 max-w-xl leading-7 text-slate-300">If that sounds like your engineering culture, I&apos;d love to talk.</p></div>
+      <div class="self-end"><ul class="space-y-4 text-sm font-semibold"><li><a class="flex flex-wrap items-center gap-3 hover:text-teal-300" href="mailto:dj.sethi09@gmail.com"><i data-lucide="mail" class="h-4 w-4" aria-hidden="true"></i>Email <span class="font-normal text-slate-400">dj.sethi09@gmail.com</span></a></li><li><a href="https://www.linkedin.com/in/dheerajbharatsethi/" target="_blank" rel="noopener noreferrer" class="flex flex-wrap items-center gap-3 hover:text-teal-300"><i data-lucide="linkedin" class="h-4 w-4" aria-hidden="true"></i>LinkedIn <span class="font-normal text-slate-400">dheerajbharatsethi</span></a></li><li><a href="https://github.com/dheerix/" target="_blank" rel="noopener noreferrer" class="flex flex-wrap items-center gap-3 hover:text-teal-300"><i data-lucide="github" class="h-4 w-4" aria-hidden="true"></i>GitHub <span class="font-normal text-slate-400">github.com/dheerix</span></a></li></ul><p class="mt-10 text-xs text-slate-400">© <span id="year"></span> Dheeraj Bharat Sethi</p></div>
+    </div>
+  </footer>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.468.0/dist/umd/lucide.min.js"></script>
+  <script>
+    const root = document.documentElement;
+    const themeToggle = document.getElementById('theme-toggle');
+    const savedTheme = localStorage.getItem('portfolio-theme');
+    if (savedTheme === 'dark' || (!savedTheme && matchMedia('(prefers-color-scheme: dark)').matches)) root.classList.add('dark');
+    const updateThemeButton = () => { const isDark = root.classList.contains('dark'); themeToggle.setAttribute('aria-pressed', String(isDark)); themeToggle.setAttribute('aria-label', `Switch to ${isDark ? 'light' : 'dark'} theme`); };
+    themeToggle.addEventListener('click', () => { root.classList.toggle('dark'); localStorage.setItem('portfolio-theme', root.classList.contains('dark') ? 'dark' : 'light'); updateThemeButton(); });
+    updateThemeButton();
+    document.getElementById('year').textContent = new Date().getFullYear();
+    document.querySelectorAll('#mobile-menu a').forEach((link) => link.addEventListener('click', () => document.getElementById('mobile-menu').removeAttribute('open')));
+    const carousel = document.getElementById('testimonial-carousel');
+    const track = document.getElementById('testimonial-track');
+    const slides = track ? [...track.children] : [];
+    const status = document.getElementById('testimonial-status');
+    const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
+    let carouselIndex = 0;
+    let carouselTimer;
+    const perView = () => matchMedia('(min-width: 768px)').matches ? 3 : 1;
+    const showPage = (nextIndex) => { if (!slides.length) return; const pageCount = Math.ceil(slides.length / perView()); carouselIndex = (nextIndex + pageCount) % pageCount; carousel.scrollTo({ left: carouselIndex * carousel.clientWidth, behavior: reducedMotion.matches ? 'auto' : 'smooth' }); status.textContent = `${carouselIndex + 1} / ${pageCount}`; };
+    const restartTimer = () => { clearInterval(carouselTimer); if (!reducedMotion.matches) carouselTimer = setInterval(() => showPage(carouselIndex + 1), 7000); };
+    document.getElementById('testimonial-prev').addEventListener('click', () => { showPage(carouselIndex - 1); restartTimer(); });
+    document.getElementById('testimonial-next').addEventListener('click', () => { showPage(carouselIndex + 1); restartTimer(); });
+    carousel.addEventListener('keydown', (event) => { if (event.key === 'ArrowLeft') { event.preventDefault(); showPage(carouselIndex - 1); restartTimer(); } if (event.key === 'ArrowRight') { event.preventDefault(); showPage(carouselIndex + 1); restartTimer(); } });
+    carousel.addEventListener('mouseenter', () => clearInterval(carouselTimer));
+    carousel.addEventListener('mouseleave', restartTimer);
+    carousel.addEventListener('focusin', () => clearInterval(carouselTimer));
+    carousel.addEventListener('focusout', restartTimer);
+    window.addEventListener('resize', () => showPage(carouselIndex));
+    reducedMotion.addEventListener?.('change', restartTimer);
+    showPage(0);
+    restartTimer();
+    lucide.createIcons();
+  </script>
+</body>
 </html>
