@@ -7,6 +7,7 @@ const repoDir = path.resolve(websiteDir, "..");
 const sourceDir = path.join(websiteDir, "src");
 const outputDir = path.join(websiteDir, "dist");
 const knowledgeDir = path.join(outputDir, "learn");
+const includeKnowledge = process.env.DHEERIX_INCLUDE_KNOWLEDGE === "1";
 const excluded = new Set([".git", ".github", "node_modules", "output", "outputs", "dist"]);
 
 const sectionDetails = {
@@ -43,19 +44,23 @@ async function findMarkdown(directory, relative = "") {
 await rm(outputDir, { recursive: true, force: true });
 await mkdir(outputDir, { recursive: true });
 await cp(path.join(repoDir, "portfolio", "dheerix"), outputDir, { recursive: true });
-await cp(sourceDir, knowledgeDir, { recursive: true });
-
-const documents = [];
-for (const relativePath of await findMarkdown(repoDir)) {
-  const normalizedPath = relativePath.split(path.sep).join("/");
-  const content = await readFile(path.join(repoDir, relativePath), "utf8");
-  const section = normalizedPath.split("/")[0];
-  const [sectionTitle, sectionDescription, sectionOrder] = sectionDetails[section] || [humanize(section), "Additional notes and reference material.", 50];
-  const title = content.match(/^#\s+(.+)$/m)?.[1]?.replace(/[*_`]/g, "").trim() || humanize(path.basename(normalizedPath, ".md"));
-  const description = content.replace(/```[\s\S]*?```/g, " ").split("\n").map(line => line.trim()).find(line => line && !/^(#|\||-|\d+\.)/.test(line))?.replace(/[*_`>]/g, "").slice(0, 180) || "Open this document to explore the material.";
-  documents.push({ path: normalizedPath, title, description, section, sectionTitle, sectionDescription, sectionOrder, words: content.trim().split(/\s+/).filter(Boolean).length, content });
-}
-documents.sort((a, b) => a.sectionOrder - b.sectionOrder || a.path.localeCompare(b.path, undefined, { numeric: true }));
-await writeFile(path.join(knowledgeDir, "documents.json"), JSON.stringify({ generatedAt: new Date().toISOString(), documents }));
 await writeFile(path.join(outputDir, ".nojekyll"), "\n");
-console.log(`Generated ${documents.length} documents in website/dist/learn`);
+
+if (includeKnowledge) {
+  await cp(sourceDir, knowledgeDir, { recursive: true });
+  const documents = [];
+  for (const relativePath of await findMarkdown(repoDir)) {
+    const normalizedPath = relativePath.split(path.sep).join("/");
+    const content = await readFile(path.join(repoDir, relativePath), "utf8");
+    const section = normalizedPath.split("/")[0];
+    const [sectionTitle, sectionDescription, sectionOrder] = sectionDetails[section] || [humanize(section), "Additional notes and reference material.", 50];
+    const title = content.match(/^#\s+(.+)$/m)?.[1]?.replace(/[*_`]/g, "").trim() || humanize(path.basename(normalizedPath, ".md"));
+    const description = content.replace(/```[\s\S]*?```/g, " ").split("\n").map(line => line.trim()).find(line => line && !/^(#|\||-|\d+\.)/.test(line))?.replace(/[*_`>]/g, "").slice(0, 180) || "Open this document to explore the material.";
+    documents.push({ path: normalizedPath, title, description, section, sectionTitle, sectionDescription, sectionOrder, words: content.trim().split(/\s+/).filter(Boolean).length, content });
+  }
+  documents.sort((a, b) => a.sectionOrder - b.sectionOrder || a.path.localeCompare(b.path, undefined, { numeric: true }));
+  await writeFile(path.join(knowledgeDir, "documents.json"), JSON.stringify({ generatedAt: new Date().toISOString(), documents }));
+  console.log(`Generated ${documents.length} local-only documents in website/dist/learn`);
+} else {
+  console.log("Generated public portfolio without the Knowledge library");
+}

@@ -1,4 +1,4 @@
-name: Deploy knowledge website to GitHub Pages
+name: Deploy portfolio to GitHub Pages
 
 on:
   push:
@@ -27,7 +27,7 @@ jobs:
       - name: Configure Pages
         uses: actions/configure-pages@v5
 
-      - name: Generate knowledge website
+      - name: Generate public portfolio
         run: node website/generate-site.mjs
 
       - name: Upload website artifact
