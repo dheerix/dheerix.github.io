@@ -1,0 +1,1 @@
+Resource consolidation preserves substantive legacy tools and templates under stable resource paths. Generated/tooling material formerly misclassified as cheatsheets now lives under resources/tools.
