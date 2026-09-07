@@ -1,2 +1,0 @@
-# Speaking/Media Kit
-
