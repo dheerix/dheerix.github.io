@@ -1,2 +1,0 @@
-# Senior AI Engineer Resume
-
