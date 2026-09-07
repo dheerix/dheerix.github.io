@@ -1,0 +1,16 @@
+# Full-Stack Cover Letter Template
+
+{{ABOUT_ME}}
+
+{{CAREER_STORY}}
+
+{{FULLSTACK_ENGINEERING}}
+
+{{OWNERSHIP}}
+
+{{CROSS_FUNCTIONAL}}
+
+{{COMPANY_INTEREST}}
+
+{{CLOSING}}
+

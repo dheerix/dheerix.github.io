@@ -1,0 +1,16 @@
+# Platform Cover Letter Template
+
+{{ABOUT_ME}}
+
+{{CAREER_STORY}}
+
+{{PLATFORM_ENGINEERING}}
+
+{{MODERNIZATION}}
+
+{{TECHNICAL_LEADERSHIP}}
+
+{{COMPANY_INTEREST}}
+
+{{CLOSING}}
+

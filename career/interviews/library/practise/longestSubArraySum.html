@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Longest Subarray Sum Runner</title>
+	<style>
+		:root {
+			font-family: system-ui, sans-serif;
+			color-scheme: light dark;
+		}
+
+		body {
+			max-width: 900px;
+			margin: 40px auto;
+			padding: 0 20px;
+		}
+
+		.controls {
+			display: flex;
+			gap: 12px;
+			align-items: end;
+			flex-wrap: wrap;
+			margin-bottom: 20px;
+		}
+
+		label {
+			display: grid;
+			gap: 6px;
+		}
+
+		input, button {
+			font: inherit;
+			padding: 8px 10px;
+		}
+
+		#numbers {
+			width: 280px;
+		}
+
+		#output {
+			min-height: 300px;
+			padding: 18px;
+			border-radius: 8px;
+			background: #111827;
+			color: #e5e7eb;
+			white-space: pre-wrap;
+			overflow-wrap: anywhere;
+		}
+	</style>
+</head>
+<body>
+	<h1>Longest Subarray Sum</h1>
+	<p>Change the values and select <strong>Run</strong> to see every step.</p>
+
+	<div class="controls">
+		<label>
+			Numbers (comma separated)
+			<input id="numbers" value="1, -1, 5, -2, 3">
+		</label>
+		<label>
+			Target k
+			<input id="target" type="number" value="3">
+		</label>
+		<button id="run" type="button">Run</button>
+	</div>
+
+	<pre id="output" aria-live="polite"></pre>
+
+	<script src="longestSubArraySum.js"></script>
+	<script>
+		const output = document.querySelector('#output');
+
+		function runExample() {
+			output.textContent = '';
+
+			const nums = document.querySelector('#numbers').value
+				.split(',')
+				.map(value => Number(value.trim()));
+			const k = Number(document.querySelector('#target').value);
+
+			if (nums.some(Number.isNaN) || Number.isNaN(k)) {
+				output.textContent = 'Enter valid numbers separated by commas.';
+				return;
+			}
+
+			const originalLog = console.log;
+			console.log = (...values) => {
+				const line = values.map(value =>
+					typeof value === 'object' ? JSON.stringify(value) : String(value)
+				).join(' ');
+				output.textContent += `${line}\n`;
+				originalLog(...values);
+			};
+
+			try {
+				longestSubarraySumK(nums, k);
+			} finally {
+				console.log = originalLog;
+			}
+		}
+
+		document.querySelector('#run').addEventListener('click', runExample);
+		runExample();
+	</script>
+</body>
+</html>

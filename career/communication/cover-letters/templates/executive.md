@@ -1,0 +1,16 @@
+# Technical Leader Cover Letter Template
+
+{{ABOUT_ME}}
+
+{{CAREER_STORY}}
+
+{{TECHNICAL_LEADERSHIP}}
+
+{{MODERNIZATION}}
+
+{{CROSS_FUNCTIONAL}}
+
+{{COMPANY_INTEREST}}
+
+{{CLOSING}}
+

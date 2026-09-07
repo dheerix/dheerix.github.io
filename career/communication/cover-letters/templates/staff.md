@@ -1,0 +1,16 @@
+# Staff Cover Letter Template
+
+{{ABOUT_ME}}
+
+{{CAREER_STORY}}
+
+{{TECHNICAL_LEADERSHIP}}
+
+{{CROSS_FUNCTIONAL}}
+
+{{OWNERSHIP}}
+
+{{COMPANY_INTEREST}}
+
+{{CLOSING}}
+

@@ -1,0 +1,16 @@
+# AI Cover Letter Template
+
+{{ABOUT_ME}}
+
+{{CAREER_STORY}}
+
+{{AI_ENGINEERING}}
+
+{{MODERNIZATION}}
+
+{{OWNERSHIP}}
+
+{{COMPANY_INTEREST}}
+
+{{CLOSING}}
+
