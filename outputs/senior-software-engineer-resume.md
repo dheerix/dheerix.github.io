@@ -1,2 +1,0 @@
-# Senior Software Engineer Resume
-
