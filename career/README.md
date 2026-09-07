@@ -1,6 +1,9 @@
 # Career
 
-This is the presentation layer over engineering capability.
+This is the presentation and observability layer over engineering capability.
+
+## Snapshots
+Quarterly evidence-driven career assessment. Start with [2026 Q3 — Baseline](./snapshots/2026-Q3.md). This observes career evolution; it does not replace the existing project/depth plan.
 
 ## Profile
 Professional identity, LinkedIn material, and the canonical master profile.
