@@ -1,5 +1,9 @@
 # Portfolio
 
+## Working records
+
+- [Engineering-depth alignment](engineering-depth-alignment.md)
+
 Minimal, story-driven portfolio site for public engineering positioning.
 
 ## Purpose
@@ -28,4 +32,3 @@ python3 -m http.server 8000
 
 - Story content lives in `../stories/`
 - The portfolio is a presentation layer over the story library
-

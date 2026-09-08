@@ -20,4 +20,7 @@ This is the central workspace for the 2026–27 engineering-depth program.
 ## Field Notes
 Short observations from day-to-day engineering that may later become deeper artifacts.
 
+- [Engineering-depth operating model](field-notes/engineering-depth-operating-model.md)
+- [Engineering-depth cheatsheet](field-notes/engineering-depth-cheatsheet.md)
+
 The goal is evidence of engineering reasoning, not accumulation of notes.

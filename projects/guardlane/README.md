@@ -1,167 +1,34 @@
 # Guardlane
 
-## Executive Summary
+Guardlane is a production AI moderation system that combines deterministic
+rules, an English multi-label classifier, language-aware fallback, service
+orchestration, evidence persistence, human review, and operational feedback.
 
-A concise description of the system, the business problem, and my ownership.
+## System foundation
 
-## Timeline
+1. [Business context](01-business-context.md)
+2. [Requirements](02-requirements.md)
+3. [Domain model](03-domain-model.md)
+4. [Solution evolution](04-solution-evolution.md)
+5. [Dataset engineering](05-dataset-engineering.md)
+6. [Model engineering](06-model-engineering.md)
+7. [Model deployment](07-model-deployment.md)
+8. [Service architecture](08-service-architecture.md)
+9. [Architecture decisions](09-architecture-decisions.md)
 
-- Company:
-- Role:
-- Period:
-- Project status:
+## Production and operations
 
-## Business Context
+10. [Observability](10-observability.md)
+11. [Dashboard and operations](11-dashboard.md)
+12. [Production learnings](12-production-learnings.md)
+13. [Retrospective](13-retrospective.md)
 
-What business capability, customer need, operational problem, or strategic goal
-led to this project?
+## Communication and evidence
 
-## Problem
+14. [Interview guide](14-interview.md)
+15. [Engineering impact](15-promotion.md)
+16. [Reverse-engineered production system design](16-reverse-engineered-system-design.md)
+17. [QNA/VDP policy adapter](17-qna-vdp-policy-adapter.md)
 
-What was not working?
-
-What limitations existed in the previous process, system, or architecture?
-
-## Stakeholders
-
-- Product:
-- Engineering:
-- Data/AI:
-- Operations:
-- Customers:
-- Leadership:
-
-## My Role
-
-What did I personally own, influence, design, implement, coordinate, or improve?
-
-Clearly distinguish:
-
-- work I led
-- work I implemented
-- decisions I influenced
-- work completed by the wider team
-
-## Architecture
-
-### Previous State
-
-Describe the original system or workflow.
-
-### Target State
-
-Describe the new architecture.
-
-### Main Components
-
-- frontend
-- APIs
-- services
-- databases
-- messaging
-- cloud infrastructure
-- AI/ML components
-- observability
-- deployment
-
-### Request or Data Flow
-
-Describe the end-to-end flow.
-
-## Key Technical Decisions
-
-### Decision 1
-
-- Context:
-- Options:
-- Selected approach:
-- Why:
-- Trade-offs:
-- Outcome:
-
-## Implementation
-
-Describe the major engineering work.
-
-## Production Readiness
-
-- deployment
-- scalability
-- resilience
-- fallback behavior
-- observability
-- security
-- testing
-- rollout strategy
-- operational support
-
-## Challenges
-
-Describe the most difficult technical, business, coordination, or delivery
-challenges.
-
-## Business Impact
-
-What changed because this system was delivered?
-
-## Metrics
-
-Include known numbers where available.
-
-Avoid inventing metrics. Mark unknown values clearly.
-
-## Leadership and Influence
-
-How did I improve decisions, alignment, execution, quality, or team capability?
-
-## Recognition
-
-Record relevant feedback, appreciation, adoption, or leadership visibility.
-
-## Lessons Learned
-
-What would I repeat?
-
-What would I change?
-
-## Reusable Engineering Patterns
-
-Which patterns from this project can be applied elsewhere?
-
-## Interview Versions
-
-### 30 Seconds
-
-### 2 Minutes
-
-### 10 Minutes
-
-### Architecture Deep Dive
-
-## Resume Bullet Candidates
-
--
--
--
-
-## Promotion Evidence
-
-### Technical Excellence
-
-### Ownership
-
-### Leadership
-
-### Communication
-
-### Business Impact
-
-## Supporting Evidence
-
-- PRs:
-- tickets:
-- diagrams:
-- dashboards:
-- presentations:
-- messages:
-- release notes:
+The last two records capture implementation-level learning from current work.
+They intentionally omit work-system links and change identifiers.
