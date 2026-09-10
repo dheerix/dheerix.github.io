@@ -14,9 +14,10 @@ The portfolio should render stories from `../stories/` rather than duplicating t
 
 - Home and navigation
 - Project listing
-- Markdown-based story rendering
-- Guardlane story page
-- AI Upload story page
+- Featured Guardlane summary
+- Dedicated Guardlane and PlanForge engineering case studies under
+  `dheerix/projects/`
+- Compact selected-work summaries
 
 ## Local Preview
 
@@ -30,5 +31,8 @@ python3 -m http.server 8000
 
 ## Source of Truth
 
-- Story content lives in `../stories/`
-- The portfolio is a presentation layer over the story library
+- Engineering evidence remains in `../projects/`, `../engineering/`, and
+  `../evidence/`.
+- The portfolio is a presentation layer over those records; it should summarize
+  verified, public-safe claims instead of duplicating source documents.
+- Employer-derived details must be generalized before publication.

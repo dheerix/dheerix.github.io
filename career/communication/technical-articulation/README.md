@@ -86,3 +86,7 @@ Keep the vocabulary library small and evidence-led. Add terminology only when it
 The recurring test is simple:
 
 > **Am I expressing the engineering judgment I already possess more clearly?**
+
+## Applied articulation
+
+- [Guardlane business-impact investigation](../../../projects/guardlane/18-business-impact-investigation.md#interview-articulation) — explaining a post-production business signal through hypothesis, counterfactual analysis, correlation-versus-causation discipline, and controlled validation.

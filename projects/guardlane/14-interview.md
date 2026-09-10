@@ -2,6 +2,11 @@
 
 # Interview Guide
 
+The [business-impact investigation](18-business-impact-investigation.md#interview-articulation)
+adds the post-production story: observed business signal, hypothesis,
+multi-label segmentation, counterfactual analysis, causal discipline, and
+controlled policy validation.
+
 This document provides a structured approach for presenting the Guardlane project during technical interviews, architecture discussions, and engineering leadership conversations.
 
 ---

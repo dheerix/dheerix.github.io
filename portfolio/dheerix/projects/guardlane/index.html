@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Guardlane engineering case study — a production moderation system combining deterministic rules, specialized machine learning, language-aware routing, and human review." />
+  <meta name="color-scheme" content="light dark" />
+  <title>Guardlane Engineering Case Study — Dheerix</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: { extend: {
+        colors: { paper: '#f8f6f1', ink: '#17212b', moss: '#245d52', rust: '#b94726', 'rust-light': '#f29a7d' },
+        fontFamily: {
+          sans: ['Inter', 'Segoe UI', 'Arial', 'sans-serif'],
+          editorial: ['Space Grotesk', 'Inter', 'Segoe UI', 'Arial', 'sans-serif'],
+        },
+      } },
+    };
+  </script>
+  <style>
+    .brand-logo { display: inline-flex; align-items: center; gap: .75rem; font-family: "Space Grotesk", "Inter", "Segoe UI", Arial, sans-serif; font-weight: 700; text-transform: uppercase; }
+    .brand-logo__mark { display: grid; width: 2.375rem; height: 2.375rem; place-items: center; border: 1px solid rgba(255,255,255,.16); background: linear-gradient(135deg, #0b1730, #1f5fad); color: #fff; font-size: .92rem; letter-spacing: .08em; }
+    .brand-logo__text { font-size: .82rem; letter-spacing: .08em; }
+    .dark .text-rust { color: #f29a7d; }
+    a, button, summary { outline-offset: 4px; }
+    a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px solid #b94726; outline-offset: 4px; }
+    section[id], footer[id] { scroll-margin-top: 5rem; }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto !important; }
+      *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
+    }
+  </style>
+</head>
+<body class="bg-paper text-ink antialiased dark:bg-slate-950 dark:text-slate-100">
+  <a href="#main-content" class="fixed left-4 top-3 z-[60] -translate-y-20 bg-ink px-4 py-2 text-sm font-bold text-paper focus:translate-y-0 dark:bg-paper dark:text-ink">Skip to content</a>
+  <header class="sticky top-0 z-50 border-b border-ink/10 bg-paper/95 backdrop-blur dark:border-white/10 dark:bg-slate-950/95">
+    <nav class="mx-auto flex max-w-7xl items-center justify-between gap-4 px-5 py-3 lg:px-8" aria-label="Case study navigation">
+      <a href="../../index.html#introduction" class="brand-logo" aria-label="Dheerix portfolio home"><span class="brand-logo__mark">DX</span><span class="brand-logo__text">Dheerix</span></a>
+      <div class="hidden items-center gap-5 text-xs font-semibold uppercase tracking-wider text-slate-600 md:flex dark:text-slate-300">
+        <a class="hover:text-rust dark:hover:text-rust-light" href="#problem">Problem</a>
+        <a class="hover:text-rust dark:hover:text-rust-light" href="#architecture">Architecture</a>
+        <a class="hover:text-rust dark:hover:text-rust-light" href="#decisions">Decisions</a>
+        <a class="hover:text-rust dark:hover:text-rust-light" href="#operations">Operations</a>
+        <a class="hover:text-rust dark:hover:text-rust-light" href="#impact">Impact</a>
+        <a class="hover:text-rust dark:hover:text-rust-light" href="#evidence">Evidence</a>
+      </div>
+      <div class="flex items-center gap-3">
+        <a href="../../index.html#work" class="hidden text-xs font-bold uppercase tracking-wider sm:inline">All work</a>
+        <button id="theme-toggle" type="button" class="inline-flex h-9 w-9 items-center justify-center rounded-full border border-ink/15 hover:border-rust hover:text-rust dark:border-white/20 dark:hover:border-rust-light dark:hover:text-rust-light" aria-label="Switch to dark theme" aria-pressed="false"><i data-lucide="sun" class="h-4 w-4 dark:hidden" aria-hidden="true"></i><i data-lucide="moon" class="hidden h-4 w-4 dark:block" aria-hidden="true"></i></button>
+      </div>
+    </nav>
+    <details id="mobile-menu" class="border-t border-ink/10 px-5 py-2 md:hidden dark:border-white/10">
+      <summary class="cursor-pointer text-xs font-bold uppercase tracking-wider">Case study sections</summary>
+      <div class="grid grid-cols-2 gap-4 py-4 text-sm"><a href="#problem">Problem</a><a href="#architecture">Architecture</a><a href="#decisions">Decisions</a><a href="#operations">Operations</a><a href="#impact">Impact</a><a href="#evidence">Evidence</a><a href="../../index.html#work">All work</a></div>
+    </details>
+  </header>
+
+  <main id="main-content">
+    <section id="summary" class="mx-auto max-w-7xl px-5 pb-14 pt-12 sm:pt-16 lg:px-8 lg:pb-20">
+      <a href="../../index.html#work" class="text-xs font-bold uppercase tracking-[.18em] text-moss hover:text-rust dark:text-teal-300 dark:hover:text-rust-light">← Selected work</a>
+      <div class="mt-8 grid gap-10 lg:grid-cols-[1.3fr_.7fr] lg:items-end">
+        <div>
+          <p class="text-xs font-bold uppercase tracking-[.2em] text-rust dark:text-rust-light">Engineering case study · Production AI</p>
+          <h1 class="mt-4 font-editorial text-5xl font-semibold leading-none tracking-[-.04em] sm:text-7xl">Guardlane</h1>
+          <p class="mt-6 max-w-3xl font-editorial text-2xl font-semibold leading-9 sm:text-3xl">How a marketplace moderation capability evolved from one model call into an operable system with specialized detection paths and explicit policy boundaries.</p>
+        </div>
+        <dl class="grid grid-cols-[7rem_1fr] border-y border-ink/15 text-sm dark:border-white/15">
+          <dt class="border-b border-ink/10 py-4 font-bold text-moss dark:border-white/10 dark:text-teal-300">Role</dt><dd class="border-b border-ink/10 py-4 dark:border-white/10">Software Engineer</dd>
+          <dt class="border-b border-ink/10 py-4 font-bold text-moss dark:border-white/10 dark:text-teal-300">Status</dt><dd class="border-b border-ink/10 py-4 dark:border-white/10">Production capability</dd>
+          <dt class="py-4 font-bold text-moss dark:text-teal-300">Domains</dt><dd class="py-4">Production AI · service architecture · MLOps · human review</dd>
+        </dl>
+      </div>
+      <div class="mt-12 grid gap-px border border-ink/15 bg-ink/15 md:grid-cols-3 dark:border-white/15 dark:bg-white/15">
+        <article class="bg-paper p-6 dark:bg-slate-950"><p class="text-xs font-bold uppercase tracking-[.18em] text-rust dark:text-rust-light">Problem</p><p class="mt-3 text-sm leading-6 text-slate-600 dark:text-slate-300">Moderate short marketplace messages consistently without treating a probabilistic model as the owner of product policy.</p></article>
+        <article class="bg-paper p-6 dark:bg-slate-950"><p class="text-xs font-bold uppercase tracking-[.18em] text-rust dark:text-rust-light">My ownership</p><p class="mt-3 text-sm leading-6 text-slate-600 dark:text-slate-300">Owned delivery across requirements, backend orchestration, dataset and model development, SageMaker deployment, UI integration, human-review tooling, production readiness, and stakeholder alignment.</p></article>
+        <article class="bg-paper p-6 dark:bg-slate-950"><p class="text-xs font-bold uppercase tracking-[.18em] text-rust dark:text-rust-light">Outcome</p><p class="mt-3 text-sm leading-6 text-slate-600 dark:text-slate-300">Delivered a traceable moderation capability with a stable consumer contract, specialized inference paths, persisted outcomes, operational telemetry, and human review.</p></article>
+      </div>
+    </section>
+
+    <section id="problem" class="border-y border-ink/10 bg-white py-16 dark:border-white/10 dark:bg-slate-900/40" aria-labelledby="problem-title">
+      <div class="mx-auto grid max-w-7xl gap-10 px-5 lg:grid-cols-[.45fr_1.55fr] lg:px-8">
+        <header><p class="text-xs font-bold uppercase tracking-[.2em] text-moss dark:text-teal-300">01 · Problem</p><h2 id="problem-title" class="mt-4 font-editorial text-4xl leading-tight">Moderation was a systems problem, not only a classification problem.</h2></header>
+        <div class="grid gap-8 md:grid-cols-2">
+          <div><h3 class="font-bold">Product pressure</h3><p class="mt-3 leading-7 text-slate-600 dark:text-slate-300">Marketplace conversations could contain contact sharing, abusive content, negotiation attempts, and other policy violations. The workflow needed timely decisions while preserving the product context required to interpret a prediction correctly.</p></div>
+          <div><h3 class="font-bold">Technical pressure</h3><p class="mt-3 leading-7 text-slate-600 dark:text-slate-300">Deterministic patterns, English semantic classification, and unsupported-language handling had different latency, cost, capability, and evaluation characteristics. Consumers still needed one predictable contract.</p></div>
+          <div><h3 class="font-bold">Operating pressure</h3><p class="mt-3 leading-7 text-slate-600 dark:text-slate-300">A successful endpoint call could not prove prediction quality. The system also needed traceability, persisted evidence, operational visibility, and a way for reviewers to correct outcomes.</p></div>
+          <div><h3 class="font-bold">Ownership constraint</h3><p class="mt-3 leading-7 text-slate-600 dark:text-slate-300">Guardlane could classify content, but the consuming marketplace workflow owned the final user-facing action. Keeping that boundary explicit allowed product policy to evolve without retraining the model.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="architecture" class="mx-auto max-w-7xl px-5 py-16 lg:px-8" aria-labelledby="architecture-title">
+      <div class="grid gap-6 lg:grid-cols-[.7fr_1.3fr]"><div><p class="text-xs font-bold uppercase tracking-[.2em] text-moss dark:text-teal-300">02 · System at a glance</p><h2 id="architecture-title" class="mt-4 font-editorial text-4xl leading-tight">Specialized engines behind one moderation boundary.</h2></div><p class="self-end leading-7 text-slate-600 dark:text-slate-300">The public view intentionally shows responsibilities and flow rather than employer-specific services, payloads, infrastructure identifiers, or policy rules.</p></div>
+      <div class="mt-10 overflow-x-auto border border-ink/15 bg-white p-5 dark:border-white/15 dark:bg-slate-900/40" role="img" aria-label="Marketplace input flows through validation and deterministic detection, then language-aware semantic routing, result normalization, product policy, and asynchronous evidence review.">
+        <div class="mx-auto flex min-w-[54rem] items-stretch gap-3 text-center text-xs font-semibold">
+          <div class="grid flex-1 place-items-center border border-ink/20 p-4 dark:border-white/20">Marketplace<br />input</div><div class="grid place-items-center text-rust" aria-hidden="true">→</div>
+          <div class="grid flex-1 place-items-center border border-ink/20 p-4 dark:border-white/20">Validate +<br />deterministic rules</div><div class="grid place-items-center text-rust" aria-hidden="true">→</div>
+          <div class="grid flex-1 place-items-center bg-ink p-4 text-paper dark:bg-slate-800">Language-aware<br />semantic route</div><div class="grid place-items-center text-rust" aria-hidden="true">→</div>
+          <div class="grid flex-1 place-items-center border border-ink/20 p-4 dark:border-white/20">Normalize +<br />aggregate evidence</div><div class="grid place-items-center text-rust" aria-hidden="true">→</div>
+          <div class="grid flex-1 place-items-center border border-ink/20 p-4 dark:border-white/20">Consumer applies<br />product policy</div>
+        </div>
+        <div class="mx-auto mt-3 flex min-w-[54rem] flex-col items-center text-center text-xs text-slate-600 dark:text-slate-300"><span class="text-rust" aria-hidden="true">↓</span><div class="mt-2 w-2/5 border border-dashed border-moss/50 p-3 dark:border-teal-300/50">Asynchronous evidence persistence → targeted human review → future evaluation</div></div>
+      </div>
+
+      <div class="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+        <article class="border-t-2 border-ink py-5 dark:border-white"><p class="text-xs font-bold text-rust">01</p><h3 class="mt-3 text-lg font-bold">Capability-aware routing</h3><p class="mt-3 text-sm leading-6 text-slate-600 dark:text-slate-300">Unsupported input is routed to an appropriate fallback instead of being mistaken for a low-confidence classifier result.</p></article>
+        <article class="border-t-2 border-ink py-5 dark:border-white"><p class="text-xs font-bold text-rust">02</p><h3 class="mt-3 text-lg font-bold">Independent categories</h3><p class="mt-3 text-sm leading-6 text-slate-600 dark:text-slate-300">Multi-label outputs preserve overlapping policy signals and allow category-specific evaluation and thresholds.</p></article>
+        <article class="border-t-2 border-ink py-5 dark:border-white"><p class="text-xs font-bold text-rust">03</p><h3 class="mt-3 text-lg font-bold">Prediction ≠ action</h3><p class="mt-3 text-sm leading-6 text-slate-600 dark:text-slate-300">The moderation service returns evidence; the consuming workflow owns context-sensitive allow, warn, or block behavior.</p></article>
+        <article class="border-t-2 border-ink py-5 dark:border-white"><p class="text-xs font-bold text-rust">04</p><h3 class="mt-3 text-lg font-bold">Feedback is a component</h3><p class="mt-3 text-sm leading-6 text-slate-600 dark:text-slate-300">Persisted inference evidence and human review make production outcomes available for evaluation and later refinement.</p></article>
+      </div>
+    </section>
+
+    <section id="decisions" class="bg-ink py-16 text-paper dark:bg-slate-900" aria-labelledby="decisions-title">
+      <div class="mx-auto max-w-7xl px-5 lg:px-8">
+        <div class="grid gap-6 lg:grid-cols-[.7fr_1.3fr]"><div><p class="text-xs font-bold uppercase tracking-[.2em] text-teal-300">03 · Key decisions</p><h2 id="decisions-title" class="mt-4 font-editorial text-4xl leading-tight">The architecture reflects explicit trade-offs.</h2></div><p class="self-end leading-7 text-slate-300">These are compact summaries of the project ADRs. The emphasis is on why each boundary exists, not on reproducing internal documentation.</p></div>
+        <div class="mt-10 grid gap-px bg-white/15 md:grid-cols-2">
+          <article class="bg-ink p-7 dark:bg-slate-900"><p class="text-xs font-bold uppercase tracking-[.18em] text-rust-light">Hybrid moderation</p><h3 class="mt-3 text-xl font-bold">Use the best-fit detector for each request class.</h3><div class="mt-5 space-y-4 text-sm leading-6"><div><p class="font-bold text-teal-300">Why it mattered</p><p class="mt-1 text-slate-300">No single technique met every capability, latency, cost, and evaluation need.</p></div><div><p class="font-bold text-teal-300">Chosen approach</p><p class="mt-1 text-slate-300">Combine deterministic detection, an English multi-label DistilBERT classifier on SageMaker, and an LLM fallback for unsupported input.</p></div><div><p class="font-bold text-rust-light">Primary trade-off</p><p class="mt-1 text-slate-300">Better specialization in exchange for orchestration complexity.</p></div></div></article>
+          <article class="bg-ink p-7 dark:bg-slate-900"><p class="text-xs font-bold uppercase tracking-[.18em] text-rust-light">Policy boundary</p><h3 class="mt-3 text-xl font-bold">Return prediction evidence; keep product action with the consumer.</h3><div class="mt-5 space-y-4 text-sm leading-6"><div><p class="font-bold text-teal-300">Why it mattered</p><p class="mt-1 text-slate-300">The same detected category can require different behavior in different workflow contexts.</p></div><div><p class="font-bold text-teal-300">Chosen approach</p><p class="mt-1 text-slate-300">Guardlane normalizes evidence while the marketplace workflow applies contextual policy.</p></div><div><p class="font-bold text-rust-light">Primary trade-off</p><p class="mt-1 text-slate-300">Cleaner ownership requires a carefully versioned consumer contract.</p></div></div></article>
+          <article class="bg-ink p-7 dark:bg-slate-900"><p class="text-xs font-bold uppercase tracking-[.18em] text-rust-light">Unified contract</p><h3 class="mt-3 text-xl font-bold">Hide engine-specific formats behind a stable response.</h3><div class="mt-5 space-y-4 text-sm leading-6"><div><p class="font-bold text-teal-300">Why it mattered</p><p class="mt-1 text-slate-300">Consumers should not understand model tensors, provider responses, or rule-engine internals.</p></div><div><p class="font-bold text-teal-300">Chosen approach</p><p class="mt-1 text-slate-300">Normalize categories, sources, confidence evidence, versions, and processing status.</p></div><div><p class="font-bold text-rust-light">Primary trade-off</p><p class="mt-1 text-slate-300">The orchestration layer must preserve useful detail without leaking implementations.</p></div></div></article>
+          <article class="bg-ink p-7 dark:bg-slate-900"><p class="text-xs font-bold uppercase tracking-[.18em] text-rust-light">Asynchronous evidence</p><h3 class="mt-3 text-xl font-bold">Separate inference latency from operational persistence.</h3><div class="mt-5 space-y-4 text-sm leading-6"><div><p class="font-bold text-teal-300">Why it mattered</p><p class="mt-1 text-slate-300">Review and traceability are valuable, but they should not unnecessarily extend the user-facing path.</p></div><div><p class="font-bold text-teal-300">Chosen approach</p><p class="mt-1 text-slate-300">Publish moderation evidence for storage and later human review after producing a result.</p></div><div><p class="font-bold text-rust-light">Primary trade-off</p><p class="mt-1 text-slate-300">Lower request coupling introduces delivery, retry, and evidence-completeness concerns.</p></div></div></article>
+        </div>
+        <p class="mt-7 text-sm"><a href="#evidence" class="font-bold text-teal-300 hover:text-rust-light">See the supporting evidence map →</a></p>
+      </div>
+    </section>
+
+    <section id="operations" class="mx-auto max-w-7xl px-5 py-16 lg:px-8" aria-labelledby="operations-title">
+      <div class="grid gap-6 lg:grid-cols-[.7fr_1.3fr]"><div><p class="text-xs font-bold uppercase tracking-[.2em] text-moss dark:text-teal-300">04 · Failure &amp; operations</p><h2 id="operations-title" class="mt-4 font-editorial text-4xl leading-tight">A clean result and a failed result are different states.</h2></div><p class="self-end leading-7 text-slate-600 dark:text-slate-300">The table distinguishes documented architectural reasoning from measured production outcomes. No incident or quantitative performance claim is implied.</p></div>
+      <div class="mt-10 overflow-x-auto border-y border-ink/15 dark:border-white/15">
+        <table class="w-full min-w-[48rem] border-collapse text-left text-sm">
+          <thead><tr class="border-b border-ink/15 dark:border-white/15"><th class="p-4 font-bold">Failure mode</th><th class="p-4 font-bold">Consequence</th><th class="p-4 font-bold">Mitigation</th><th class="p-4 font-bold">Evidence status</th></tr></thead>
+          <tbody class="divide-y divide-ink/10 dark:divide-white/10">
+            <tr><td class="p-4 font-semibold">Unsupported classifier input</td><td class="p-4 text-slate-600 dark:text-slate-300">A score could be interpreted outside the model’s capability.</td><td class="p-4 text-slate-600 dark:text-slate-300">Route by supported capability and normalize the fallback result.</td><td class="p-4"><span class="bg-moss/10 px-2 py-1 text-xs font-bold text-moss dark:bg-teal-300/10 dark:text-teal-300">Architecture decision</span></td></tr>
+            <tr><td class="p-4 font-semibold">Semantic dependency failure</td><td class="p-4 text-slate-600 dark:text-slate-300">Available rule evidence may be incomplete.</td><td class="p-4 text-slate-600 dark:text-slate-300">Represent complete, partial, and failed processing explicitly; do not return failure as “no categories.”</td><td class="p-4"><span class="bg-rust/10 px-2 py-1 text-xs font-bold text-rust dark:bg-rust-light/10 dark:text-rust-light">Documented design</span></td></tr>
+            <tr><td class="p-4 font-semibold">Evidence persistence failure</td><td class="p-4 text-slate-600 dark:text-slate-300">The inference can succeed while the review record is missing.</td><td class="p-4 text-slate-600 dark:text-slate-300">Keep persistence off the synchronous path and observe its delivery separately.</td><td class="p-4"><span class="bg-moss/10 px-2 py-1 text-xs font-bold text-moss dark:bg-teal-300/10 dark:text-teal-300">Architecture decision</span></td></tr>
+            <tr><td class="p-4 font-semibold">Incompatible deployment</td><td class="p-4 text-slate-600 dark:text-slate-300">Model, taxonomy, thresholds, or response handling can drift.</td><td class="p-4 text-slate-600 dark:text-slate-300">Version behavior as a release unit, validate compatibility, and retain a rollback path.</td><td class="p-4"><span class="bg-rust/10 px-2 py-1 text-xs font-bold text-rust dark:bg-rust-light/10 dark:text-rust-light">Documented operating design</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="mt-10 grid gap-6 md:grid-cols-3">
+        <article class="border-l-2 border-rust pl-5"><h3 class="font-bold">Platform signals</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-300">Request execution, inference duration, dependency failures, and production diagnostics through application and endpoint telemetry.</p></article>
+        <article class="border-l-2 border-rust pl-5"><h3 class="font-bold">Model signals</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-300">Category-level evaluation, confidence behavior, review disagreement, and model-version traceability.</p></article>
+        <article class="border-l-2 border-rust pl-5"><h3 class="font-bold">Human signal</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-300">Targeted review corrects outcomes and creates evidence for threshold, dataset, prompt, or model refinement.</p></article>
+      </div>
+    </section>
+
+    <section id="impact" class="border-y border-ink/10 bg-white py-16 dark:border-white/10 dark:bg-slate-900/40" aria-labelledby="impact-title">
+      <div class="mx-auto max-w-7xl px-5 lg:px-8">
+        <div class="grid gap-6 lg:grid-cols-[.7fr_1.3fr]"><div><p class="text-xs font-bold uppercase tracking-[.2em] text-moss dark:text-teal-300">05 · Business-impact investigation</p><h2 id="impact-title" class="mt-4 font-editorial text-4xl leading-tight">Model quality is not product quality.</h2></div><div class="self-end"><p class="leading-7 text-slate-600 dark:text-slate-300">After rollout, the team observed an approximately <strong class="text-ink dark:text-white">3% decrease in sale conversion</strong>. That correlation created a hypothesis that Guardlane or its decision policy could be contributing. It does not establish that Guardlane caused the movement.</p><p class="mt-3 text-sm font-bold text-rust dark:text-rust-light">Status: investigation ongoing · policy decision pending</p></div></div>
+
+        <div class="mt-10 grid gap-px border border-ink/15 bg-ink/15 sm:grid-cols-4 dark:border-white/15 dark:bg-white/15">
+          <article class="bg-paper p-5 dark:bg-slate-950"><p class="text-xs font-bold uppercase tracking-wider text-moss dark:text-teal-300">Model metrics</p><p class="mt-2 text-sm text-slate-600 dark:text-slate-300">Precision · recall · F1</p></article>
+          <article class="bg-paper p-5 dark:bg-slate-950"><p class="text-xs font-bold uppercase tracking-wider text-moss dark:text-teal-300">Decision policy</p><p class="mt-2 text-sm text-slate-600 dark:text-slate-300">How evidence becomes allow, block, or review</p></article>
+          <article class="bg-paper p-5 dark:bg-slate-950"><p class="text-xs font-bold uppercase tracking-wider text-moss dark:text-teal-300">User behavior</p><p class="mt-2 text-sm text-slate-600 dark:text-slate-300">How moderation changes conversations</p></article>
+          <article class="bg-paper p-5 dark:bg-slate-950"><p class="text-xs font-bold uppercase tracking-wider text-rust dark:text-rust-light">Business outcome</p><p class="mt-2 text-sm text-slate-600 dark:text-slate-300">Conversion · engagement · trust · safety</p></article>
+        </div>
+
+        <div class="mt-12 overflow-x-auto" role="img" aria-label="The investigation moves from a business signal to a moderation hypothesis, blocked-decision extraction, negotiation segmentation, counterfactual analysis, business plausibility, policy choice, and controlled validation.">
+          <div class="flex min-w-[68rem] items-stretch gap-2 text-center text-xs font-semibold"><div class="grid flex-1 place-items-center border border-ink/20 p-3 dark:border-white/20">Business<br />signal</div><div class="grid place-items-center text-rust" aria-hidden="true">→</div><div class="grid flex-1 place-items-center border border-ink/20 p-3 dark:border-white/20">Moderation<br />hypothesis</div><div class="grid place-items-center text-rust" aria-hidden="true">→</div><div class="grid flex-1 place-items-center border border-ink/20 p-3 dark:border-white/20">Blocked-decision<br />extraction</div><div class="grid place-items-center text-rust" aria-hidden="true">→</div><div class="grid flex-1 place-items-center bg-ink p-3 text-paper dark:bg-slate-800">Negotiation<br />segmentation</div><div class="grid place-items-center text-rust" aria-hidden="true">→</div><div class="grid flex-1 place-items-center border border-ink/20 p-3 dark:border-white/20">Counterfactual<br />cohort</div><div class="grid place-items-center text-rust" aria-hidden="true">→</div><div class="grid flex-1 place-items-center border border-ink/20 p-3 dark:border-white/20">Business<br />plausibility</div><div class="grid place-items-center text-rust" aria-hidden="true">→</div><div class="grid flex-1 place-items-center border border-ink/20 p-3 dark:border-white/20">Policy + controlled<br />validation</div></div>
+        </div>
+
+        <div class="mt-12 grid gap-8 lg:grid-cols-[.9fr_1.1fr]">
+          <div><p class="text-xs font-bold uppercase tracking-[.18em] text-rust dark:text-rust-light">Negotiation taxonomy</p><h3 class="mt-3 font-editorial text-2xl">Separate conversational topic from harmful intent.</h3><div class="mt-6 grid gap-3 sm:grid-cols-2"><p class="border-l-2 border-moss pl-4 text-sm leading-6 dark:border-teal-300"><strong>Benign</strong><br /><span class="text-slate-600 dark:text-slate-300">Offers, counter-offers, flexibility, purchase intent</span></p><p class="border-l-2 border-moss pl-4 text-sm leading-6 dark:border-teal-300"><strong>+ Contact</strong><br /><span class="text-slate-600 dark:text-slate-300">Investigate separately; do not assume intent</span></p><p class="border-l-2 border-rust pl-4 text-sm leading-6"><strong>+ Circumvention</strong><br /><span class="text-slate-600 dark:text-slate-300">Potential independent blocking reason</span></p><p class="border-l-2 border-rust pl-4 text-sm leading-6"><strong>+ Negative</strong><br /><span class="text-slate-600 dark:text-slate-300">Block or review depending on policy</span></p><p class="border-l-2 border-rust pl-4 text-sm leading-6"><strong>+ Other violation</strong><br /><span class="text-slate-600 dark:text-slate-300">Independent category determines treatment</span></p><p class="border-l-2 border-ink/30 pl-4 text-sm leading-6 dark:border-white/30"><strong>Ambiguous</strong><br /><span class="text-slate-600 dark:text-slate-300">Review or further analysis</span></p></div></div>
+          <div class="border border-ink/15 p-6 dark:border-white/15"><p class="text-xs font-bold uppercase tracking-[.18em] text-rust dark:text-rust-light">Counterfactual</p><h3 class="mt-3 font-editorial text-2xl">What would pass if negotiation alone were not blocking?</h3><div class="mt-6 grid gap-5 text-sm sm:grid-cols-2"><div><p class="font-bold">Current policy candidate</p><p class="mt-2 font-mono leading-6 text-slate-600 dark:text-slate-300">BLOCK = negotiation OR negative OR circumvention OR other violation</p></div><div><p class="font-bold">Alternative to evaluate</p><p class="mt-2 font-mono leading-6 text-slate-600 dark:text-slate-300">BLOCK = negative OR circumvention OR other violation<br />negotiation = context</p></div></div><p class="mt-6 text-sm leading-6 text-slate-600 dark:text-slate-300">The key cohort has negotiation present while contact, negative, circumvention, and other violations are absent. Its size, reviewed intent, exposure, and downstream behavior determine business plausibility—not the raw count of negotiation blocks.</p></div>
+        </div>
+
+        <details class="mt-10 border-y border-ink/15 py-5 dark:border-white/15"><summary class="cursor-pointer font-bold text-moss dark:text-teal-300">Investigation questions</summary><ol class="mt-5 grid gap-x-10 gap-y-3 pl-5 text-sm leading-6 text-slate-600 sm:grid-cols-2 dark:text-slate-300"><li>What share of blocked messages contains negotiation?</li><li>What share is blocked only because of negotiation?</li><li>How much negotiation appears commercially legitimate?</li><li>Which labels commonly co-occur with negotiation?</li><li>Is conversion movement concentrated among exposed users?</li><li>Is the affected population large enough to explain the movement?</li><li>What undesirable interactions would become allowed?</li><li>Can negotiation become contextual rather than blocking?</li><li>Which experiment, guardrails, and rollback criteria validate a change?</li></ol></details>
+        <p class="mt-7 border-l-2 border-rust pl-5 text-sm leading-6 text-slate-600 dark:text-slate-300"><strong class="text-ink dark:text-white">Correlation ≠ causation.</strong> Stronger evidence requires exposure analysis, counterfactual replay, reviewed intent, a controlled and reversible policy change, business and safety guardrails, and checks for concurrent marketplace changes.</p>
+      </div>
+    </section>
+
+    <section id="evidence" class="border-y border-ink/10 bg-white py-16 dark:border-white/10 dark:bg-slate-900/40" aria-labelledby="evidence-title">
+      <div class="mx-auto max-w-7xl px-5 lg:px-8">
+        <div class="grid gap-6 lg:grid-cols-[.7fr_1.3fr]"><div><p class="text-xs font-bold uppercase tracking-[.2em] text-moss dark:text-teal-300">06 · Evidence</p><h2 id="evidence-title" class="mt-4 font-editorial text-4xl leading-tight">Claims trace back to project records.</h2></div><p class="self-end leading-7 text-slate-600 dark:text-slate-300">Only generalized, public-safe records are linked. Implementation repositories, work-system URLs, commit references, internal diagrams, and proprietary policy details are intentionally excluded.</p></div>
+        <div class="mt-10 divide-y divide-ink/15 border-y border-ink/15 dark:divide-white/15 dark:border-white/15">
+          <a class="grid gap-3 py-6 hover:text-rust sm:grid-cols-[1fr_1.4fr_auto] dark:hover:text-rust-light" href="https://github.com/dheerix/dheerix.github.io/blob/main/projects/guardlane/09-architecture-decisions.md" target="_blank" rel="noopener noreferrer"><span class="font-bold">Architecture decisions</span><span class="text-sm text-slate-600 dark:text-slate-300">Hybrid routing, policy separation, unified contract, asynchronous persistence, and versioning.</span><span class="text-sm font-bold">Read ADR summaries ↗</span></a>
+          <a class="grid gap-3 py-6 hover:text-rust sm:grid-cols-[1fr_1.4fr_auto] dark:hover:text-rust-light" href="https://github.com/dheerix/dheerix.github.io/blob/main/projects/guardlane/08-service-architecture.md" target="_blank" rel="noopener noreferrer"><span class="font-bold">Service architecture</span><span class="text-sm text-slate-600 dark:text-slate-300">Boundaries, request flow, result normalization, processing states, and persistence separation.</span><span class="text-sm font-bold">Read system design ↗</span></a>
+          <a class="grid gap-3 py-6 hover:text-rust sm:grid-cols-[1fr_1.4fr_auto] dark:hover:text-rust-light" href="https://github.com/dheerix/dheerix.github.io/blob/main/projects/guardlane/10-observability.md" target="_blank" rel="noopener noreferrer"><span class="font-bold">Observability</span><span class="text-sm text-slate-600 dark:text-slate-300">Application telemetry, endpoint health, model quality, correlation, and investigation questions.</span><span class="text-sm font-bold">Read operations record ↗</span></a>
+          <a class="grid gap-3 py-6 hover:text-rust sm:grid-cols-[1fr_1.4fr_auto] dark:hover:text-rust-light" href="https://github.com/dheerix/dheerix.github.io/blob/main/projects/guardlane/11-dashboard.md" target="_blank" rel="noopener noreferrer"><span class="font-bold">Human-review workflow</span><span class="text-sm text-slate-600 dark:text-slate-300">Review queue, correction workflow, evaluation feedback, and operational users.</span><span class="text-sm font-bold">Read review design ↗</span></a>
+          <a class="grid gap-3 py-6 hover:text-rust sm:grid-cols-[1fr_1.4fr_auto] dark:hover:text-rust-light" href="https://github.com/dheerix/dheerix.github.io/blob/main/projects/guardlane/18-business-impact-investigation.md" target="_blank" rel="noopener noreferrer"><span class="font-bold">Business-impact investigation</span><span class="text-sm text-slate-600 dark:text-slate-300">Negotiation taxonomy, counterfactual cohort, causal discipline, validation plan, and interview articulation.</span><span class="text-sm font-bold">Read investigation ↗</span></a>
+          <a class="grid gap-3 py-6 hover:text-rust sm:grid-cols-[1fr_1.4fr_auto] dark:hover:text-rust-light" href="https://github.com/dheerix/dheerix.github.io/blob/main/projects/guardlane/19-negotiation-signal-adr.md" target="_blank" rel="noopener noreferrer"><span class="font-bold">Negotiation policy decision</span><span class="text-sm text-slate-600 dark:text-slate-300">Four policy options and the evidence required before selecting one.</span><span class="text-sm font-bold">Read open ADR ↗</span></a>
+        </div>
+        <p class="mt-5 text-sm leading-6 text-slate-600 dark:text-slate-300"><strong class="text-ink dark:text-white">Evidence boundary:</strong> the approximately 3% conversion decrease is an observed business signal, not attributed impact. The causal contribution, negotiation-only population, policy decision, and post-change result remain under investigation.</p>
+      </div>
+    </section>
+
+    <section id="learning" class="mx-auto max-w-7xl px-5 py-16 lg:px-8" aria-labelledby="learning-title">
+      <div class="grid gap-10 lg:grid-cols-[.55fr_1.45fr]">
+        <header><p class="text-xs font-bold uppercase tracking-[.2em] text-moss dark:text-teal-300">07 · Learning</p><h2 id="learning-title" class="mt-4 font-editorial text-4xl leading-tight">What changed in my architectural judgment.</h2></header>
+        <div class="grid gap-8 sm:grid-cols-2">
+          <article><h3 class="font-bold">What the project taught me</h3><p class="mt-3 leading-7 text-slate-600 dark:text-slate-300">The production system is the orchestration, contract, policy boundary, telemetry, review path, and recovery behavior—not simply the model endpoint. Evaluation must match each component’s actual capability.</p></article>
+          <article><h3 class="font-bold">What I would strengthen</h3><p class="mt-3 leading-7 text-slate-600 dark:text-slate-300">I would make partial-processing states and policy versions explicit from the first release, validate latency budgets against tail behavior, and design representative review sampling alongside targeted review.</p></article>
+          <article><h3 class="font-bold">What would trigger re-evaluation</h3><p class="mt-3 leading-7 text-slate-600 dark:text-slate-300">New language coverage, material taxonomy change, unacceptable review disagreement, dependency cost or latency shifts, and repeated policy-adapter divergence would justify revisiting the routing or ownership model.</p></article>
+          <article><h3 class="font-bold">Outcome statement</h3><p class="mt-3 leading-7 text-slate-600 dark:text-slate-300">Guardlane established a reusable moderation capability and an operational learning loop. A roughly 3% conversion decrease was observed after rollout; no causal contribution or post-change result is claimed while the investigation continues.</p></article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer id="contact" class="bg-ink text-paper">
+    <div class="mx-auto grid max-w-7xl gap-8 px-5 py-12 sm:grid-cols-[1fr_auto] sm:items-end lg:px-8">
+      <div><p class="text-xs font-bold uppercase tracking-[.2em] text-teal-300">Continue exploring</p><h2 class="mt-3 font-editorial text-3xl">Engineering judgment, shown through real systems.</h2><p class="mt-4 max-w-2xl text-sm leading-6 text-slate-300">Return to the portfolio for selected work, capabilities, career history, and recommendations.</p></div>
+      <div class="flex flex-wrap gap-6 text-sm font-bold"><a href="../planforge/" class="border-b-2 border-white/25 pb-1 hover:text-teal-300">PlanForge case study</a><a href="../../index.html#work" class="border-b-2 border-rust pb-1 hover:text-teal-300">Back to selected work →</a></div>
+    </div>
+  </footer>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.468.0/dist/umd/lucide.min.js"></script>
+  <script>
+    const root = document.documentElement;
+    const themeToggle = document.getElementById('theme-toggle');
+    const savedTheme = localStorage.getItem('portfolio-theme');
+    if (savedTheme === 'dark' || (!savedTheme && matchMedia('(prefers-color-scheme: dark)').matches)) root.classList.add('dark');
+    const updateThemeButton = () => { const isDark = root.classList.contains('dark'); themeToggle.setAttribute('aria-pressed', String(isDark)); themeToggle.setAttribute('aria-label', `Switch to ${isDark ? 'light' : 'dark'} theme`); };
+    themeToggle.addEventListener('click', () => { root.classList.toggle('dark'); localStorage.setItem('portfolio-theme', root.classList.contains('dark') ? 'dark' : 'light'); updateThemeButton(); });
+    updateThemeButton();
+    document.querySelectorAll('#mobile-menu a').forEach((link) => link.addEventListener('click', () => document.getElementById('mobile-menu').removeAttribute('open')));
+    lucide.createIcons();
+  </script>
+</body>
+</html>

@@ -2,6 +2,10 @@
 
 # Engineering Impact & Leadership Evidence
 
+The [business-impact investigation](18-business-impact-investigation.md)
+extends this evidence beyond delivery into ownership of production
+consequences, decision-policy analysis, and business-aware validation.
+
 This document summarizes the engineering impact, technical leadership, and long-term architectural contributions demonstrated through the design and implementation of Guardlane.
 
 The objective is not only to highlight project delivery, but to demonstrate ownership across the complete software engineering lifecycle—from problem discovery to production operations.

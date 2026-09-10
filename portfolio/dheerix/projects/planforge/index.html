@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="PlanForge engineering case study — an independent product for turning engineering intent into versioned, reviewable cross-repository plans and evidence-backed findings." />
+  <meta name="color-scheme" content="light dark" />
+  <title>PlanForge Engineering Case Study — Dheerix</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: { extend: {
+        colors: { paper: '#f8f6f1', ink: '#17212b', moss: '#245d52', rust: '#b94726', 'rust-light': '#f29a7d' },
+        fontFamily: { sans: ['Inter', 'Segoe UI', 'Arial', 'sans-serif'], editorial: ['Space Grotesk', 'Inter', 'Segoe UI', 'Arial', 'sans-serif'] },
+      } },
+    };
+  </script>
+  <style>
+    .brand-logo { display: inline-flex; align-items: center; gap: .75rem; font-family: "Space Grotesk", "Inter", "Segoe UI", Arial, sans-serif; font-weight: 700; text-transform: uppercase; }
+    .brand-logo__mark { display: grid; width: 2.375rem; height: 2.375rem; place-items: center; border: 1px solid rgba(255,255,255,.16); background: linear-gradient(135deg, #0b1730, #1f5fad); color: #fff; font-size: .92rem; letter-spacing: .08em; }
+    .brand-logo__text { font-size: .82rem; letter-spacing: .08em; }
+    .dark .text-rust { color: #f29a7d; }
+    a, button, summary { outline-offset: 4px; }
+    a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px solid #b94726; outline-offset: 4px; }
+    section[id], footer[id] { scroll-margin-top: 5rem; }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto !important; }
+      *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
+    }
+  </style>
+</head>
+<body class="bg-paper text-ink antialiased dark:bg-slate-950 dark:text-slate-100">
+  <a href="#main-content" class="fixed left-4 top-3 z-[60] -translate-y-20 bg-ink px-4 py-2 text-sm font-bold text-paper focus:translate-y-0 dark:bg-paper dark:text-ink">Skip to content</a>
+  <header class="sticky top-0 z-50 border-b border-ink/10 bg-paper/95 backdrop-blur dark:border-white/10 dark:bg-slate-950/95">
+    <nav class="mx-auto flex max-w-7xl items-center justify-between gap-4 px-5 py-3 lg:px-8" aria-label="Case study navigation">
+      <a href="../../index.html#introduction" class="brand-logo" aria-label="Dheerix portfolio home"><span class="brand-logo__mark">DX</span><span class="brand-logo__text">Dheerix</span></a>
+      <div class="hidden items-center gap-5 text-xs font-semibold uppercase tracking-wider text-slate-600 md:flex dark:text-slate-300"><a href="#problem">Problem</a><a href="#architecture">Architecture</a><a href="#decisions">Decisions</a><a href="#reliability">Reliability</a><a href="#evidence">Evidence</a></div>
+      <div class="flex items-center gap-3"><a href="../../index.html#work" class="hidden text-xs font-bold uppercase tracking-wider sm:inline">All work</a><button id="theme-toggle" type="button" class="inline-flex h-9 w-9 items-center justify-center rounded-full border border-ink/15 hover:border-rust hover:text-rust dark:border-white/20 dark:hover:border-rust-light dark:hover:text-rust-light" aria-label="Switch to dark theme" aria-pressed="false"><i data-lucide="sun" class="h-4 w-4 dark:hidden" aria-hidden="true"></i><i data-lucide="moon" class="hidden h-4 w-4 dark:block" aria-hidden="true"></i></button></div>
+    </nav>
+    <details id="mobile-menu" class="border-t border-ink/10 px-5 py-2 md:hidden dark:border-white/10"><summary class="cursor-pointer text-xs font-bold uppercase tracking-wider">Case study sections</summary><div class="grid grid-cols-2 gap-4 py-4 text-sm"><a href="#problem">Problem</a><a href="#architecture">Architecture</a><a href="#decisions">Decisions</a><a href="#reliability">Reliability</a><a href="#evidence">Evidence</a><a href="../../index.html#work">All work</a></div></details>
+  </header>
+
+  <main id="main-content">
+    <section id="summary" class="mx-auto max-w-7xl px-5 pb-14 pt-12 sm:pt-16 lg:px-8 lg:pb-20">
+      <a href="../../index.html#work" class="text-xs font-bold uppercase tracking-[.18em] text-moss hover:text-rust dark:text-teal-300 dark:hover:text-rust-light">← Selected work</a>
+      <div class="mt-8 grid gap-10 lg:grid-cols-[1.3fr_.7fr] lg:items-end">
+        <div><p class="text-xs font-bold uppercase tracking-[.2em] text-rust dark:text-rust-light">Engineering product case study · Independent product</p><h1 class="mt-4 font-editorial text-5xl font-semibold leading-none tracking-[-.04em] sm:text-7xl">PlanForge</h1><p class="mt-6 max-w-3xl font-editorial text-2xl font-semibold leading-9 sm:text-3xl">Turning distributed engineering intent into versioned plans, repository-scoped work, and evidence-backed delivery findings.</p></div>
+        <dl class="grid grid-cols-[7rem_1fr] border-y border-ink/15 text-sm dark:border-white/15"><dt class="border-b border-ink/10 py-4 font-bold text-moss dark:border-white/10 dark:text-teal-300">Ownership</dt><dd class="border-b border-ink/10 py-4 dark:border-white/10">Creator and product engineer</dd><dt class="border-b border-ink/10 py-4 font-bold text-moss dark:border-white/10 dark:text-teal-300">Status</dt><dd class="border-b border-ink/10 py-4 dark:border-white/10">Working early-stage product</dd><dt class="py-4 font-bold text-moss dark:text-teal-300">Domains</dt><dd class="py-4">Developer tools · workflow systems · evidence · agentic engineering</dd></dl>
+      </div>
+      <div class="mt-12 grid gap-px border border-ink/15 bg-ink/15 md:grid-cols-3 dark:border-white/15 dark:bg-white/15">
+        <article class="bg-paper p-6 dark:bg-slate-950"><p class="text-xs font-bold uppercase tracking-[.18em] text-rust dark:text-rust-light">Problem</p><p class="mt-3 text-sm leading-6 text-slate-600 dark:text-slate-300">Features spanning repositories lose shared intent as requirements become tickets, pull requests, implementation details, and separate review conversations.</p></article>
+        <article class="bg-paper p-6 dark:bg-slate-950"><p class="text-xs font-bold uppercase tracking-[.18em] text-rust dark:text-rust-light">My ownership</p><p class="mt-3 text-sm leading-6 text-slate-600 dark:text-slate-300">I conceived, designed, and built PlanForge as a versioned planning and evidence control plane, including its schemas, validators, deviation lifecycle, review surfaces, and test suite.</p></article>
+        <article class="bg-paper p-6 dark:bg-slate-950"><p class="text-xs font-bold uppercase tracking-[.18em] text-rust dark:text-rust-light">Current outcome</p><p class="mt-3 text-sm leading-6 text-slate-600 dark:text-slate-300">The working implementation persists cross-repository plans, collects delivery evidence, detects reviewable deviations, and renders read-only project and finding views.</p></article>
+      </div>
+    </section>
+
+    <section id="problem" class="border-y border-ink/10 bg-white py-16 dark:border-white/10 dark:bg-slate-900/40" aria-labelledby="problem-title">
+      <div class="mx-auto grid max-w-7xl gap-10 px-5 lg:grid-cols-[.45fr_1.55fr] lg:px-8"><header><p class="text-xs font-bold uppercase tracking-[.2em] text-moss dark:text-teal-300">01 · Product problem</p><h2 id="problem-title" class="mt-4 font-editorial text-4xl leading-tight">Local delivery can look complete while system-level intent has drifted.</h2></header><div class="grid gap-8 md:grid-cols-2">
+        <div><h3 class="font-bold">Intent is fragmented</h3><p class="mt-3 leading-7 text-slate-600 dark:text-slate-300">Requirements, architecture choices, ownership, tickets, code changes, and verification evidence live in different systems and decay at different rates.</p></div>
+        <div><h3 class="font-bold">Repository views are partial</h3><p class="mt-3 leading-7 text-slate-600 dark:text-slate-300">A pull request can be correct in isolation while violating a contract, dependency, lifecycle requirement, or acceptance criterion shared with another repository.</p></div>
+        <div><h3 class="font-bold">Completion is ambiguous</h3><p class="mt-3 leading-7 text-slate-600 dark:text-slate-300">One merged change does not prove every required change is merged, and merged code does not prove end-to-end behavior was verified.</p></div>
+        <div><h3 class="font-bold">Automation can overclaim</h3><p class="mt-3 leading-7 text-slate-600 dark:text-slate-300">Diffs provide useful evidence but cannot always prove business meaning. A trustworthy product must preserve uncertainty and keep engineers in control.</p></div>
+      </div></div>
+    </section>
+
+    <section id="architecture" class="mx-auto max-w-7xl px-5 py-16 lg:px-8" aria-labelledby="architecture-title">
+      <div class="grid gap-6 lg:grid-cols-[.7fr_1.3fr]"><div><p class="text-xs font-bold uppercase tracking-[.2em] text-moss dark:text-teal-300">02 · System at a glance</p><h2 id="architecture-title" class="mt-4 font-editorial text-4xl leading-tight">A durable comparison loop around existing workflow systems.</h2></div><p class="self-end leading-7 text-slate-600 dark:text-slate-300">PlanForge does not replace product planning, code review, or engineering judgment. It preserves a versioned baseline and compares implementation evidence against it.</p></div>
+      <div class="mt-10 overflow-x-auto border border-ink/15 bg-white p-5 dark:border-white/15 dark:bg-slate-900/40" role="img" aria-label="Requirements become an approved versioned plan and repository projections. Delivery evidence is collected and compared with the plan to produce findings for engineer review.">
+        <div class="mx-auto flex min-w-[58rem] items-stretch gap-3 text-center text-xs font-semibold"><div class="grid flex-1 place-items-center border border-ink/20 p-4 dark:border-white/20">Requirements +<br />engineering intent</div><div class="grid place-items-center text-rust" aria-hidden="true">→</div><div class="grid flex-1 place-items-center bg-ink p-4 text-paper dark:bg-slate-800">Approved versioned<br />central plan</div><div class="grid place-items-center text-rust" aria-hidden="true">→</div><div class="grid flex-1 place-items-center border border-ink/20 p-4 dark:border-white/20">Repository<br />projections</div><div class="grid place-items-center text-rust" aria-hidden="true">→</div><div class="grid flex-1 place-items-center border border-ink/20 p-4 dark:border-white/20">Delivery<br />evidence</div><div class="grid place-items-center text-rust" aria-hidden="true">→</div><div class="grid flex-1 place-items-center border border-ink/20 p-4 dark:border-white/20">Comparison +<br />review findings</div></div>
+        <div class="mx-auto mt-3 flex min-w-[58rem] flex-col items-center text-center text-xs text-slate-600 dark:text-slate-300"><span class="text-rust" aria-hidden="true">↓</span><div class="mt-2 w-2/5 border border-dashed border-moss/50 p-3 dark:border-teal-300/50">Engineer accepts, dismisses, corrects, or creates a new plan version</div></div>
+      </div>
+      <div class="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+        <article class="border-t-2 border-ink py-5 dark:border-white"><p class="text-xs font-bold text-rust">01</p><h3 class="mt-3 text-lg font-bold">Stable identity</h3><p class="mt-3 text-sm leading-6 text-slate-600 dark:text-slate-300">A shared plan ID, plan version, and schema version connect central intent to every repository projection.</p></article>
+        <article class="border-t-2 border-ink py-5 dark:border-white"><p class="text-xs font-bold text-rust">02</p><h3 class="mt-3 text-lg font-bold">Deterministic validation</h3><p class="mt-3 text-sm leading-6 text-slate-600 dark:text-slate-300">Validators reject stale versions, unknown dependencies, missing repositories, duplicate projections, and misplaced acceptance criteria.</p></article>
+        <article class="border-t-2 border-ink py-5 dark:border-white"><p class="text-xs font-bold text-rust">03</p><h3 class="mt-3 text-lg font-bold">Evidence provenance</h3><p class="mt-3 text-sm leading-6 text-slate-600 dark:text-slate-300">Findings retain expected intent, observed evidence, confidence, ownership, review state, and freshness.</p></article>
+        <article class="border-t-2 border-ink py-5 dark:border-white"><p class="text-xs font-bold text-rust">04</p><h3 class="mt-3 text-lg font-bold">Human authority</h3><p class="mt-3 text-sm leading-6 text-slate-600 dark:text-slate-300">PlanForge reports discrepancies; engineers decide whether to accept, correct, dismiss, or replan.</p></article>
+      </div>
+    </section>
+
+    <section id="decisions" class="bg-ink py-16 text-paper dark:bg-slate-900" aria-labelledby="decisions-title">
+      <div class="mx-auto max-w-7xl px-5 lg:px-8"><div class="grid gap-6 lg:grid-cols-[.7fr_1.3fr]"><div><p class="text-xs font-bold uppercase tracking-[.2em] text-teal-300">03 · Key decisions</p><h2 id="decisions-title" class="mt-4 font-editorial text-4xl leading-tight">Product boundaries matter more than adding agents.</h2></div><p class="self-end leading-7 text-slate-300">Deterministic state and workflow authority remain separate from probabilistic interpretation, making findings explainable and recovery deliberate.</p></div>
+        <div class="mt-10 grid gap-px bg-white/15 md:grid-cols-2">
+          <article class="bg-ink p-7 dark:bg-slate-900"><p class="text-xs font-bold uppercase tracking-[.18em] text-rust-light">Control plane, not project tracker</p><h3 class="mt-3 text-xl font-bold">Coordinate evidence without replacing authoritative systems.</h3><p class="mt-5 text-sm leading-6 text-slate-300"><strong class="text-teal-300">Approach:</strong> derive planning and delivery overlays while existing systems retain product workflow and code-review authority.</p><p class="mt-4 text-sm leading-6 text-slate-300"><strong class="text-rust-light">Trade-off:</strong> less direct automation in exchange for clear ownership boundaries.</p></article>
+          <article class="bg-ink p-7 dark:bg-slate-900"><p class="text-xs font-bold uppercase tracking-[.18em] text-rust-light">Central plan + projections</p><h3 class="mt-3 text-xl font-bold">Keep shared intent central and repository work local.</h3><p class="mt-5 text-sm leading-6 text-slate-300"><strong class="text-teal-300">Approach:</strong> freeze one versioned plan and generate deterministic repository-scoped projections.</p><p class="mt-4 text-sm leading-6 text-slate-300"><strong class="text-rust-light">Trade-off:</strong> stronger consistency requires regeneration and freshness validation.</p></article>
+          <article class="bg-ink p-7 dark:bg-slate-900"><p class="text-xs font-bold uppercase tracking-[.18em] text-rust-light">Findings, not verdicts</p><h3 class="mt-3 text-xl font-bold">Preserve uncertainty in plan-versus-code comparison.</h3><p class="mt-5 text-sm leading-6 text-slate-300"><strong class="text-teal-300">Approach:</strong> classify results as confirmed, suspected, or questions with confidence, provenance, and review state.</p><p class="mt-4 text-sm leading-6 text-slate-300"><strong class="text-rust-light">Trade-off:</strong> human review remains necessary, but evidence is safer and more trustworthy.</p></article>
+          <article class="bg-ink p-7 dark:bg-slate-900"><p class="text-xs font-bold uppercase tracking-[.18em] text-rust-light">Completion ≠ verification</p><h3 class="mt-3 text-xl font-bold">Aggregate every required change and track proof separately.</h3><p class="mt-5 text-sm leading-6 text-slate-300"><strong class="text-teal-300">Approach:</strong> derive implementation completion from the full required change set and model verification independently.</p><p class="mt-4 text-sm leading-6 text-slate-300"><strong class="text-rust-light">Trade-off:</strong> accuracy requires explicit optional and superseded evidence relationships.</p></article>
+        </div><p class="mt-7 text-sm"><a href="#evidence" class="font-bold text-teal-300 hover:text-rust-light">See the supporting evidence map →</a></p>
+      </div>
+    </section>
+
+    <section id="reliability" class="mx-auto max-w-7xl px-5 py-16 lg:px-8" aria-labelledby="reliability-title">
+      <div class="grid gap-6 lg:grid-cols-[.7fr_1.3fr]"><div><p class="text-xs font-bold uppercase tracking-[.2em] text-moss dark:text-teal-300">04 · Failure &amp; recovery</p><h2 id="reliability-title" class="mt-4 font-editorial text-4xl leading-tight">Trust depends on rejecting false certainty.</h2></div><p class="self-end leading-7 text-slate-600 dark:text-slate-300">The implementation validates structural failure states and creates review artifacts. It does not claim production-scale operation or autonomous correction.</p></div>
+      <div class="mt-10 overflow-x-auto border-y border-ink/15 dark:border-white/15"><table class="w-full min-w-[50rem] border-collapse text-left text-sm"><thead><tr class="border-b border-ink/15 dark:border-white/15"><th class="p-4">Failure mode</th><th class="p-4">Risk</th><th class="p-4">Response</th><th class="p-4">Evidence status</th></tr></thead><tbody class="divide-y divide-ink/10 dark:divide-white/10">
+        <tr><td class="p-4 font-semibold">Stale projection</td><td class="p-4 text-slate-600 dark:text-slate-300">Work follows superseded intent.</td><td class="p-4 text-slate-600 dark:text-slate-300">Validate plan identity and freshness across artifacts.</td><td class="p-4 font-bold text-moss dark:text-teal-300">Implemented + tested</td></tr>
+        <tr><td class="p-4 font-semibold">Missing repository or dependency</td><td class="p-4 text-slate-600 dark:text-slate-300">A locally complete change leaves the feature incomplete.</td><td class="p-4 text-slate-600 dark:text-slate-300">Fail validation for missing projections and unknown references.</td><td class="p-4 font-bold text-moss dark:text-teal-300">Implemented + tested</td></tr>
+        <tr><td class="p-4 font-semibold">Ambiguous evidence</td><td class="p-4 text-slate-600 dark:text-slate-300">A legitimate variation is reported as a defect.</td><td class="p-4 text-slate-600 dark:text-slate-300">Emit a suspected finding or question with provenance.</td><td class="p-4 font-bold text-moss dark:text-teal-300">Implemented model</td></tr>
+        <tr><td class="p-4 font-semibold">Premature completion</td><td class="p-4 text-slate-600 dark:text-slate-300">One merge masks unfinished work or missing proof.</td><td class="p-4 text-slate-600 dark:text-slate-300">Aggregate required changes and track verification separately.</td><td class="p-4 font-bold text-rust">Accepted design</td></tr>
+        <tr><td class="p-4 font-semibold">Uncertain provenance</td><td class="p-4 text-slate-600 dark:text-slate-300">A finding uses the wrong baseline.</td><td class="p-4 text-slate-600 dark:text-slate-300">Preserve a warning and require confirmation.</td><td class="p-4 font-bold text-moss dark:text-teal-300">Observed example</td></tr>
+      </tbody></table></div>
+    </section>
+
+    <section id="outcome" class="border-y border-ink/10 bg-white py-16 dark:border-white/10 dark:bg-slate-900/40" aria-labelledby="outcome-title">
+      <div class="mx-auto grid max-w-7xl gap-10 px-5 lg:grid-cols-[.55fr_1.45fr] lg:px-8"><header><p class="text-xs font-bold uppercase tracking-[.2em] text-moss dark:text-teal-300">05 · Product outcome</p><h2 id="outcome-title" class="mt-4 font-editorial text-4xl leading-tight">A working evidence loop, with its limits visible.</h2></header><div class="grid gap-8 sm:grid-cols-2">
+        <article><h3 class="font-bold">Implemented</h3><p class="mt-3 leading-7 text-slate-600 dark:text-slate-300">Versioned plans, repository projections, evidence inputs, deviation rules and lifecycle, durable analysis, workspace discovery, read-only servers, HTML views, and CI-backed tests.</p></article>
+        <article><h3 class="font-bold">Demonstrated</h3><p class="mt-3 leading-7 text-slate-600 dark:text-slate-300">Generalized examples exposed a cross-repository contract mismatch and a missing durable-state recovery path that local ticket completion could overlook.</p></article>
+        <article><h3 class="font-bold">Verified</h3><p class="mt-3 leading-7 text-slate-600 dark:text-slate-300">The recorded full test suite passed across foundation behavior, execution-plan validation, workspace discovery, server behavior, and deliberately invalid artifact states.</p></article>
+        <article><h3 class="font-bold">Not yet proven</h3><p class="mt-3 leading-7 text-slate-600 dark:text-slate-300">Autonomous execution, automatic remediation, production-scale freshness, live multi-user operation, and one canonical project from plan through independent verification.</p></article>
+      </div></div>
+    </section>
+
+    <section id="evidence" class="mx-auto max-w-7xl px-5 py-16 lg:px-8" aria-labelledby="evidence-title">
+      <div class="grid gap-6 lg:grid-cols-[.7fr_1.3fr]"><div><p class="text-xs font-bold uppercase tracking-[.2em] text-moss dark:text-teal-300">06 · Evidence</p><h2 id="evidence-title" class="mt-4 font-editorial text-4xl leading-tight">Product claims map to durable records.</h2></div><p class="self-end leading-7 text-slate-600 dark:text-slate-300">These public-safe records expose product reasoning and implementation boundaries—not proprietary source code or employer-system identifiers.</p></div>
+      <div class="mt-10 divide-y divide-ink/15 border-y border-ink/15 dark:divide-white/15 dark:border-white/15">
+        <a class="grid gap-3 py-6 hover:text-rust sm:grid-cols-[1fr_1.4fr_auto]" href="https://github.com/dheerix/dheerix.github.io/blob/main/projects/planforge/system-design.md" target="_blank" rel="noopener noreferrer"><strong>System design</strong><span class="text-sm text-slate-600 dark:text-slate-300">Evolution, invariants, evidence path, authority boundaries, and open decisions.</span><span class="text-sm font-bold">Read design ↗</span></a>
+        <a class="grid gap-3 py-6 hover:text-rust sm:grid-cols-[1fr_1.4fr_auto]" href="https://github.com/dheerix/dheerix.github.io/blob/main/projects/planforge/implementation-status.md" target="_blank" rel="noopener noreferrer"><strong>Implementation status</strong><span class="text-sm text-slate-600 dark:text-slate-300">Implemented capabilities, test coverage, maturity, and next proof.</span><span class="text-sm font-bold">Read status ↗</span></a>
+        <a class="grid gap-3 py-6 hover:text-rust sm:grid-cols-[1fr_1.4fr_auto]" href="https://github.com/dheerix/dheerix.github.io/blob/main/projects/planforge/adrs/0001-planforge-as-cross-repository-control-plane.md" target="_blank" rel="noopener noreferrer"><strong>Control-plane boundary</strong><span class="text-sm text-slate-600 dark:text-slate-300">Why PlanForge coordinates context instead of becoming another authority.</span><span class="text-sm font-bold">Read ADR 0001 ↗</span></a>
+        <a class="grid gap-3 py-6 hover:text-rust sm:grid-cols-[1fr_1.4fr_auto]" href="https://github.com/dheerix/dheerix.github.io/blob/main/projects/planforge/adrs/0002-versioned-central-plan-and-repository-projections.md" target="_blank" rel="noopener noreferrer"><strong>Versioned projections</strong><span class="text-sm text-slate-600 dark:text-slate-300">Central plans, repository projections, regeneration, and freshness.</span><span class="text-sm font-bold">Read ADR 0002 ↗</span></a>
+        <a class="grid gap-3 py-6 hover:text-rust sm:grid-cols-[1fr_1.4fr_auto]" href="https://github.com/dheerix/dheerix.github.io/blob/main/projects/planforge/adrs/0003-evidence-backed-deviation-findings.md" target="_blank" rel="noopener noreferrer"><strong>Reviewable findings</strong><span class="text-sm text-slate-600 dark:text-slate-300">Finding type, confidence, provenance, review state, and ownership.</span><span class="text-sm font-bold">Read ADR 0003 ↗</span></a>
+        <a class="grid gap-3 py-6 hover:text-rust sm:grid-cols-[1fr_1.4fr_auto]" href="https://github.com/dheerix/dheerix.github.io/blob/main/projects/planforge/adrs/0004-aggregate-pr-completion-and-independent-verification.md" target="_blank" rel="noopener noreferrer"><strong>Completion and verification</strong><span class="text-sm text-slate-600 dark:text-slate-300">Multi-change aggregation and independent proof of system behavior.</span><span class="text-sm font-bold">Read ADR 0004 ↗</span></a>
+      </div>
+    </section>
+
+    <section id="learning" class="border-t border-ink/10 bg-white py-16 dark:border-white/10 dark:bg-slate-900/40" aria-labelledby="learning-title"><div class="mx-auto grid max-w-7xl gap-10 px-5 lg:grid-cols-[.55fr_1.45fr] lg:px-8"><header><p class="text-xs font-bold uppercase tracking-[.2em] text-moss dark:text-teal-300">07 · Learning</p><h2 id="learning-title" class="mt-4 font-editorial text-4xl leading-tight">What building the product clarified.</h2></header><div class="grid gap-8 sm:grid-cols-2">
+      <article><h3 class="font-bold">Durability before autonomy</h3><p class="mt-3 leading-7 text-slate-600 dark:text-slate-300">Agents become useful only after identity, state, dependencies, approvals, evidence, and recovery are explicit. Conversation history is not a workflow store.</p></article>
+      <article><h3 class="font-bold">Uncertainty is product data</h3><p class="mt-3 leading-7 text-slate-600 dark:text-slate-300">A suspected mismatch, its confidence, and its provenance are more useful than an unsupported automated verdict.</p></article>
+      <article><h3 class="font-bold">What I would test next</h3><p class="mt-3 leading-7 text-slate-600 dark:text-slate-300">Run one canonical feature through frozen intent, every projection, all linked changes, one reviewed deviation, and final independent verification.</p></article>
+      <article><h3 class="font-bold">Re-evaluation trigger</h3><p class="mt-3 leading-7 text-slate-600 dark:text-slate-300">Change the control-plane boundary only when automation has sufficient evidence quality, recovery semantics, and a clear product reason to own workflow transitions.</p></article>
+    </div></div></section>
+  </main>
+
+  <footer id="contact" class="bg-ink text-paper"><div class="mx-auto grid max-w-7xl gap-8 px-5 py-12 sm:grid-cols-[1fr_auto] sm:items-end lg:px-8"><div><p class="text-xs font-bold uppercase tracking-[.2em] text-teal-300">Continue exploring</p><h2 class="mt-3 font-editorial text-3xl">Two systems, two different engineering problems.</h2><p class="mt-4 max-w-2xl text-sm leading-6 text-slate-300">Guardlane shows production AI delivery. PlanForge shows product architecture for durable engineering workflows.</p></div><div class="flex flex-wrap gap-6 text-sm font-bold"><a href="../guardlane/" class="border-b-2 border-white/25 pb-1 hover:text-teal-300">Guardlane case study</a><a href="../../index.html#work" class="border-b-2 border-rust pb-1 hover:text-teal-300">All selected work →</a></div></div></footer>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.468.0/dist/umd/lucide.min.js"></script>
+  <script>
+    const root = document.documentElement;
+    const themeToggle = document.getElementById('theme-toggle');
+    const savedTheme = localStorage.getItem('portfolio-theme');
+    if (savedTheme === 'dark' || (!savedTheme && matchMedia('(prefers-color-scheme: dark)').matches)) root.classList.add('dark');
+    const updateThemeButton = () => { const isDark = root.classList.contains('dark'); themeToggle.setAttribute('aria-pressed', String(isDark)); themeToggle.setAttribute('aria-label', `Switch to ${isDark ? 'light' : 'dark'} theme`); };
+    themeToggle.addEventListener('click', () => { root.classList.toggle('dark'); localStorage.setItem('portfolio-theme', root.classList.contains('dark') ? 'dark' : 'light'); updateThemeButton(); });
+    updateThemeButton();
+    document.querySelectorAll('#mobile-menu a').forEach((link) => link.addEventListener('click', () => document.getElementById('mobile-menu').removeAttribute('open')));
+    lucide.createIcons();
+  </script>
+</body>
+</html>

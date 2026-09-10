@@ -164,3 +164,9 @@ implemented.
 4. What retention and access controls apply to actor-level moderation evidence?
 5. Which quality metrics can be estimated from targeted review plus random
    sampling?
+
+## Post-production investigation
+
+The [business-impact investigation](18-business-impact-investigation.md)
+extends this system design into counterfactual analysis of negotiation-related
+decisions, product-policy options, and controlled validation.

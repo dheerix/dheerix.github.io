@@ -307,3 +307,9 @@ The orchestration layer becomes the stable product capability.
 # Engineering Principle
 
 > Good architecture is not choosing one technology. It is assigning each responsibility to the component best suited to perform it while keeping the overall system simple, observable, and replaceable.
+
+## Decision under investigation
+
+- [Negotiation as a moderation signal](19-negotiation-signal-adr.md) examines
+  whether negotiation should remain independently blocking or become contextual
+  evidence. No final policy decision is recorded yet.

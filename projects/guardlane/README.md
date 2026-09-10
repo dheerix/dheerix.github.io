@@ -23,6 +23,11 @@ orchestration, evidence persistence, human review, and operational feedback.
 12. [Production learnings](12-production-learnings.md)
 13. [Retrospective](13-retrospective.md)
 
+## Post-production impact
+
+18. [Business-impact investigation](18-business-impact-investigation.md)
+19. [ADR: Negotiation as a moderation signal](19-negotiation-signal-adr.md)
+
 ## Communication and evidence
 
 14. [Interview guide](14-interview.md)
@@ -30,5 +35,6 @@ orchestration, evidence persistence, human review, and operational feedback.
 16. [Reverse-engineered production system design](16-reverse-engineered-system-design.md)
 17. [QNA/VDP policy adapter](17-qna-vdp-policy-adapter.md)
 
-The last two records capture implementation-level learning from current work.
-They intentionally omit work-system links and change identifiers.
+Records 16–19 extend the case study from implementation evidence into
+product-policy and business-impact reasoning. They intentionally omit
+work-system links and change identifiers.
