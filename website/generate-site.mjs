@@ -7,6 +7,8 @@ const repoDir = path.resolve(websiteDir, "..");
 const sourceDir = path.join(websiteDir, "src");
 const outputDir = path.join(websiteDir, "dist");
 const knowledgeDir = path.join(outputDir, "learn");
+const glanceSourceDir = path.join(repoDir, "resources", "tools", "legacy-generators", "generated");
+const glanceOutputDir = path.join(knowledgeDir, "glances");
 const includeKnowledge = process.env.DHEERIX_INCLUDE_KNOWLEDGE === "1";
 const excluded = new Set([".git", ".github", "node_modules", "output", "outputs", "dist"]);
 
@@ -48,6 +50,7 @@ await writeFile(path.join(outputDir, ".nojekyll"), "\n");
 
 if (includeKnowledge) {
   await cp(sourceDir, knowledgeDir, { recursive: true });
+  await cp(glanceSourceDir, glanceOutputDir, { recursive: true });
   const documents = [];
   for (const relativePath of await findMarkdown(repoDir)) {
     const normalizedPath = relativePath.split(path.sep).join("/");
@@ -59,8 +62,15 @@ if (includeKnowledge) {
     documents.push({ path: normalizedPath, title, description, section, sectionTitle, sectionDescription, sectionOrder, words: content.trim().split(/\s+/).filter(Boolean).length, content });
   }
   documents.sort((a, b) => a.sectionOrder - b.sectionOrder || a.path.localeCompare(b.path, undefined, { numeric: true }));
-  await writeFile(path.join(knowledgeDir, "documents.json"), JSON.stringify({ generatedAt: new Date().toISOString(), documents }));
-  console.log(`Generated ${documents.length} local-only documents in website/dist/learn`);
+  const glances = [];
+  for (const phase of (await readdir(glanceSourceDir, { withFileTypes: true })).filter(entry => entry.isDirectory()).sort((a, b) => a.name.localeCompare(b.name, undefined, { numeric: true }))) {
+    for (const file of (await readdir(path.join(glanceSourceDir, phase.name))).filter(name => name.toLowerCase().endsWith(".png")).sort((a, b) => a.localeCompare(b, undefined, { numeric: true }))) {
+      const match = file.match(/^(\\d+)-(.+)\\.png$/i);
+      glances.push({ id: match?.[1] || file, title: humanize(match?.[2] || file.replace(/\\.png$/i, "")), phase: phase.name, phaseTitle: humanize(phase.name), image: `glances/${phase.name}/${file}` });
+    }
+  }
+  await writeFile(path.join(knowledgeDir, "documents.json"), JSON.stringify({ generatedAt: new Date().toISOString(), documents, glances }));
+  console.log(`Generated ${documents.length} local-only documents and ${glances.length} engineering glances in website/dist/learn`);
 } else {
   console.log("Generated public portfolio without the Knowledge library");
 }
