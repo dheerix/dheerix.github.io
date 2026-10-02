@@ -17,6 +17,9 @@ This is the central workspace for the 2026–27 engineering-depth program.
 - `dsa/patterns/` — reusable problem-solving patterns
 - `dsa/grind75/` — interview-maintenance exercises
 
+## Glances
+Visual quick-recall cards are surfaced by the Engineering site from the existing generated assets in `resources/tools/legacy-generators/generated/`. They are indexed automatically at build time; do not duplicate the PNGs under `engineering/`.
+
 ## Field Notes
 Short observations from day-to-day engineering that may later become deeper artifacts.
 
