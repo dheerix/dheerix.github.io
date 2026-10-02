@@ -1,5 +1,6 @@
 const app = document.querySelector("#app");
 let documents = [];
+let glances = [];
 let sections = [];
 let currentPath = "";
 
@@ -83,7 +84,7 @@ function home() {
   app.innerHTML = `<section class="hero"><div class="hero-copy"><span class="kicker">A working engineering library</span><h1>Build depth.<br><em>Show the work.</em></h1><p>Interview systems, coding patterns, project decisions, and fourteen years of production lessons—organized to turn accumulated notes into deliberate practice.</p><div class="hero-actions"><a class="button primary" href="#/section/interviews">Start interview prep</a><a class="button ghost" href="#/section/projects">Explore project work</a></div></div><aside class="focus-panel"><span class="panel-label">Interview focus</span>${[["35%", "Coding & DSA"], ["25%", "System design"], ["15%", "Technical depth"], ["25%", "Projects, behavior & mocks"]].map(([value, label]) => `<div><strong>${value}</strong><span>${label}</span></div>`).join("")}</aside></section>
   <section class="stats"><div><strong>${documents.length}</strong><span>Documents</span></div><div><strong>${sections.length}</strong><span>Collections</span></div><div><strong>${Math.round(words / 1000)}k</strong><span>Words indexed</span></div><div><strong>75</strong><span>Coding drills</span></div></section>
   <section class="content-section"><div class="section-heading"><span class="kicker">Start here</span><h2>Your preparation desk</h2><p>High-leverage guides for active interview preparation.</p></div><div class="card-grid">${picks.map(card).join("")}</div></section>
-  <section class="content-section section-tint"><div class="section-heading"><span class="kicker">The library</span><h2>Explore by collection</h2></div><div class="collection-grid">${sections.map(section => `<a class="collection-card" href="#/section/${section.id}"><span>${String(section.order).padStart(2, "0")}</span><div><strong>${escapeHtml(section.title)}</strong><p>${escapeHtml(section.description)}</p></div><b>${section.count}</b></a>`).join("")}</div></section>`;
+  <section class="content-section"><div class="section-heading"><span class="kicker">Quick recall</span><h2>Engineering Glances</h2><p>Visual refreshers across core engineering concepts.</p></div><a class="collection-card" href="#/glances"><span>↗</span><div><strong>Glances</strong><p>Scan concepts you already know in seconds.</p></div><b>${glances.length}</b></a></section><section class="content-section section-tint"><div class="section-heading"><span class="kicker">The library</span><h2>Explore by collection</h2></div><div class="collection-grid">${sections.map(section => `<a class="collection-card" href="#/section/${section.id}"><span>${String(section.order).padStart(2, "0")}</span><div><strong>${escapeHtml(section.title)}</strong><p>${escapeHtml(section.description)}</p></div><b>${section.count}</b></a>`).join("")}</div></section>`;
 }
 
 function section(id) {
@@ -96,6 +97,23 @@ function section(id) {
     const matches = items.filter(item => `${item.title} ${item.description} ${item.path}`.toLowerCase().includes(query));
     document.querySelector("#section-results").innerHTML = matches.length ? matches.map(card).join("") : '<p class="empty-state">No matching documents.</p>';
   });
+}
+
+function glancesPage() {
+  const phases = [...new Map(glances.map(item => [item.phase, item.phaseTitle])).entries()];
+  app.innerHTML = `<section class="page-hero"><a class="back-link" href="#/">← Home</a><span class="kicker">Engineering · Quick recall</span><h1>Glances</h1><p>Visual refreshers for concepts you already know. Scan, recall, move on.</p><div class="section-count">${glances.length} cards · ${phases.length} phases</div></section><section class="content-section"><div class="filter-row"><label><span>Find a glance</span><input id="glance-filter" type="search" placeholder="Search concurrency, cache, graphs…"></label></div><div id="glance-results">${renderGlances(glances)}</div></section>`;
+  document.querySelector("#glance-filter").addEventListener("input", event => {
+    const query = event.target.value.toLowerCase().trim();
+    const matches = glances.filter(item => `${item.title} ${item.phaseTitle}`.toLowerCase().includes(query));
+    document.querySelector("#glance-results").innerHTML = renderGlances(matches);
+  });
+}
+
+function renderGlances(items) {
+  if (!items.length) return `<p class="empty-state">No matching glances.</p>`;
+  const groups = new Map();
+  for (const item of items) { if (!groups.has(item.phase)) groups.set(item.phase, { title: item.phaseTitle, items: [] }); groups.get(item.phase).items.push(item); }
+  return [...groups.values()].map(group => `<section class="glance-phase"><div class="section-heading"><span class="kicker">Quick recall</span><h2>${escapeHtml(group.title)}</h2></div><div class="glance-grid">${group.items.map(item => `<a class="glance-card" href="${item.image}" target="_blank" rel="noopener"><img src="${item.image}" alt="${escapeHtml(item.title)} engineering glance" loading="lazy"><span><b>${escapeHtml(item.id)}</b>${escapeHtml(item.title)}</span></a>`).join("")}</div></section>`).join("");
 }
 
 function documentPage(path) {
@@ -121,6 +139,7 @@ function route() {
   const parts = (location.hash || "#/").slice(2).split("/");
   if (parts[0] === "doc") documentPage(decodeURIComponent(parts.slice(1).join("/")));
   else if (parts[0] === "section") section(parts[1]);
+  else if (parts[0] === "glances") glancesPage();
   else if (parts[0] === "search") search(decodeURIComponent(parts.slice(1).join("/")));
   else home();
   window.scrollTo(0, 0); app.focus({ preventScroll: true });
@@ -132,6 +151,7 @@ document.addEventListener("keydown", event => { if (event.key === "/" && !/input
 
 fetch("./documents.json").then(response => { if (!response.ok) throw new Error("Unable to load the document index."); return response.json(); }).then(data => {
   documents = data.documents;
+  glances = data.glances || [];
   const map = new Map();
   for (const doc of documents) { if (!map.has(doc.section)) map.set(doc.section, { id: doc.section, title: doc.sectionTitle, description: doc.sectionDescription, order: doc.sectionOrder, count: 0 }); map.get(doc.section).count++; }
   sections = [...map.values()].sort((a, b) => a.order - b.order || a.title.localeCompare(b.title));
