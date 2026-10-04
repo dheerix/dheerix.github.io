@@ -21,7 +21,7 @@ For each topic, be able to:
 - [Async / Await](dotnet/async-await.md)
 - [Cancellation](dotnet/cancellation.md)
 - [Dependency Injection Lifetimes](dotnet/dependency-injection.md)
-- [Middleware / Request Pipeline](dotnet/middleware-pipeline.md)
+- [Middleware / Request Pipeline](dotnet/middleware-pipeline.md)\n- [Routing / Model Binding / Validation](dotnet/routing-model-binding.md)\n- [Action Results / MVC Filters](dotnet/action-results-filters.md)\n- [Configuration / Options](dotnet/options-configuration.md)
 
 ## Connected runtime model
 
