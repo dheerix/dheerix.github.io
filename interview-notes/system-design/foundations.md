@@ -355,3 +355,243 @@ Trade-offs
     ↓
 Verification
 ```
+
+
+## 11. Worked design — large asynchronous vehicle CSV import
+
+### Requirements and assumptions
+
+Scenario: a dealer uploads up to ~500,000 vehicles / potentially ~1 GB. Processing may take minutes. Each row is validated/imported, progress must survive browser reloads, and a detailed success/failure report is produced.
+
+Clarify before choosing infrastructure:
+- synchronous completion or asynchronous job?
+- fixed/versioned schema?
+- partial success or atomic import?
+- duplicate and re-upload semantics?
+- row-level error reporting?
+- progress definition?
+- concurrency / multi-tenant scale?
+- report retention?
+
+Assume async processing, versioned schema, partial success, detailed failed-row reporting, idempotent re-upload, durable progress, and hundreds of concurrent jobs.
+
+### Architecture
+
+```
+Browser ── create job ──> API ──> Job DB
+   |
+   └── large CSV ──> Object Storage
+                         |
+                   file validation
+                         |
+                    split/chunk
+                         |
+                         v
+                   Durable Queue
+                         |
+                 fairness / limits
+                         |
+                    Worker Fleet
+                         |
+                  Vehicle DB + chunk state
+                         |
+                  progress aggregation
+                         |
+                        SSE
+                         |
+                      Browser
+```
+
+### Control plane vs data plane
+
+Avoid proxying a ~1 GB byte stream through API instances when the API only needs to authorize and coordinate the upload.
+
+- **Control plane:** create job, authorize upload, query status.
+- **Data plane:** browser uploads file bytes directly to object storage.
+
+AWS example: S3 presigned upload; multipart upload for large objects.
+
+### Durable job state
+
+Model state separately from progress:
+
+```
+UPLOADED → QUEUED → VALIDATING → PROCESSING → COMPLETED
+                                  └──────────→ FAILED
+```
+
+A job can be QUEUED at 0%; state and percentage are different dimensions.
+
+### Checkpointing and retry granularity
+
+Sequential processing can use a processing cursor such as LastProcessedRow.
+
+Parallel chunk processing requires chunk-level checkpoints:
+
+```
+ImportJob
+  JobId, Status, TotalChunks, CompletedChunks
+
+ImportChunk
+  JobId, ChunkId, StartRow, EndRow,
+  Status, RetryCount, SucceededRows, FailedRows
+```
+
+**Rule:** checkpoint granularity should align with the independently retryable work unit.
+
+Before parallelizing, establish business independence: duplicate business keys across chunks, ordering dependencies, cross-row references, and downstream capacity can invalidate naive parallelism.
+
+### Checkpointing vs idempotency
+
+Checkpointing answers **where to resume**.
+
+Idempotency answers **whether replay around the checkpoint boundary is safe**.
+
+Example failure:
+
+```
+persist vehicle row
+      ↓
+worker crashes
+      ↓
+checkpoint was not advanced
+      ↓
+row is replayed
+```
+
+Useful identities:
+- `(JobId, RowNumber)` — processing identity,
+- `(DealerId, ExternalVehicleId/VIN)` — business identity.
+
+An idempotency key and a business uniqueness constraint are related but not necessarily identical.
+
+### At-least-once chunk delivery
+
+If a worker completes C2 and crashes before ACK, C2 may be redelivered.
+
+Consumer behavior:
+
+```
+receive J100:C2
+      ↓
+is chunk already COMPLETED?
+   yes → skip effect + ACK
+   no  → process idempotently
+```
+
+Chunk-level completion is an idempotent-consumer boundary. Row-level idempotency still protects partial chunk replay.
+
+### Failure classification
+
+Do not retry every failure identically.
+
+| Failure | Treatment |
+|---|---|
+| deterministic business/data validation error | record row failure; continue if partial success allowed |
+| transient dependency timeout | bounded retry + exponential backoff + jitter |
+| file-wide schema/structural error | reject during file validation |
+| recoverable malformed row | row failure only if parser can safely recover the next record boundary |
+| repeatedly unrecoverable/poison work item | bounded deliveries, then quarantine/DLQ |
+
+**Rule:** validate failures at the earliest boundary where they can be determined.
+
+### Dependency retry vs broker redelivery
+
+These are independent loops.
+
+```
+Queue delivers chunk
+      ↓
+worker DB attempt/retry policy
+      ↓
+message processing fails
+      ↓
+broker may redeliver entire chunk later
+```
+
+Therefore:
+
+> Dependency retry count != message delivery count.
+
+For a sustained shared DB outage:
+- circuit breaker protects the DB,
+- pause/slow consumption or delayed redelivery protects workers and queue from useless churn,
+- do not rapidly DLQ valid chunks merely because a shared dependency is temporarily unavailable.
+
+Infrastructure outage and poison-message handling are different failure classes.
+
+### Multi-tenant fairness and backpressure
+
+One dealer submitting many huge jobs can become a noisy neighbor.
+
+A local `SemaphoreSlim` can bound work inside one .NET process, but it does not create a cluster-wide per-dealer limit.
+
+Need scheduling/queueing/coordination semantics that enforce the desired global fairness boundary.
+
+> Correct algorithm locally does not imply correct coordination globally.
+
+The durable queue also provides **load leveling**: a burst of uploads becomes backlog processed at a sustainable rate rather than immediate pressure on the Vehicle DB.
+
+### Progress and SSE
+
+Progress can aggregate from chunk completion rather than writing one shared job counter for every imported row.
+
+SSE is a natural fit for live server → browser progress, but the SSE stream is not the source of truth.
+
+```
+durable Job/Chunk state → current progress
+                       ↘ SSE notification → browser
+```
+
+After reconnect, fetch current state and converge; replaying every intermediate percentage is unnecessary.
+
+> Durable state for correctness; push channel for responsiveness.
+
+### Why not Task.Run from ASP.NET?
+
+A fire-and-forget `Task.Run` couples business-critical work lifetime to the API process.
+
+Pod restart, deployment, crash, or scale-down can destroy the in-memory task. Durable job state alone does not preserve the fact that work still needs execution; otherwise a separate scanner/scheduler must rediscover it.
+
+A durable work queue provides:
+- durable work ownership,
+- redelivery after worker failure,
+- decoupling from API/request lifetime,
+- independent worker scaling,
+- load leveling,
+- backpressure.
+
+### .NET / AWS implementation mapping
+
+| System-design concept | Concrete grounding |
+|---|---|
+| API request should not own long job | Avoid fire-and-forget `Task.Run` from ASP.NET request |
+| In-process hosted work | `BackgroundService` / `IHostedService`; still process-lifetime scoped unless work source is durable |
+| Worker implementation | .NET Worker Service / `BackgroundService.ExecuteAsync` consuming durable messages |
+| Local bounded concurrency | `SemaphoreSlim`; per-process, not distributed |
+| Graceful shutdown | host `CancellationToken`; unacked durable work can be redelivered |
+| Transient HTTP dependency failures | `HttpClient` resilience / Polly-style retry, backoff, jitter, circuit breaker |
+| Atomic same-DB changes | EF Core transaction where vehicle effect, row result and checkpoint share one transactional boundary |
+| Idempotency | unique constraints, processed-operation records, conditional updates |
+| Large file handoff | S3 presigned URL / multipart upload |
+| Durable work dispatch | SQS / RabbitMQ / Pulsar-style queue |
+| Live progress | ASP.NET Core SSE; Job DB remains authoritative |
+
+### Interview answer — durable queue vs in-process background task
+
+> “I would not use an in-process Task.Run for a long-running business-critical import because the work lifetime becomes coupled to the API instance. A durable queue decouples request handling from processing and gives us durable work ownership, redelivery after worker failure, independent worker scaling, load leveling, and backpressure. Workers still need idempotent processing because delivery is typically at least once.”
+
+## 12. Additional cold-recall prompts
+
+13. Why should a 1 GB upload bypass the API data path?
+14. What is the difference between checkpointing and idempotency?
+15. Why does one LastProcessedRow stop working when chunks execute in parallel?
+16. Why can a completed chunk be delivered again?
+17. How do processing identity and business identity differ?
+18. Why should a DB timeout be treated differently from an invalid price?
+19. Why can an open circuit breaker still leave a queue-churn problem?
+20. When should a failed chunk go to DLQ, and when should consumption simply be delayed?
+21. Why is SemaphoreSlim insufficient for a global per-dealer concurrency limit?
+22. Why is SSE not the source of truth for job progress?
+23. What does a durable queue provide that Task.Run does not?
+24. How does a queue protect downstream capacity during a burst?
