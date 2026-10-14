@@ -157,11 +157,12 @@
 | CLOSED | Circuit permits calls normally |
 | OPEN | Circuit fails calls fast |
 | HALF-OPEN | Limited probes test dependency recovery |
-| Bulkhead | Isolate/bound capacity so one failure/workload cannot consume everything |
+| Bulkhead | Isolate/bound capacity so one failure/workload cannot consume everything; e.g. per-pod `SemaphoreSlim`, bounded worker pool, separate resource pool |
 | Failure isolation | Contain failure to limited components/capabilities |
 | Graceful degradation | Preserve useful core behavior while dropping optional capability |
 | Fail closed | Refuse operation when missing data could violate critical invariant |
 | Cascading failure | One overloaded/failed dependency causes failures across others |
+| Backpressure | Response when arrival rate exceeds safe processing capacity: bound waiting work and slow/reject/drop/degrade producers; e.g. bounded `Channel<T>` / bounded queue |
 | Resource saturation | Resource demand reaches/exceeds available capacity |
 | Load shedding | Reject/drop lower-priority work to protect system health |
 
@@ -301,7 +302,11 @@
 
 **Outbox vs Saga** — reliably propagate committed state vs coordinate/compensate distributed workflow.
 
-**Circuit breaker vs Bulkhead** — stop calling unhealthy dependency vs constrain resource consumption.
+**Circuit breaker vs Bulkhead** — dependency health/fail-fast vs capacity isolation. Circuit breaker can wrap `HttpClient`; a local bulkhead can be implemented with `SemaphoreSlim` or bounded worker capacity.
+
+**Bulkhead vs Backpressure** — bulkhead decides how much capacity a workload may consume; backpressure decides what to do when work arrives faster than that capacity can process it.
+
+**Retry storm vs Backpressure** — retry amplification creates additional overload; backpressure is a mechanism used to control overload.
 
 **Pub/Sub vs Durable broker** — ephemeral fan-out vs durable/replayable processing.
 
