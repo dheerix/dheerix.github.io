@@ -43,6 +43,25 @@ Keep the first answer concise. Expand only when asked. Separate **I** from **we*
 - **Disagreement:** Competing incentives → options → evidence → decision → commitment.
 - **Unknown answer:** “Here’s what I know, what I’d verify, and how I’d test it.”
 
+## Six Thinking Hats — reasoning overlay
+
+Use the hats **internally** to widen judgment; deliver **one coherent answer**, not six labeled mini-answers.
+
+| Hat | Engineering prompt |
+| --- | --- |
+| ⚪ White — facts | What do we know, what is assumed, and what evidence is missing? |
+| 🔴 Red — intuition/people | What feels concerning? What do users or teammates feel? (Do not disguise intuition as data.) |
+| ⚫ Black — caution | What can fail? Security, reliability, compatibility, and operational risk? |
+| 🟡 Yellow — value | What benefit is realistic? Why is the investment worthwhile? |
+| 🟢 Green — alternatives | What other designs, experiments, or simplifications could work? |
+| 🔵 Blue — process | What is the decision, owner, validation plan, and next step? |
+
+**Fast engineering loop:** Blue (frame) → White (facts) → Black (risks) → Green (options) → Yellow (benefits) → Blue (decision). Use Red explicitly when human trust or team dynamics matter. This is a practical adaptation, not the mandated order of the formal method.
+
+**Spoken translation:** “Given [facts], I considered [alternatives]. The main risk is [failure]. I’d choose [approach] because [benefit/trade-off], and validate it with [test/metric].”
+
+**Example — RAG assistant:** clarify users, sources, freshness and permissions → identify hallucination/leakage risk → compare hybrid retrieval and simpler baselines → pick permission-aware retrieval, citations and evaluation → measure grounding and latency.
+
 ## Ask the interviewer
 1. What consequential decisions would I own in the first six months?
 2. Where does delivery lose predictability today?
