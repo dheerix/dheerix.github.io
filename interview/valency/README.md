@@ -126,3 +126,15 @@ See [technical-confidence-checklist.md](technical-confidence-checklist.md). The 
 - [Dense interview cheat sheet](interview-cheatsheet.md): Brad's outreach mapped to verified experience, key questions, five-stage architecture, technical terminology, guardrails and opening/closing.
 
 The handwritten visual cheat sheet was generated in the conversation but is **not yet uploaded to this repository**.
+
+## Three-project interview framing (November 18)
+
+Use this as the primary map in the conversation:
+
+1. **Inventory Upload Anything → Ingestion:** OCR, schema discovery, chunk extraction, reconciliation, async pipelines.
+2. **PlanForge → Evidence verification:** frozen plan + product requirements + existing code compared with PR changes to find gaps/deviations and support review (**MVP/design exploration; do not overstate implementation**).
+3. **Guardlane → Policy over prediction:** NLP model quality and application-enforced decisions.
+
+**Shared pattern:** `Ingestion → Evidence verification → Governed decision`.
+
+The [dense interview cheat sheet](interview-cheatsheet.md) and [study notes](study-sessions-01-05.md) contain the complete revised mapping.
