@@ -75,3 +75,58 @@ Solid edges are current architectural responsibilities described in the reposito
 - [Comparison input builder](https://github.com/dheerix/planforge/blob/main/skills/planforge/scripts/build_comparison_input.rb)
 
 **Repository visibility:** PlanForge is private; only authenticated viewers with access can open these links. This mapping contains architecture descriptions but no private source copied into the public interview notes.
+
+## How deviation detection actually works — source-verified
+
+**Important architecture boundary:** PlanForge separates *candidate deviation discovery* from *deterministic validation of a supplied finding*. `analyze_deviations.rb` does **not** autonomously inspect arbitrary PR diffs and prove full requirement coverage.
+
+### Four-step process
+
+1. **Freeze the baseline.** The versioned `execution-plan.yaml` specifies the accepted implementation scope, repositories, plan identity/version, linked PRs and acceptance criteria. The original Linear product requirements remain the canonical product intent.
+2. **Collect scoped implementation evidence.** `collect_repository_evidence.rb` reads Git checkout status, branch, commit and working-tree provenance; `collect_pull_request_evidence.rb` normalizes *supplied* PR snapshots but rejects PRs not linked to the frozen plan; `collect_linear_evidence.rb` normalizes *supplied* Linear snapshots; `build_comparison_input.rb` joins explicit evidence checks only when plan identity/version and source IDs match. These collectors don't themselves prove semantic requirement satisfaction.
+3. **Discover candidate gaps or deviations upstream.** Codex following `SKILL.md` can inspect confirmed codebases and compare expectations with implementation; alternatively the findings are provided as structured evidence. This interpretive step may involve LLM reasoning. It is **not** automatically carried out by the deterministic analyzer.
+4. **Validate, report and review.** `analyze_deviations.rb` validates each supplied finding's category, status, `expected`, `actual`, recommendation, evidence links and provenance against `deviation-rules.json` and the evidence/status contracts. It produces `deviation-analysis.json` and a draft `linear-comment.md`; it does **not** silently post to Linear. `validate_deviation_transitions.rb` enforces allowed status changes. Human review/disposition remains essential.
+
+### What counts as a deviation?
+
+The implemented rule registry includes:
+- **`contract-drift`** — an expected request/response/event/terminology contract differs from evidence.
+- **`missing-acceptance-coverage`** — evidence does not demonstrate one or more frozen acceptance criteria.
+- **`scope-drift`** — implemented changes alter included or excluded scope.
+- **`deferred-recovery-gap`** — deferred workflow lacks necessary durable recovery state.
+- **`lifecycle-recovery-gap`** — required persistence/recovery/state-transition path isn't evidenced.
+
+These categories constrain **how supplied findings are classified and validated**; the categories don't automatically discover violations.
+
+### Example: AC-7 backward-compatibility requirement (illustrative)
+
+**Expected:** `AC-7: Existing clients continue receiving the legacy response field.`
+
+**Observed candidate evidence:** A linked PR changes the API response, but the reviewer finds no compatibility test or other proof that the original contract is preserved.
+
+**Candidate finding:** `missing-acceptance-coverage`, with `expected`, `actual`, an evidence link pointing to the PR/contract, an owner, and a recommendation to verify the old contract and produce regression evidence.
+
+**Do not infer actual incompatibility merely from missing tests.** Insufficient implementation evidence means the criterion has not yet been *demonstrated*, which is different from proving that it has been *violated*.
+
+**After review:** A finding can move among statuses such as `detected`, `acknowledged`, `resolving`, `blocked`, `resolved`, `accepted_risk`, `dismissed`, and `stale`, subject to the registry's allowed transitions. A future evidence update may require re-evaluation.
+
+### Carve analogy
+
+`Approved readiness criterion → authorized engineering-source evidence → candidate gap/contradiction → evidence-backed structured finding → deterministic policy checks → domain-expert disposition`.
+
+**Brad-ready phrasing:**
+
+> "PlanForge uses a frozen plan and acceptance criteria as the baseline. Codex-guided investigation supplies candidate findings from scoped repository and PR evidence. Our scripts enforce plan identity, evidence contracts, deviation categories and status transitions, then prepare a human-reviewable report. The interesting agentic extension would be to adaptively discover sufficient evidence—not to let the model rewrite assessment policy or self-approve a finding."
+
+**Source files:**
+[PlanForge skill](https://github.com/dheerix/planforge/blob/main/skills/planforge/SKILL.md) ·
+[analyze_deviations.rb](https://github.com/dheerix/planforge/blob/main/skills/planforge/scripts/analyze_deviations.rb) ·
+[deviation-rules.json](https://github.com/dheerix/planforge/blob/main/skills/planforge/references/deviation-rules.json) ·
+[deviation evidence contract](https://github.com/dheerix/planforge/blob/main/skills/planforge/references/deviation-evidence-contract.md) ·
+[PR evidence collector](https://github.com/dheerix/planforge/blob/main/skills/planforge/scripts/collect_pull_request_evidence.rb) ·
+[repository evidence collector](https://github.com/dheerix/planforge/blob/main/skills/planforge/scripts/collect_repository_evidence.rb) ·
+[comparison input builder](https://github.com/dheerix/planforge/blob/main/skills/planforge/scripts/build_comparison_input.rb) ·
+[status model](https://github.com/dheerix/planforge/blob/main/skills/planforge/references/deviation-status-model.json) ·
+[transition validator](https://github.com/dheerix/planforge/blob/main/skills/planforge/scripts/validate_deviation_transitions.rb).
+
+*The PlanForge repository is private. These links require repository access.*
