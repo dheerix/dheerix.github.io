@@ -113,3 +113,22 @@ Tokens/subwords; context window; transformer attention; logits → softmax; temp
 **Future only:** `accessLinearProject → checkPR → checkRepoCode → runTests → accessBrowser` is an illustrative **bounded agent extension**, with allow-lists, auth, budgets and checkpoints around tool calls. It is NOT an existing PlanForge capability.
 
 **Brad-ready:** "PlanForge's rules, evidence contracts and approvals are controlled; the opportunity for an agent would be dynamically discovering supporting code/PR evidence, not rewriting the assessment policy." See [detailed comparison](planforge-carve-mapping.md).
+
+## PlanForge deviation detection — 30-second recall (Nov 18)
+
+**Four steps:** **Frozen baseline → scoped evidence → candidate discrepancy → deterministic validation + human review**.
+
+1. **Baseline:** Frozen Linear plan/version and product requirements/acceptance criteria.
+2. **Evidence:** Read-only Git collector (branch, commit, worktree), normalized linked PR/Linear snapshots; comparison input verifies source IDs and plan identity.
+3. **Discovery:** Codex-guided inspection or supplied candidate finding compares `expected` against `actual`. **The Ruby analyzer does not autonomously inspect PR diffs or prove all requirements satisfied.**
+4. **Deterministic analyzer:** `analyze_deviations.rb` validates supplied category/status/owner/expected/actual/recommendation/evidence links, applies registered rules, writes `deviation-analysis.json` + `linear-comment.md`. Human reviewer resolves/dispositions; status transitions are validated separately.
+
+**Rule categories:** `contract-drift`, `missing-acceptance-coverage`, `scope-drift`, `deferred-recovery-gap`, `lifecycle-recovery-gap`.
+
+**Example:** AC-7 requires backward-compatible response. PR changes API; no test proves legacy contract. Flag **missing acceptance coverage**, not automatically "breaking change proven." Cite PR/contract and seek review.
+
+**Carve transfer:** Criterion → retrieved current evidence → candidate gap/contradiction → validated finding → expert review. **Possible agent improvement = adaptive investigation upstream; current PlanForge = Codex-operated prescribed workflow + deterministic scripts, not a standalone bounded agent.**
+
+**Say to Brad:** "The verification rules are controlled; the agent opportunity is discovering which evidence to inspect next."
+
+See [detailed source-grounded deviation explanation](planforge-carve-mapping.md#how-deviation-detection-actually-works--source-verified).
