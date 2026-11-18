@@ -84,3 +84,18 @@ Tokens/subwords; context window; transformer attention; logits → softmax; temp
 
 ## REMEMBER
 **Listen first.** Don't recite everything. No fictitious CAD/industrial experience, model calibration, exact review queue features or sole OneSearch ownership. Trustworthiness > impressive agent count. Be a curious engineering partner, not a memorized presenter.
+
+
+## FINAL THREE-PILLAR MAP — the main story (Nov 18 revision)
+
+**Inventory Upload Anything = EVIDENCE INGESTION.** OCR → schema discovery → chunked extraction → reconciliation → asynchronous processing. The transferable challenge is turning inconsistent external inputs into structured, usable evidence. Do not confuse extraction chunking with RAG retrieval chunking or assert industrial drawing expertise.
+
+**PlanForge = EVIDENCE VERIFICATION + DEVIATIONS.** Compare a frozen implementation plan **and original product requirements** with the **existing codebase** and the **actual PR/diff**; trace requirement-to-code evidence, identify missing implementation and justified/unjustified deviations, then present results to a TL/reviewer. This is the **closest conceptual analogue to Carve's criterion-to-evidence assessment**, but PlanForge is an MVP/design exploration, **not an established production deployment**. Example: approved plan requires backward compatibility, API changes, and tests; PR looks plausible but lacks a required migration/contract/test. The assessor must identify the uncovered requirement rather than say "done". Carve analogue: approved readiness criterion vs current engineering documents/revisions, evidence gaps, contradictions, expert approval.
+
+**Guardlane = POLICY OVER MODEL PREDICTION.** DistilBERT/SageMaker produces probabilistic moderation classifications; deterministic application policy, validation, review and quality monitoring govern downstream action. Never imply a model score alone grants authority. Only claim specific threshold/calibration/HITL queue mechanisms if verified. Observed post-rollout ~20% fewer risky buyer questions is not a randomized causal estimate.
+
+**Unified pattern:** `INGESTION → EVIDENCE / DEVIATION VERIFICATION → GOVERNED DECISION`.
+
+**Preferred discovery question:** "How explicitly do you model readiness criteria and their supporting evidence? Do agents evaluate gaps and deviations against that baseline, while domain rules and expert approval govern the final decision?"
+
+**Natural example:** "In PlanForge we're exploring a frozen plan and product requirements as a baseline, then checking a PR and existing code for implementation evidence and deviations. I see a similar problem in Carve with engineering criteria and document evidence—though PlanForge is an MVP we're developing, not a deployed capital-project assessor."
