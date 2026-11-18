@@ -142,3 +142,7 @@ The [dense interview cheat sheet](interview-cheatsheet.md) and [study notes](stu
 
 ### PlanForge architecture clarification — November 18
 **PlanForge is agentless.** It follows predefined instructions and a controlled verification process; it does **not** autonomously decide which tools to call or pursue iterative agent goals. Its key comparison is **frozen plan + product requirements + existing codebase vs actual PR changes**, recording supporting implementation evidence and gaps/deviations for review. Do not call it a bounded agent, an agentic implementation, or a production autonomous assessor. Carve may use bounded agents for *adaptive evidence discovery*, but its **verification and policy gates can use PlanForge-like deterministic/instruction-driven procedures**. This distinction makes the trade-off concrete: start with prescribed checks and introduce autonomy only when the evidence path genuinely requires it.
+
+## PlanForge source review
+
+The [study notes](study-sessions-01-05.md) and [cheat sheet](interview-cheatsheet.md) have been updated following direct inspection of the private `dheerix/planforge` implementation. **Current PlanForge is a Codex-operated, instruction-driven skill with deterministic collectors/validators and human confirmation gates; bounded autonomous investigation remains a proposed extension.** The current deviation analyzer validates submitted findings, rather than independently proving complete PR requirement coverage. See [PlanForge vs Carve — source-grounded comparison](planforge-carve-mapping.md).
