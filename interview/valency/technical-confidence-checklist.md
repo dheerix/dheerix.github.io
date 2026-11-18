@@ -183,3 +183,16 @@ This is **not an actual Carve endpoint or enum definition**.
 - [PDRI at Valency](https://valencyinc.com/carve-for-pdri/)
 - [Valency GenAI Governance Framework](https://valencyinc.com/wp-content/uploads/2025/06/Valency-Generative-AI-Governance-Framework.pdf)
 - [Elasticsearch Module 01 notes](../module-01-search-engineering/README.md)
+
+
+## Updated experience-first mental model (Nov 18)
+
+**Input → evidence → decision:**
+
+- **Inventory Upload Anything / Input:** OCR, schema discovery, chunked extraction, reconciliation, async job flow. Think **evidence acquisition**.
+- **PlanForge / Evidence:** evaluate a PR **against frozen plan, existing code and original product requirements**, trace coverage and detect gaps/deviations. Think **criterion-to-evidence verification**. This is a design/MVP direction, not a claim of validated production agent behavior.
+- **Guardlane / Decision:** distinguish probabilistic NLP prediction from deterministic product policy and operational quality controls. Think **governed decision**.
+
+Carve's analogous sequence: source documents → requirement-to-evidence investigation and gaps → approved readiness criteria, domain rules and expert review.
+
+**Must-have distinction:** RAG retrieves possible evidence; an assessment verifier determines whether that evidence sufficiently satisfies requirements. Approval is a separate governed action.
