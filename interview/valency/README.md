@@ -119,3 +119,10 @@ See [technical-confidence-checklist.md](technical-confidence-checklist.md). The 
 - 2026-11-16: Valency elevated to primary focus; introductory meeting reframed as mutual engineering discovery rather than a formal exam.
 - 2026-11-16: Mandatory technical concept groups defined and captured in dedicated notes.
 - After the meeting: record Brad's actual product/architecture statements, technical uncertainties, follow-up commitments and next steps here—without copying sensitive details into this public repo.
+
+## Consolidated study material (November 18)
+
+- [Sessions 01–05 — technical study and discussion notes](study-sessions-01-05.md): Carve domain, evidence trust, document intelligence/RAG, bounded agents, full-stack architecture, security and partnership conversation.
+- [Dense interview cheat sheet](interview-cheatsheet.md): Brad's outreach mapped to verified experience, key questions, five-stage architecture, technical terminology, guardrails and opening/closing.
+
+The handwritten visual cheat sheet was generated in the conversation but is **not yet uploaded to this repository**.
