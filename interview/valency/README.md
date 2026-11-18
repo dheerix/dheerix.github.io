@@ -146,3 +146,11 @@ The [dense interview cheat sheet](interview-cheatsheet.md) and [study notes](stu
 ## PlanForge source review
 
 The [study notes](study-sessions-01-05.md) and [cheat sheet](interview-cheatsheet.md) have been updated following direct inspection of the private `dheerix/planforge` implementation. **Current PlanForge is a Codex-operated, instruction-driven skill with deterministic collectors/validators and human confirmation gates; bounded autonomous investigation remains a proposed extension.** The current deviation analyzer validates submitted findings, rather than independently proving complete PR requirement coverage. See [PlanForge vs Carve — source-grounded comparison](planforge-carve-mapping.md).
+
+## Post-interview checkpoint — November 18, 2026
+
+- **Outcome:** Candidate reported the introductory conversation with Brad went well. No offer or confirmed next round yet.
+- **Team described in conversation:** one engineering director and two junior engineers; hiring for an **in-person senior engineer**.
+- **Decision gates if an offer arrives:** (1) salary relative to current CAD 125K base and opportunity cost, (2) senior-level title and scope, (3) acceptance of an in-office schedule ending around **3:00 PM**, and (4) an actual offer. No decision before these are known.
+- **Open questions:** compensation range, exact title/ownership, office schedule flexibility, next steps.
+- **Next preparation priority:** MaintainX — Senior Search Developer; recruiter conversation recorded for **Friday, November 20 at 2:00 PM EST**. Confirm timing against latest recruiter correspondence.
