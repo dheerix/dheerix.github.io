@@ -196,3 +196,7 @@ This is **not an actual Carve endpoint or enum definition**.
 Carve's analogous sequence: source documents → requirement-to-evidence investigation and gaps → approved readiness criteria, domain rules and expert review.
 
 **Must-have distinction:** RAG retrieves possible evidence; an assessment verifier determines whether that evidence sufficiently satisfies requirements. Approval is a separate governed action.
+
+
+### PlanForge architecture clarification — November 18
+**PlanForge is agentless.** It follows predefined instructions and a controlled verification process; it does **not** autonomously decide which tools to call or pursue iterative agent goals. Its key comparison is **frozen plan + product requirements + existing codebase vs actual PR changes**, recording supporting implementation evidence and gaps/deviations for review. Do not call it a bounded agent, an agentic implementation, or a production autonomous assessor. Carve may use bounded agents for *adaptive evidence discovery*, but its **verification and policy gates can use PlanForge-like deterministic/instruction-driven procedures**. This distinction makes the trade-off concrete: start with prescribed checks and introduce autonomy only when the evidence path genuinely requires it.
