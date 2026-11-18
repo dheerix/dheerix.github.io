@@ -103,3 +103,33 @@ Proposed tools:
 4. Agent budget, allow-listed tools, checkpoints, idempotency and failure semantics.
 5. Tenant isolation and prompt-injection defenses cannot rely on instructions to LLM.
 6. Eval retrieval completeness and citation support separately from uptime/latency.
+
+
+## Nov 18 addendum — PlanForge is the strongest assessment analogue
+
+Reframe the engineering narrative into **three complementary systems**, not one generic AI experience:
+
+1. **Inventory Upload Anything — evidence ingestion:** OCR → schema discovery → chunk extraction → reconcile → structure and persist. Focus on completeness and async pipeline reliability. It supplies the material that can later be assessed.
+2. **PlanForge — evidence checking and deviations:** frozen plan + original product requirements + existing codebase are the baseline/context; actual PR changes are submitted evidence. Examine requirement coverage, contradictory implementation, missing tests/edge cases, unexpected deviations, evidence links, and TL review. **MVP/design exploration**: distinguish proposed verifier behavior from what is truly implemented or field-tested. This directly mirrors Carve's criterion → source evidence → gap/deviation → review pattern.
+3. **Guardlane — policy above probabilistic predictions:** moderation model estimates; the surrounding application applies governed policy, quality checks, escalation/review as appropriate. This mirrors keeping final readiness authorization outside a model response.
+
+### Working analogy
+
+| Layer | Software workflow | Carve-like workflow |
+|---|---|---|
+| Requirement baseline | Frozen implementation plan + product requirements | Approved project-readiness criteria |
+| Existing context | Existing codebase | Current authoritative engineering records |
+| New evidence | PR diff, tests, changed contracts | New documents, drawings, revisions, approval records |
+| Investigation | Locate code paths and compare evidence with plan | Search/reconcile source spans and check criteria |
+| Gaps / deviations | Missing scope, incompatible behavior, unplanned changes | Missing evidence, contradictions, unresolved actions |
+| Approval | Technical lead/reviewer | Authorized project-assurance specialist |
+
+**A critical nuance:** a PR can conform to the frozen plan and still fail original product requirements; hence evaluate *plan + existing code + product intent* rather than only line-by-line plan adherence. Similarly, Carve evidence can align with a checklist item but fail the underlying readiness objective.
+
+### Higher-value question for Brad
+
+"How do you express a readiness criterion and its evidence contract? Is the agent tracing each criterion to supporting passages and identifying gaps or deviations, or does an expert still do most of that mapping manually?"
+
+### A succinct positioning statement
+
+"My experience spans the three stages of a trustworthy assessment: document extraction in Inventory Upload Anything, requirements-to-implementation evidence and deviations in PlanForge, and applying product policy over uncertain model predictions in Guardlane. PlanForge is exploratory, but the underlying verification problem feels directly relevant to Carve."
