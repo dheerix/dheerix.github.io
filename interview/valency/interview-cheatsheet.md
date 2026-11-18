@@ -103,3 +103,13 @@ Tokens/subwords; context window; transformer attention; logits → softmax; temp
 
 ### PlanForge architecture clarification — November 18
 **PlanForge is agentless.** It follows predefined instructions and a controlled verification process; it does **not** autonomously decide which tools to call or pursue iterative agent goals. Its key comparison is **frozen plan + product requirements + existing codebase vs actual PR changes**, recording supporting implementation evidence and gaps/deviations for review. Do not call it a bounded agent, an agentic implementation, or a production autonomous assessor. Carve may use bounded agents for *adaptive evidence discovery*, but its **verification and policy gates can use PlanForge-like deterministic/instruction-driven procedures**. This distinction makes the trade-off concrete: start with prescribed checks and introduce autonomy only when the evidence path genuinely requires it.
+
+## SOURCE-VERIFIED PLANFORGE CORRECTION (NOV 18)
+
+**Implemented:** Codex skill with predefined stages/confirmation gates; frozen Linear plan and repo-local projections; read-only Git evidence collector; adapters for **supplied** Linear and linked-PR snapshots; `build_comparison_input.rb` verifies plan identity/source references; `analyze_deviations.rb` validates **supplied structured findings** against `deviation-rules.json` and emits analysis + draft Linear comment; approval workflows require human action.
+
+**Not established in current implementation:** an explicit PlanForge-owned bounded model tool loop, autonomous browser/network investigation, universal semantic PR requirement-coverage verifier, or automatic Linear posting. Codex may perform model-assisted interpretation, so the overall skill is **instruction-driven rather than fully deterministic**; script outputs are deterministic for fixed inputs.
+
+**Future only:** `accessLinearProject → checkPR → checkRepoCode → runTests → accessBrowser` is an illustrative **bounded agent extension**, with allow-lists, auth, budgets and checkpoints around tool calls. It is NOT an existing PlanForge capability.
+
+**Brad-ready:** "PlanForge's rules, evidence contracts and approvals are controlled; the opportunity for an agent would be dynamically discovering supporting code/PR evidence, not rewriting the assessment policy." See [detailed comparison](planforge-carve-mapping.md).
