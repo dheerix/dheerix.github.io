@@ -138,3 +138,7 @@ Use this as the primary map in the conversation:
 **Shared pattern:** `Ingestion → Evidence verification → Governed decision`.
 
 The [dense interview cheat sheet](interview-cheatsheet.md) and [study notes](study-sessions-01-05.md) contain the complete revised mapping.
+
+
+### PlanForge architecture clarification — November 18
+**PlanForge is agentless.** It follows predefined instructions and a controlled verification process; it does **not** autonomously decide which tools to call or pursue iterative agent goals. Its key comparison is **frozen plan + product requirements + existing codebase vs actual PR changes**, recording supporting implementation evidence and gaps/deviations for review. Do not call it a bounded agent, an agentic implementation, or a production autonomous assessor. Carve may use bounded agents for *adaptive evidence discovery*, but its **verification and policy gates can use PlanForge-like deterministic/instruction-driven procedures**. This distinction makes the trade-off concrete: start with prescribed checks and introduce autonomy only when the evidence path genuinely requires it.
